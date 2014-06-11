@@ -1,4 +1,4 @@
 class Consultant
   include Mongoid::Document
-  field :name, type: String
+  field :full_name, type: String
 end

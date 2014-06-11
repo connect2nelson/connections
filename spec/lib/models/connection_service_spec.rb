@@ -6,15 +6,16 @@ describe ConnectionService do
       expect(ConnectionService.all.size).to eq 0
     end
     it 'should return two connections between two people' do
-      Consultant.create({name: 'Adam'})
-      Consultant.create({name: 'Billy'})
+      Consultant.create({full_name: 'Adam'})
+      Consultant.create({full_name: 'Billy'})
       expect(ConnectionService.all.size).to eq 2
     end
     it 'should return six connections between three people' do
-      Consultant.create({name: 'Adam'})
-      Consultant.create({name: 'Billy'})
-      Consultant.create({name: 'Charlotte'})
+      Consultant.create({full_name: 'Adam'})
+      Consultant.create({full_name: 'Billy'})
+      Consultant.create({full_name: 'Charlotte'})
       expect(ConnectionService.all.size).to eq 6
     end
   end
+
 end
