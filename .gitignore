@@ -69,3 +69,5 @@ config/secrets.yml
 
 ### Sass ###
 .sass-cache
+
+*swp
