@@ -19,7 +19,8 @@ gem 'haml-rails'
 gem 'bson_ext'
 gem 'mongoid', '>= 2.0.0.beta.19'
 gem 'mongoid-rspec', group: :test
-
+gem 'foreman'
+gem 'omniauth-saml'
 group :test, :development do
    gem 'rspec-rails', '>=2.0.1'
    gem 'capybara'
