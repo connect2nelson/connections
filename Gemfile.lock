@@ -72,6 +72,10 @@ GEM
       moped (~> 2.0.0.rc1)
       origin (~> 2.1)
       tzinfo (>= 0.3.37)
+    mongoid-rspec (1.10.0)
+      mongoid (>= 3.0.1)
+      rake
+      rspec (>= 2.14)
     moped (2.0.0.rc1)
       bson (~> 2.2)
       connection_pool (~> 2.0)
@@ -99,6 +103,10 @@ GEM
     rake (10.3.2)
     rdoc (4.1.1)
       json (~> 1.4)
+    rspec (3.0.0)
+      rspec-core (~> 3.0.0)
+      rspec-expectations (~> 3.0.0)
+      rspec-mocks (~> 3.0.0)
     rspec-core (3.0.0)
       rspec-support (~> 3.0.0)
     rspec-expectations (3.0.0)
@@ -158,6 +166,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   mongoid (>= 2.0.0.beta.19)
+  mongoid-rspec
   rails (= 4.0.4)
   rspec-rails (>= 2.0.1)
   sass-rails (~> 4.0.2)
