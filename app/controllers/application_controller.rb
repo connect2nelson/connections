@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   def is_authhorized
-    enabled_security = ENV["SECURITY_ENABLED"]
+    enabled_security = ENV["SECURITY_ENABLED"] == "ENABLED"
     current_user != nil || (enabled_security == false)
   end
 

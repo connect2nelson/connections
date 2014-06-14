@@ -4,6 +4,8 @@ RSpec.describe ConsultantsController, :type => :controller do
 
   describe 'show GET' do
 
+    #ENV["SECURITY_ENABLED"] = "enabled"
+
     let(:consultant) {Consultant.new(employee_id: "1")}
 
     it 'should show user' do
