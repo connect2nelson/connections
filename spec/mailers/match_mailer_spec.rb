@@ -8,19 +8,24 @@ RSpec.describe MatchMailer, :type => :mailer do
   }
   subject { ActionMailer::Base.deliveries.first }
 
-  it 'send an email' do
+  it 'should send an email' do
     expect(subject).to_not be_nil
   end
-  it 'send an email to a mentor' do
+  it 'should send an email to a mentor' do
     expect(subject.to).to include mentor
   end
-  it 'send an email to a thoughtworker' do
+  it 'should send an email to a thoughtworker' do
     expect(subject.to).to include thoughtworker
   end
-  it 'send an email from noreply' do
+  it 'should send an email from noreply' do
     expect(subject.from).to include 'no-reply@thoughtworks.com'
   end
-  it 'send an email with subject [Connnections] New connection for you!' do
+
+  it 'should send an email with subject [Connnections] New connection for you!' do
     expect(subject.subject).to eq '[Connections] New connection for you!'
+  end
+
+  it 'should send email with sent date to today' do
+      expect(subject.date.utc.to_i).to eq Time.now.utc.to_i
   end
 end
