@@ -3,7 +3,7 @@ class MatchMailer < ActionMailer::Base
   default subject: '[Connections] New connection for you!'
   default date: Time.now
 
-  def create_match_message(from, to, time)
+  def create_match_message(from, to)
     mail(to: [to, from])
   end
 end

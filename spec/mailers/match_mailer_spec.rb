@@ -4,7 +4,7 @@ RSpec.describe MatchMailer, :type => :mailer do
   let(:mentor) { 'mentor@thoughtworks.com' }
   let(:thoughtworker) { 'thoughtworker@thoughtworks.com' }
   before {
-    MatchMailer.create_match_message(thoughtworker, mentor, Time.now).deliver
+    MatchMailer.create_match_message(thoughtworker, mentor).deliver
   }
   subject { ActionMailer::Base.deliveries.first }
 
