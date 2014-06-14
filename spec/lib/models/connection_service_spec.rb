@@ -16,8 +16,24 @@ describe ConnectionService do
       Consultant.create({full_name: 'Charlotte'})
       expect(ConnectionService.all.size).to eq 6
     end
-
-
   end
 
+  context '.sf_office' do
+    it 'should return zero connections between zero people' do
+      expect(ConnectionService.sf_office.size).to eq 0
+    end
+    it 'should return two connections between two people' do
+      Consultant.create({full_name: 'Adam', working_office: 'San Francisco'})
+      Consultant.create({full_name: 'Billy', working_office: 'San Francisco'})
+      Consultant.create({full_name: 'Charlie', working_office: 'Chicago'})
+      expect(ConnectionService.sf_office.size).to eq 2
+    end
+    it 'should return six connections between three people' do
+      Consultant.create({full_name: 'Adam', working_office: 'San Francisco'})
+      Consultant.create({full_name: 'Billy', working_office: 'San Francisco'})
+      Consultant.create({full_name: 'Charlotte', working_office: 'San Francisco'})
+      Consultant.create({full_name: 'Denise', working_office: 'Chicago'})
+      expect(ConnectionService.sf_office.size).to eq 6
+    end
+  end
 end
