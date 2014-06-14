@@ -9,6 +9,7 @@ RSpec.describe MatchMailer, :type => :mailer do
                                  full_name: "Pam Ocampo",
                                  working_office: "San Francisco")
     @connections = nil
+    @connections_mailer = MatchMailer.send_connections(@consultant, @connections).deliver
   }
   subject { ActionMailer::Base.deliveries.first }
 
@@ -29,8 +30,11 @@ RSpec.describe MatchMailer, :type => :mailer do
     expect(subject.subject).to eq '[Connections] New connection for you!'
   end
 
-  it 'assign a consultant employee email to the mailer' do
-      connections_mailer = MatchMailer.send_connections(@consultant, @connections).deliver
-      expect(connections_mailer.to).to include "#{@consultant.employee_id}@thoughtworks.com"
+  it 'should assign a consultant employee email to the mailer' do
+      expect(@connections_mailer.to).to include "#{@consultant.employee_id}@thoughtworks.com"
+  end
+
+  it 'should have the consultant name in the body' do
+      expect(@connections_mailer.body).to include @consultant.full_name
   end
 end
