@@ -4,7 +4,11 @@ RSpec.describe MatchMailer, :type => :mailer do
   let(:mentor) { 'mentor@thoughtworks.com' }
   let(:thoughtworker) { 'thoughtworker@thoughtworks.com' }
   before {
-    MatchMailer.create_match_message(thoughtworker, mentor).deliver
+    mailer = MatchMailer.create_match_message(thoughtworker, mentor).deliver
+    @consultant = Consultant.new(employee_id: "15230",
+                                 full_name: "Pam Ocampo",
+                                 working_office: "San Francisco")
+    @connections = nil
   }
   subject { ActionMailer::Base.deliveries.first }
 
@@ -23,5 +27,10 @@ RSpec.describe MatchMailer, :type => :mailer do
 
   it 'should send an email with subject [Connnections] New connection for you!' do
     expect(subject.subject).to eq '[Connections] New connection for you!'
+  end
+
+  it 'assign a consultant employee email to the mailer' do
+      connections_mailer = MatchMailer.send_connections(@consultant, @connections).deliver
+      expect(connections_mailer.to).to include "#{@consultant.employee_id}@thoughtworks.com"
   end
 end
