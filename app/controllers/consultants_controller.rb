@@ -4,4 +4,6 @@ class ConsultantsController < ApplicationController
     @consultant = Consultant.find_by(employee_id: params[:id])
   end
 
+
+
 end

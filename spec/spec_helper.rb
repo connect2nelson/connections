@@ -2,6 +2,7 @@ Dir['lib/models/*.rb'].each { |f| require "./#{f}" }
 
 RSpec.configure do |config|
 
+
   config.before(:suite) do
     DatabaseCleaner[:mongoid].strategy = :truncation
     DatabaseCleaner[:mongoid].clean_with(:truncation)

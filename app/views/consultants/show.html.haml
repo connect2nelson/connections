@@ -5,3 +5,10 @@
     .small-8.columns
       %h2 #{@consultant.full_name}
       %h3 Office: #{@consultant.working_office}
+  .row
+    .small-8.columns
+      Matches
+    .small-4.columns
+      %ul
+        - @consultant.skills_to_learn.each do |skill|
+          %li= skill
