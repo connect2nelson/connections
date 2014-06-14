@@ -6,7 +6,6 @@ class ConsultantsController < ApplicationController
 
   def show
     @consultant = Consultant.find_by(employee_id: params[:id])
+    @connections = ConnectionService.best_match_for(@consultant)
   end
-
-
 end

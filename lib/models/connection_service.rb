@@ -22,10 +22,10 @@ class ConnectionService
   end
 
   def self.best_match_for mentee
-      Consultant.all.not.where('_id' => mentee.id).map do |other|
+    for_office(mentee.working_office).not.where('_id' => mentee.id).map do |other|
       Connection.new(other, mentee)
-    end.flatten.sort_by{ |connection|
-        connection.skill_gap
-      }.reverse
+    end.flatten.select(&:match?).sort_by{ |connection|
+      connection.skill_gap
+    }.reverse
   end
 end

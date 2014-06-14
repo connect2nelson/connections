@@ -8,6 +8,10 @@
   .row
     .small-8.columns
       Matches
+      %ul
+        - @connections.take(3).each do |connection|
+          %li= connection.mentor.full_name
+
     .small-4.columns
       %ul
         - @consultant.skills_to_learn.each do |skill|

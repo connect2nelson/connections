@@ -71,6 +71,7 @@ describe ConnectionService do
     let!(:java_and_ruby_master) {Consultant.create(full_name: 'Charlotte', skills: {"java" => "5", "ruby" => "5" }, working_office: "San Francisco") }
     let!(:ruby_master) {Consultant.create(full_name: 'Billy', skills: {"ruby" => "5" }, working_office: "San Francisco") }
     let!(:mentee) {Consultant.create(full_name: 'Adam', skills: {"java" => "1", "ruby"=> "1" }, working_office: "San Francisco") }
+    let!(:chicago_ruby_master) {Consultant.create(full_name: 'Billy', skills: {"ruby" => "5" }, working_office: "Chicago") }
 
     it 'should return a list of matches for the mentee' do
       connections = ConnectionService.best_match_for mentee
