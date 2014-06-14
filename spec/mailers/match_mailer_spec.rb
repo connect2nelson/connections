@@ -24,8 +24,4 @@ RSpec.describe MatchMailer, :type => :mailer do
   it 'should send an email with subject [Connnections] New connection for you!' do
     expect(subject.subject).to eq '[Connections] New connection for you!'
   end
-
-  it 'should send email with sent date to today' do
-      expect(subject.date.utc.to_i).to eq Time.now.utc.to_i
-  end
 end
