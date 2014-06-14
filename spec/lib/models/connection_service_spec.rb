@@ -16,6 +16,8 @@ describe ConnectionService do
       Consultant.create({full_name: 'Charlotte'})
       expect(ConnectionService.all.size).to eq 6
     end
+
+
   end
 
 end
