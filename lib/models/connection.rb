@@ -1,9 +1,11 @@
 class Connection
   attr_reader :mentor, :mentee, :skill_gap
+  attr_accessor :relevant_skills
 
   def initialize(mentor, mentee)
     @mentor = mentor
     @mentee = mentee
+    @relevant_skills = Hash.new
     @skill_gap = calculate_skill_gap
   end
 
@@ -30,6 +32,7 @@ class Connection
     mentor.skills.each do |skill, level|
       if mentee.skills.has_key?(skill)
         diff = level.to_i - mentee.skills[skill].to_i
+        @relevant_skills[skill] = diff
         sum = sum + diff
       end
     end

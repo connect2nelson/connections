@@ -27,10 +27,20 @@ describe ConnectionService do
         connections = ConnectionService.all
         connections_for_mentee = connections.select{|connection| connection.mentee.full_name == 'Adam' }
         first_connection_mentor = connections_for_mentee[0].mentor
+        first_connection_mentor_skills = connections_for_mentee[0].relevant_skills
 
         expect(connections.size).to eq 6
         expect(connections_for_mentee[0].skill_gap).to eq 8
         expect(first_connection_mentor.full_name).to eq "Charlotte"
+      end
+
+      it 'should tell me which skills were a match' do
+        connections = ConnectionService.all
+        connections_for_mentee = connections.select{|connection| connection.mentee.full_name == 'Adam' }
+        first_connection_mentor_skills = connections_for_mentee[0].relevant_skills
+
+        expect(first_connection_mentor_skills.length).to eq 2
+        expect(first_connection_mentor_skills["ruby"]).to eq 4
       end
 
     end
