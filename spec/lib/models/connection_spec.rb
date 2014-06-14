@@ -20,6 +20,8 @@ describe Connection do
     let(:mentor) {Consultant.new(skills: {"ruby" => 5 }, working_office: "office") }
     let(:mentee) {Consultant.new(skills: {"ruby"=> 1 }, working_office: "office") }
     let(:sf_mentee) {Consultant.new(skills: {"ruby" => 1 }, working_office: "San Francisco") }
+    let(:sf_ruby_beginner) {Consultant.new(skills: {"ruby" => 2 }, working_office: "San Francisco") }
+
     let(:chicago_mentor) {Consultant.new(skills: {"ruby" => 5 }, working_office: "Chicago") }
     let(:ruby_chicago_master) {Consultant.new(skills: {"ruby" => 5 }, working_office: "Chicago") }
     let(:java_master) {Consultant.new(skills: {"java" => 5, "ruby" => 5 }, working_office: "San Francisco") }
@@ -30,7 +32,8 @@ describe Connection do
     let(:connection) {Connection.new(mentor, mentee)}
     let(:connection_between_chicago_and_sf) {Connection.new(chicago_mentor, sf_mentee)}
     let(:connection_between_two_chicago_masters) {Connection.new(chicago_mentor, ruby_chicago_master)}
-    let(:connection_between_java_masters) {Connection.new(java_maestro, java_master)}
+    let(:connection_between_java_masters) {Connection.new(java_master, java_maestro)}
+    let(:connection_between_ruby_beginners) {Connection.new(sf_mentee, sf_ruby_beginner)}
 
 
 
@@ -46,8 +49,12 @@ describe Connection do
         expect(connection_between_two_chicago_masters).to_not be_match
     end
 
-    it "should not match two java experts" do 
-      expect(connection_between_java_masters).to_not be_match
+    it "should match two people who have mismatched skills in any area" do 
+      expect(connection_between_java_masters).to be_match
+    end
+
+    it "should not match two beginners" do
+      expect(connection_between_ruby_beginners).to_not be_match
     end
 
 
