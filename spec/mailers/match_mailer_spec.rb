@@ -8,7 +8,7 @@ RSpec.describe MatchMailer, :type => :mailer do
     @consultant = Consultant.new(employee_id: "15230",
                                  full_name: "Pam Ocampo",
                                  working_office: "San Francisco")
-    @connections = nil
+    @connections = [Connection.new(Consultant.new(full_name: "Derek Hammer"), @consultant)]
     @connections_mailer = MatchMailer.send_connections(@consultant, @connections).deliver
   }
   subject { ActionMailer::Base.deliveries.first }
@@ -36,5 +36,10 @@ RSpec.describe MatchMailer, :type => :mailer do
 
   it 'should have the consultant name in the body' do
       expect(@connections_mailer.body).to include @consultant.full_name
+  end
+
+  it 'should have a list of connections in the body' do
+      expect(@connections_mailer.body).to include @connections.first.mentee.full_name
+      expect(@connections_mailer.body).to include @connections.first.mentor.full_name
   end
 end
