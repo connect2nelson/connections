@@ -12,4 +12,16 @@ class ApplicationController < ActionController::Base
   def logged_in?
     !session[:auth_token].nil?
   end
+
+  def is_authhorized
+    enabled_security = ENV["SECURITY_ENABLED"]
+    current_user != nil || (enabled_security == false)
+  end
+
+
+  def authenticate_user
+    if(!is_authhorized)
+      redirect_to "/auth/saml"
+    end
+  end
 end
