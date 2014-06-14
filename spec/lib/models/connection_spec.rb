@@ -15,5 +15,15 @@ describe Connection do
     end
 
   end
+
+  context 'match' do
+    let(:mentor) {Consultant.new(skills: {:ruby => 5 }) }
+    let(:mentee) {Consultant.new(skills: {:ruby => 1 }) }
+    let(:connection) {Connection.new(mentor, mentee)}
+
+    it 'should be a match' do
+      expect(connection).to be_match
+    end
+  end
 end
 

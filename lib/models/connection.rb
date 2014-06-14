@@ -7,4 +7,8 @@ class Connection
     @mentee = mentee
   end
 
+  def match?
+    true
+  end
+
 end
