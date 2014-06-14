@@ -1,3 +1,6 @@
+# Load models from lib
+Dir['./lib/models/*.rb'].each { |f| require(f) }
+
 # Load the Rails application.
 require File.expand_path('../application', __FILE__)
 
