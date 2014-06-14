@@ -5,10 +5,12 @@ gem 'sass-rails', '~> 4.0.2'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'database_cleaner', :github => 'bmabey/database_cleaner'
 gem 'foundation-rails'
+gem 'rails3-jquery-autocomplete'
 
 group :doc do
   gem 'sdoc', require: false
