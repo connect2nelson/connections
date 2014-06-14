@@ -8,14 +8,19 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'database_cleaner', :github => 'bmabey/database_cleaner'
+gem 'foundation-rails'
 
 group :doc do
   gem 'sdoc', require: false
 end
 
-gem "haml", ">= 3.0.0"
-gem "haml-rails"
-gem "bson_ext"
-gem "mongoid", ">= 2.0.0.beta.19"
-gem "rspec-rails", ">= 2.0.1", group: [:development, :test]
+gem 'haml', '>= 3.0.0'
+gem 'haml-rails'
+gem 'bson_ext'
+gem 'mongoid', '>= 2.0.0.beta.19'
 gem 'mongoid-rspec', group: :test
+
+group :test, :development do
+   gem 'rspec-rails', '>=2.0.1'
+   gem 'capybara'
+end
