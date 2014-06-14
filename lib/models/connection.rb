@@ -1,11 +1,10 @@
 class Connection
-  attr_reader :mentor
-  attr_reader :mentee
+  attr_reader :mentor, :mentee, :skill_gap
 
   def initialize(mentor, mentee)
     @mentor = mentor
     @mentee = mentee
-    skill_gap =0
+    @skill_gap = calculate_skill_gap
   end
 
   def match?
@@ -24,9 +23,18 @@ class Connection
     mentee.skills[skill].to_i == 1 && level.to_i == 5
   end
 
-  def skill_gap
-    mentor.skills.inject(0) do |sum, (skill, level)|
-      sum += level.to_i - mentee.skills[skill].to_i
+  def calculate_skill_gap
+    return 0 if mentor.skills.nil?
+
+    sum = 0
+    mentor.skills.each do |skill, level|
+      if mentee.skills.has_key?(skill)
+        diff = level.to_i - mentee.skills[skill].to_i
+        sum = sum + diff
+      end
     end
+    return sum
+
   end
+
 end

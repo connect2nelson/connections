@@ -16,6 +16,25 @@ describe ConnectionService do
       Consultant.create({full_name: 'Charlotte'})
       expect(ConnectionService.all.size).to eq 6
     end
+
+    context "sorting" do
+
+      let!(:java_and_ruby_master) {Consultant.create(full_name: 'Charlotte', skills: {"java" => "5", "ruby" => "5" }, working_office: "San Francisco") }
+      let!(:ruby_master) {Consultant.create(full_name: 'Billy', skills: {"ruby" => "5" }, working_office: "San Francisco") }
+      let!(:mentee) {Consultant.create(full_name: 'Adam', skills: {"java" => "1", "ruby"=> "1" }, working_office: "San Francisco") }
+
+      it 'should sort connections by greatest gap in skills' do
+        connections = ConnectionService.all
+        connections_for_mentee = connections.select{|connection| connection.mentee.full_name == 'Adam' }
+        first_connection_mentor = connections_for_mentee[0].mentor
+
+        expect(connections.size).to eq 6
+        expect(connections_for_mentee[0].skill_gap).to eq 8
+        expect(first_connection_mentor.full_name).to eq "Charlotte"
+      end
+
+    end
+    
   end
 
   context '.sf_office' do
@@ -36,4 +55,5 @@ describe ConnectionService do
       expect(ConnectionService.sf_office.size).to eq 6
     end
   end
+
 end

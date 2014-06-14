@@ -65,20 +65,15 @@ describe Connection do
   end
 
   context 'sorting' do
-    let(:java_master) {Consultant.new(skills: {"java" => "5", "ruby" => "5" }, working_office: "San Francisco") }
-    let(:java_maestro) {Consultant.new(skills: {"java" => "5", "ruby" => "1" }, working_office: "San Francisco") }
-    let(:mentor) {Consultant.new(skills: {"ruby" => "5" }, working_office: "office") }
-    let(:mentee) {Consultant.new(skills: {"ruby"=> "1" }, working_office: "office") }
+    let(:mentor) {Consultant.new(skills: {"java" => "5", "ruby" => "5" }, working_office: "San Francisco") }
+    let(:mentee) {Consultant.new(skills: {"java" => "1", "ruby" => "1" }, working_office: "San Francisco") }
   
     let(:connection) {Connection.new(mentor, mentee)}
 
-
     it "should count difference between master and novice " do
        expect(connection).to be_match
-       expect(connection.skill_gap).to eq(4)
+       expect(connection.skill_gap).to eq(8)
     end
-
-
 
   end
 

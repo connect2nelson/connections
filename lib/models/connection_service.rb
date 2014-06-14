@@ -4,7 +4,9 @@ class ConnectionService
       Consultant.all.not.where('_id' => consultant.id).map do |other|
         Connection.new(consultant, other)
       end
-    end.flatten
+    end.flatten.sort_by{ |connection|
+    	  connection.skill_gap
+    	}.reverse
   end
 
   def self.sf_office
