@@ -1,10 +1,12 @@
 class Connection
   attr_reader :mentor
   attr_reader :mentee
+  attr_accessor :skill_gap
 
   def initialize(mentor, mentee)
     @mentor = mentor
     @mentee = mentee
+    skill_gap =0
   end
 
   def match?
@@ -20,7 +22,12 @@ class Connection
   end
 
   def can_learn_from?(skill, level)
-  	 mentee.skills[skill].to_i == 1 && level.to_i == 5 
+  	 @skill_gap = 0
+  	 mentees_skill_level = mentee.skills[skill]
+  	 if mentees_skill_level != nil
+  	   @skill_gap += level.to_i - mentees_skill_level.to_i
+  	 end
+  	 mentee.skills[skill].to_i == 1 && level.to_i == 5
   end
 
 end

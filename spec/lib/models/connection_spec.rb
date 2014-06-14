@@ -62,7 +62,21 @@ describe Connection do
       expect(connection_between_expert_mentee).to_not be_match
     end
 
+  end
 
+  context 'sorting' do
+    let(:java_master) {Consultant.new(skills: {"java" => "5", "ruby" => "5" }, working_office: "San Francisco") }
+    let(:java_maestro) {Consultant.new(skills: {"java" => "5", "ruby" => "1" }, working_office: "San Francisco") }
+    let(:mentor) {Consultant.new(skills: {"ruby" => "5" }, working_office: "office") }
+    let(:mentee) {Consultant.new(skills: {"ruby"=> "1" }, working_office: "office") }
+  
+    let(:connection) {Connection.new(mentor, mentee)}
+
+
+    it "should count difference between master and novice " do
+       expect(connection).to be_match
+       expect(connection.skill_gap).to eq(4)
+    end
 
 
 
