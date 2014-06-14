@@ -8,7 +8,7 @@ class Connection
   end
 
   def match?
-  	mentor.working_office == mentee.working_office && mentor.skills["ruby"] != mentee.skills["ruby"]
+  	mentor.skills.all? { |skill, level| mentee.skills[skill] != level } && 	mentor.working_office == mentee.working_office 
   end
 
 end
