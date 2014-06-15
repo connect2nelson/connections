@@ -4,7 +4,9 @@
       %h1 Profile Picture
     .small-8.columns
       %h2 #{@consultant.full_name}
-      %h3 Office: #{@consultant.working_office}
+      %h3 Role: #{@consultant.primary_role}
+      %h3 Home Office: #{@consultant.home_office}
+      %h3 Working Office: #{@consultant.working_office}
   .row
     .small-8.columns
       Matches
