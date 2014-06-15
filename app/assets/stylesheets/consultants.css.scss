@@ -1,8 +1,5 @@
 @import "foundation_and_overrides";
 
-$light-brown: #9e785f;
-$dark-brown: #5e3e2a;
-
 .consultant-show {
   width: $row-width;
   margin: 3em auto;
@@ -15,7 +12,7 @@ $dark-brown: #5e3e2a;
   }
   h2 {
     margin-top: 0;
-
+    color: $dark-brown;
   }
 
   dl {
@@ -31,5 +28,31 @@ $dark-brown: #5e3e2a;
       width: 20%;
       color: $dark-brown;
     }
+  }
+
+}
+
+.matches {
+  list-style: none;
+  margin: 0;
+
+  > li {
+    border: #ccc solid thin;
+    margin: 1em 0;
+    padding: 0.5em 0.7em 0.7em;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0.2em 0 0 0;
+  }
+
+  .mentor {
+    font-size: 1.3rem;
+  }
+  .label {
+    font-size: 1.1rem;
+    margin-right: 0.2em;
+    margin-bottom: 0.2em;
   }
 }

@@ -12,6 +12,14 @@
 // Allows the use of rem-calc() or lower-bound() in your settings
 @import "foundation/functions";
 
+// Colors
+
+$light-brown: #9e785f;
+$dark-brown: #5e3e2a;
+$blue: #26BDCF;
+$orange: #F78F31;
+$skin: #FEE0C9;
+
 // $experimental: true;
 
 // The default font-size is set to 100% of the browser style sheet (usually 16px)
@@ -65,6 +73,7 @@ $body-font-family: $open-sans-font;
 // $success-color: #43AC6A;
 // $warning-color: #f08a24;
 // $info-color: #a0d3e8;
+$primary-color: $blue;
 
 // We use these to make sure border radius matches unless we want it different.
 // $global-radius: 3px;
