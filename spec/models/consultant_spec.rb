@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Consultant, :type => :model do
 
   describe 'attributes' do
-    it { should have_fields(:full_name, :skills, :working_office) }
+    it { expect(subject).to have_fields(:full_name, :skills, :working_office) }
   end
 
   describe '#skills_to_learn' do
