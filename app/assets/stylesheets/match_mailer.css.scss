@@ -1,4 +1,6 @@
-body {
-    -webkit-font-smoothing: antialiased;
-    width: 100%;
+@import "foundation_and_overrides";
+.connection-message {
+    h1 {
+        margin-top: 0;
+    }
 }
