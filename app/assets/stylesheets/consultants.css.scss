@@ -1,6 +1,35 @@
-@import "foundation";
+@import "foundation_and_overrides";
+
+$light-brown: #9e785f;
+$dark-brown: #5e3e2a;
 
 .consultant-show {
   width: $row-width;
   margin: 3em auto;
+
+  img {
+    max-width: 200px;
+    max-height: 200px;
+    margin: 0.5em auto;
+    display: block;
+  }
+  h2 {
+    margin-top: 0;
+
+  }
+
+  dl {
+    margin-top: 2em;
+    dd, dt {
+      display: inline-block;
+    }
+    dd {
+      width: 75%;
+      color: $light-brown;
+    }
+    dt {
+      width: 20%;
+      color: $dark-brown;
+    }
+  }
 }

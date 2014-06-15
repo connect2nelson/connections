@@ -46,6 +46,9 @@
 // $body-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 // $body-font-weight: $font-weight-normal;
 // $body-font-style: normal;
+$open-sans-font: 'Open Sans', 'Helvetica Neue', Helvetica, sans-serif;
+$header-font-family: $open-sans-font;
+$body-font-family: $open-sans-font;
 
 // We use this to control font-smoothing
 // $font-smoothing: antialiased;
