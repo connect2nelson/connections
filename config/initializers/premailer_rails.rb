@@ -1,1 +1,6 @@
-Premailer::Rails.config.merge!(generate_text_part: false, preserve_styles: false, remove_comments: true, adapter: "nokogiri")
+Premailer::Rails.config.merge!(
+    :input_encoding => 'UTF-8',
+    :preserve_styles => true,
+    :generate_text_part => false,
+    :adapter => 'nokogiri'
+)
