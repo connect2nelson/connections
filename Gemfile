@@ -11,6 +11,7 @@ gem 'jbuilder', '~> 1.2'
 gem 'database_cleaner', :github => 'bmabey/database_cleaner'
 gem 'foundation-rails'
 gem 'rails3-jquery-autocomplete'
+gem 'premailer-rails'
 
 group :doc do
   gem 'sdoc', require: false
