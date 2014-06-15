@@ -6,6 +6,9 @@
 
   .label {
     background-color: #aaa;
+    &.highlight {
+      background-color: $blue;
+    }
   }
   .header {
     img {
