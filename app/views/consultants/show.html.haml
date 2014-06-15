@@ -10,7 +10,13 @@
       Matches
       %ul
         - @connections.take(3).each do |connection|
-          %li= connection.mentor.full_name
+          %li
+            .mentor
+              = connection.mentor.full_name
+              %ul
+                - connection.teachable_skills.each do |teachable_skill|
+                  %li= teachable_skill
+
 
     .small-4.columns
       %ul

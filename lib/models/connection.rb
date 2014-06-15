@@ -14,11 +14,11 @@ class Connection
   end
 
   def same_working_office?
-    mentor.working_office == mentee.working_office 
+    mentor.working_office == mentee.working_office
   end
 
   def has_skill_to_learn?
-    mentor.skills.any? { |skill, level| can_learn_from?(skill, level)} 
+    teachable_skills.any?
   end
 
   def can_learn_from?(skill, level)
@@ -37,7 +37,10 @@ class Connection
       end
     end
     return sum
+  end
 
+  def teachable_skills
+    mentor.skills.select {|skill, level| can_learn_from?(skill, level)}.keys
   end
 
 end
