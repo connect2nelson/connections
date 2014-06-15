@@ -2,6 +2,8 @@
 
 This is an app aimed at creating connections between consultants in ThoughtWorks.
 
+[![Build Status](https://snap-ci.com/thoughtworks/connections/branch/master/build_image)](https://snap-ci.com/thoughtworks/connections/branch/master)
+
 ## The How
 
 Mostly, we are building an application that mines data from other internal apps within ThoughtWorks in order to provide useful information to the receiptants. We currently have two 'apps' for this data and are planning to introduce some more (see the future work section below). 
