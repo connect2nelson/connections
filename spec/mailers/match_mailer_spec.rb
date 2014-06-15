@@ -7,8 +7,12 @@ RSpec.describe MatchMailer, :type => :mailer do
     mailer = MatchMailer.create_match_message(thoughtworker, mentor).deliver
     @consultant = Consultant.new(employee_id: "15230",
                                  full_name: "Pam Ocampo",
-                                 working_office: "San Francisco")
-    @connections = [Connection.new(Consultant.new(full_name: "Derek Hammer"), @consultant)]
+                                 working_office: "San Francisco",
+                                 skills: {"Ruby"=>"1", "Java"=>"1"})
+    @mentor = Consultant.new(employee_id: "",
+                             full_name: "Derek Hammer",
+                             skills: {"Ruby"=>"5", "Java"=>"5"})
+    @connections = [Connection.new(@mentor, @consultant)]
     @connections_mailer = MatchMailer.send_connections(@consultant, @connections).deliver
   }
   subject { ActionMailer::Base.deliveries.first }
@@ -38,8 +42,12 @@ RSpec.describe MatchMailer, :type => :mailer do
       expect(@connections_mailer.body).to include @consultant.full_name
   end
 
-  it 'should have a list of connections in the body' do
-      expect(@connections_mailer.body).to include @connections.first.mentee.full_name
+  it 'should have a list of of connection mentors' do
       expect(@connections_mailer.body).to include @connections.first.mentor.full_name
+  end
+
+  it 'should include the list of skills per mentor in the body' do
+      expect(@connections_mailer.body).to include @connections.first.mentor.skills.keys[0]
+      expect(@connections_mailer.body).to include @connections.first.mentor.skills.keys[1]
   end
 end

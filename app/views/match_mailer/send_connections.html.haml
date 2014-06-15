@@ -6,4 +6,6 @@
   Connections
 %ul
   -@connections.each do |connection|
-    %li= connection.mentor.full_name
+    %li
+      =connection.mentor.full_name
+      =connection.mentor.skills.keys
