@@ -3,9 +3,9 @@ require 'rails_helper'
 describe 'consultants/show.html.haml' do
 
   before do
-    mentor_one = Consultant.new(full_name: 'Amber')
-    mentor_two = Consultant.new(full_name: 'Barbara')
-    consultant = Consultant.new(employee_id: '1111', full_name: 'Ian Norris', primary_role: 'Dev', home_office: 'Chicago', working_office: 'San Francisco', skills: Hash['Ruby'=>'1'])
+    mentor_one = Consultant.new(full_name: 'Amber', employee_id: '1')
+    mentor_two = Consultant.new(full_name: 'Barbara', employee_id: '2')
+    consultant = Consultant.new(employee_id: '3', full_name: 'Ian Norris', primary_role: 'Dev', home_office: 'Chicago', working_office: 'San Francisco', skills: Hash['Ruby'=>'1'])
 
     assign :consultant, consultant
 
@@ -35,8 +35,8 @@ describe 'consultants/show.html.haml' do
   end
 
   describe 'show mentors' do
-    specify {expect(rendered).to have_text('Amber')}
-    specify {expect(rendered).to have_text('Barbara')}
+    specify {expect(rendered).to have_link('Amber', :href => '/consultants/1')}
+    specify {expect(rendered).to have_link('Barbara', :href => '/consultants/2')}
 
     it 'should show teachable skills' do
       expect(rendered).to have_text('Java')

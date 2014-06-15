@@ -18,7 +18,7 @@
         - @connections.take(3).each do |connection|
           %li
             .mentor
-              = connection.mentor.full_name
+              =link_to connection.mentor.full_name, "/consultants/#{connection.mentor.employee_id}"
               %ul
                 - connection.teachable_skills.each do |teachable_skill|
                   %li.label= teachable_skill
