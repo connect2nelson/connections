@@ -4,6 +4,12 @@ RSpec.describe Consultant, :type => :model do
 
   describe 'attributes' do
     it { expect(subject).to have_fields(:full_name, :skills, :working_office, :home_office, :primary_role) }
+    let(:consultant) {Consultant.create(employee_id: 10001)}
+
+    it 'should contain employee id in email' do
+        expect(consultant.email).to include 'thoughtworks.com'
+        expect(consultant.email).to include consultant.employee_id
+    end
   end
 
   describe '#skills_to_learn' do
