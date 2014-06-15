@@ -1,5 +1,5 @@
 .consultant-show
-  .row
+  .row.header
     .small-4.columns
       = image_tag 'profile.png'
     .small-8.columns
@@ -12,22 +12,24 @@
         %dt Working Office
         %dd= @consultant.working_office
   .row
+    .small-4.columns
+      %h3.skills-header
+        = @consultant.full_name.split.first
+        wants to learn
+      %ul.skills
+        - @consultant.skills_to_learn.sort.each do |skill|
+          %li
+            .label= skill
     .small-8.columns
       %h3 Matches
       %ul.matches
         - @connections.take(3).each do |connection|
           %li
             .mentor
-              =link_to connection.mentor.full_name, "/consultants/#{connection.mentor.employee_id}"
+              = image_tag 'profile.png'
+              .name= link_to connection.mentor.full_name, "/consultants/#{connection.mentor.employee_id}"
               %ul
                 - connection.teachable_skills.each do |teachable_skill|
                   %li.label= teachable_skill
 
 
-    .small-4.columns
-      %h3
-        = @consultant.full_name.split.first
-        wants to learn
-      %ul
-        - @consultant.skills_to_learn.each do |skill|
-          %li= skill

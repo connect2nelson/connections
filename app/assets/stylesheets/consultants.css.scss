@@ -4,11 +4,16 @@
   width: $row-width;
   margin: 3em auto;
 
-  img {
-    max-width: 200px;
-    max-height: 200px;
-    margin: 0.5em auto;
-    display: block;
+  .label {
+    background-color: #aaa;
+  }
+  .header {
+    img {
+      max-width: 200px;
+      max-height: 200px;
+      margin: 0.5em 0 0.5em auto;
+      display: block;
+    }
   }
   h2 {
     margin-top: 0;
@@ -32,6 +37,25 @@
 
 }
 
+.skills {
+  list-style: none;
+  margin: 0;
+  text-align: right;
+  li {
+    min-width: 45%;
+    display: inline-block;
+    max-width: 100%;
+  }
+  .label {
+    max-width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}
+.skills-header {
+  text-align: right;
+}
+
 .matches {
   list-style: none;
   margin: 0;
@@ -48,8 +72,22 @@
   }
 
   .mentor {
-    font-size: 1.3rem;
+    .name {
+      margin-left: 0.5em;
+      font-size: 1.3rem;
+      display: inline-block;
+    }
+    img {
+      max-width: 30px;
+      max-height: 30px;
+      display: inline-block;
+      margin: 0;
+      margin-bottom: 0.5em;
+    }
   }
+}
+
+.matches, .skills {
   .label {
     font-size: 1.1rem;
     margin-right: 0.2em;
