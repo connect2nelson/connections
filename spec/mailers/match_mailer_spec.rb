@@ -9,7 +9,7 @@ RSpec.describe MatchMailer, :type => :mailer do
                                  full_name: "Pam Ocampo",
                                  working_office: "San Francisco",
                                  skills: {"Ruby"=>"1", "Java"=>"1"})
-    @mentor = Consultant.new(employee_id: "",
+    @mentor = Consultant.new(employee_id: "10001",
                              full_name: "Derek Hammer",
                              skills: {"Ruby"=>"5", "Java"=>"5"})
     @connections = [Connection.new(@mentor, @consultant)]
@@ -38,8 +38,13 @@ RSpec.describe MatchMailer, :type => :mailer do
       expect(@connections_mailer.to).to include "#{@consultant.employee_id}@thoughtworks.com"
   end
 
-  it 'should have the consultant name in the body' do
-      expect(@connections_mailer.body).to include @consultant.full_name
+  it 'should have a list of of connection mentors' do
+      expect(@connections_mailer.body).to include @connections.first.mentor.full_name
+  end
+
+  it 'should have a connection mentors email' do
+      expect(@connections_mailer.body).to include @connections.first.mentor.email
+      expect(@connections.first.mentor.email).to eq "10001@thoughtworks.com"
   end
 
   it 'should have a list of of connection mentors' do

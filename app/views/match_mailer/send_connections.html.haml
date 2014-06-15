@@ -13,6 +13,6 @@
         -@connections.each do |connection|
           %li
             %strong
-              %a{ :href => "mailto:#{connection.mentor.employee_id}@thoughtworks.com?subject=Would love to chat! Are you available for mentorship?" }= connection.mentor.full_name
+              %a{ :href => "mailto:#{connection.mentor.email}?subject=Would love to chat! Are you available for mentorship?" }= connection.mentor.full_name
             %br
               =connection.teachable_skills.to_sentence
