@@ -8,4 +8,7 @@ Connections::Application.routes.draw do
 
   root 'consultants#index'
 
+  if Rails.env.development?
+      mount LetterOpenerWeb::Engine, at: "/dev/emails"
+  end
 end

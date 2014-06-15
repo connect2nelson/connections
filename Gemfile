@@ -29,4 +29,5 @@ group :test, :development do
    gem 'rspec-rails', '>=2.0.1'
    gem 'capybara'
    gem 'mongoid-rspec'
+   gem 'letter_opener_web'
 end

@@ -85,6 +85,13 @@ GEM
     jquery-ui-rails (4.2.1)
       railties (>= 3.2.16)
     json (1.8.1)
+    launchy (2.4.2)
+      addressable (~> 2.3)
+    letter_opener (1.2.0)
+      launchy (~> 2.2)
+    letter_opener_web (1.2.1)
+      letter_opener (~> 1.0)
+      rails (>= 3.2)
     macaddr (1.7.1)
       systemu (~> 2.6.2)
     mail (2.5.4)
@@ -220,6 +227,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   jquery-ui-rails
+  letter_opener_web
   mongoid (>= 2.0.0.beta.19)
   mongoid-rspec
   nokogiri
