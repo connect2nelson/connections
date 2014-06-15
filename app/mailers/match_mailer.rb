@@ -9,6 +9,7 @@ class MatchMailer < ActionMailer::Base
   def send_connections(consultant, connections)
       @consultant = consultant
       @connections = connections
-      mail(to: "#{consultant.employee_id}@thoughtworks.com")
+      @consultant_email = "#{consultant.employee_id}@thoughtworks.com"
+      mail(to: @consultant_email)
   end
 end

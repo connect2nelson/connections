@@ -4,14 +4,15 @@
     %meta(http-equiv="Content-Type" content="text/html; charset=UTF-8")
     =stylesheet_link_tag 'match_mailer.css'
   %body
+    %div.connection-message
     %h3
       Hey,
       = @consultant.full_name
-      we found a few ThoughtWorkers that could serve as your potential mentor!
-    %strong
-      Connections
+      we found a few ThoughtWorkers that could serve as your mentor for these skills!
       %ul
         -@connections.each do |connection|
           %li
-            =connection.mentor.full_name
-            =connection.mentor.skills.keys
+            %strong
+              %a{ :href => "mailto:#{connection.mentor.employee_id}@thoughtworks.com?subject=Would love to chat! Are you available for mentorship?" }= connection.mentor.full_name
+            %br
+              =connection.teachable_skills.to_sentence
