@@ -1,11 +1,15 @@
-%h3
-  Hey,
-  = @consultant.full_name
-  we found a few ThoughtWorkers that could serve as your potential mentor!
-%strong
-  Connections
-%ul
-  -@connections.each do |connection|
-    %li
-      =connection.mentor.full_name
-      =connection.mentor.skills.keys
+%html
+  %head
+    = stylesheet_link_tag "match_mailer"
+  %body
+    %h3
+      Hey,
+      = @consultant.full_name
+      we found a few ThoughtWorkers that could serve as your potential mentor!
+    %strong
+      Connections
+      %ul
+        -@connections.each do |connection|
+          %li
+            =connection.mentor.full_name
+            =connection.mentor.skills.keys
