@@ -4,12 +4,16 @@
       = image_tag 'profile.png'
     .small-8.columns
       %h2 #{@consultant.full_name}
-      %h3 Role: #{@consultant.primary_role}
-      %h3 Home Office: #{@consultant.home_office}
-      %h3 Working Office: #{@consultant.working_office}
+      %dl
+        %dt Role
+        %dd= @consultant.primary_role
+        %dt Home Office
+        %dd= @consultant.home_office
+        %dt Working Office
+        %dd= @consultant.working_office
   .row
     .small-8.columns
-      Matches
+      %h3 Matches
       %ul
         - @connections.take(3).each do |connection|
           %li
@@ -21,6 +25,9 @@
 
 
     .small-4.columns
+      %h3
+        = @consultant.full_name.split.first
+        wants to learn
       %ul
         - @consultant.skills_to_learn.each do |skill|
           %li= skill
