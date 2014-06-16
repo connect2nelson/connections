@@ -13,11 +13,6 @@ gem 'foundation-rails'
 gem 'rails3-jquery-autocomplete'
 gem 'nokogiri'
 gem 'premailer-rails'
-
-group :doc do
-  gem 'sdoc', require: false
-end
-
 gem 'haml', '>= 3.0.0'
 gem 'haml-rails'
 gem 'bson_ext'
@@ -30,4 +25,12 @@ group :test, :development do
    gem 'capybara'
    gem 'mongoid-rspec'
    gem 'letter_opener_web'
+end
+
+group :development do
+  gem 'rails_12factor'
+end
+
+group :doc do
+  gem 'sdoc', require: false
 end
