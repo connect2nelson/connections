@@ -33,4 +33,8 @@ Connections::Application.configure do
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
+
+  # Turn off Mongoid/Moped logging
+  Mongoid.logger = nil
+  Moped.logger = nil
 end
