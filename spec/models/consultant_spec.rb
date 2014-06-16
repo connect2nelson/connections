@@ -23,4 +23,6 @@ RSpec.describe Consultant, :type => :model do
     end
 
   end
+
+
 end

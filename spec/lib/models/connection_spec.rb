@@ -74,13 +74,29 @@ describe Connection do
   end
 
   context '#teachable_skills' do
-    let(:mentor) {Consultant.new(skills: {'java'=>2, 'ruby'=>5})}
-    let(:mentee) {Consultant.new(skills: {'java'=>1, 'ruby'=>1})}
+    let(:mentor) {Consultant.new(skills: {'java'=>'2', 'ruby'=>'5'})}
+    let(:mentee) {Consultant.new(skills: {'java'=>'1', 'ruby'=>'1'})}
     let(:connection) {Connection.new(mentor, mentee)}
 
     it 'should return skills that mentor can teach mentee' do
       expect(connection.teachable_skills.size).to eq 1
       expect(connection.teachable_skills).to include 'ruby'
+    end
+
+  end
+
+  context '#intersecting_skills' do
+    let(:mentor) {Consultant.new(skills: {'java'=>'2', 'ruby'=>'5', 'clojure'=>'3'})}
+    let(:mentee) {Consultant.new(skills: {'java'=>'1', 'ruby'=>'1', 'javascript'=>'5'})}
+    let(:connection) {Connection.new(mentor, mentee)}
+
+    it 'should only return skills that mentor and mentee both have' do
+       skills = connection.intersecting_skills.map(&:name)
+       expect(skills.size).to eq 2
+       expect(skills).to include eq 'ruby'
+       expect(skills).to include eq 'java'
+       expect(skills).to_not include eq 'javascript'
+       expect(skills).to_not include eq 'clojure'
     end
 
   end

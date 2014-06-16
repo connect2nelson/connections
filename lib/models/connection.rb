@@ -27,7 +27,6 @@ class Connection
 
   def calculate_skill_gap
     return 0 if mentor.skills.nil?
-
     sum = 0
     mentor.skills.each do |skill, level|
       if mentee.skills.has_key?(skill)
@@ -41,6 +40,13 @@ class Connection
 
   def teachable_skills
     mentor.skills.select {|skill, level| can_learn_from?(skill, level)}.keys
+  end
+
+  def intersecting_skills
+    (mentee.skills.keys & mentor.skills.keys).map do |skill|
+      SkillDiff.new(skill, mentor, mentee)
+    end
+
   end
 
 end
