@@ -1,0 +1,22 @@
+@mixin profile-attributes($selector, $align: 'left') {
+  $dd-width: 75%;
+  $dt-width: 20%;
+  @if($align == 'right') {
+    $dd-width: 20%;
+    $dt-width: 75%;
+  }
+  #{$selector} {
+    margin-top: 2em;
+    dd, dt {
+      display: inline-block;
+    }
+    dd {
+      width: $dd-width;
+      color: $light-brown;
+    }
+    dt {
+      width: $dt-width;
+      color: $dark-brown;
+    }
+  }
+}
