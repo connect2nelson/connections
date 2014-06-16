@@ -19,16 +19,13 @@ gem 'bson_ext'
 gem 'mongoid', '>= 2.0.0.beta.19'
 gem 'foreman'
 gem 'omniauth-saml'
+gem 'rails_12factor'
 
 group :test, :development do
    gem 'rspec-rails', '>=2.0.1'
    gem 'capybara'
    gem 'mongoid-rspec'
    gem 'letter_opener_web'
-end
-
-group :development do
-  gem 'rails_12factor'
 end
 
 group :doc do
