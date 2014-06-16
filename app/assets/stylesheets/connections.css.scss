@@ -1,3 +1,17 @@
-// Place all the styles related to the connections controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "foundation_and_overrides";
+@import 'modules/profile-attributes';
+
+.second-consultant-profile, .first-consultant-profile {
+  margin-top: 3em;
+
+  h2 {
+    color: $dark-brown;
+  }
+}
+
+@include profile-attributes('.first-consultant-profile');
+@include profile-attributes('.second-consultant-profile', $align: right);
+
+.summary {
+  margin-top: 3em;
+}

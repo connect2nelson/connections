@@ -1,12 +1,18 @@
-@mixin profile-attributes($selector, $align: 'left') {
+@mixin profile-attributes($selector, $align: left) {
   $dd-width: 75%;
   $dt-width: 20%;
-  @if($align == 'right') {
-    $dd-width: 20%;
+  $text-align: left;
+
+  @if($align == right) {
     $dt-width: 75%;
+    $dd-width: 20%;
+    $text-align: right;
   }
+
   #{$selector} {
+    text-align: $text-align;
     margin-top: 2em;
+
     dd, dt {
       display: inline-block;
     }

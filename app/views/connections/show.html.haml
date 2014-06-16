@@ -1,5 +1,17 @@
 .row
-  .small-6.columns
-    %h2 #{@consultant_one.full_name}
-  .small-6.columns
-    %h2 #{@consultant_two.full_name}
+  .small-4.columns
+    .first-consultant-profile
+      %h2= @consultant_one.full_name
+      %dl
+        %dt Role
+        %dd= @consultant_one.primary_role
+  .small-4.columns
+    .summary
+      "You should grab some coffee! Because.."
+  .small-4.columns
+    .second-consultant-profile
+      %h2= @consultant_two.full_name
+      %dl
+        %dt Role
+        %dd= @consultant_two.primary_role
+
