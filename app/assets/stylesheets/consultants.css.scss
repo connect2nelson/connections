@@ -1,5 +1,18 @@
 @import "foundation_and_overrides";
 
+.search-box {
+  margin: 3em 3em 0 3em;
+}
+
+.main-page-logo {
+  margin: 5em 3em 0 3em;
+}
+
+.ui-state-focus {
+  background: $blue !important;
+  color: white !important;
+}
+
 .consultant-show {
   width: $row-width;
   margin: 3em auto;

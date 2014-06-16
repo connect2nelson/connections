@@ -1,2 +1,11 @@
-= form_tag do
-  =autocomplete_field_tag 'search_field', '', consultants_autocomplete_consultant_full_name_path
+.row
+  .small-12.columns
+    .main-page-logo
+      =image_tag 'connections-header.png'
+
+.row
+  .small-12.columns
+    .search-box
+      = form_tag do
+        =autocomplete_field_tag 'search_field', '', consultants_autocomplete_consultant_full_name_path, placeholder: 'Search for Consultants'
+
