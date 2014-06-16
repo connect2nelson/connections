@@ -2,8 +2,6 @@
 @import 'modules/profile-attributes';
 
 .second-consultant-profile, .first-consultant-profile {
-  margin-top: 3em;
-
   h2 {
     color: $dark-brown;
   }
@@ -13,5 +11,28 @@
 @include profile-attributes('.second-consultant-profile', $align: right);
 
 .summary {
-  margin-top: 3em;
+  margin-top: 2em;
+  position: relative;
+  .score {
+    text-align: center;
+  }
+  .value {
+    font-size: 3em;
+  }
+  .summary-text {
+    margin-top: 1em;
+  }
+
+  .score-visual {
+    margin-top: 1em;
+    background-color: $dark-brown;
+  }
+  .score-bar {
+    background-color: $orange;
+    height: 56px;
+  }
+  img {
+    position: absolute;
+    width: 100%;
+  }
 }

@@ -7,7 +7,13 @@
         %dd= @consultant_one.primary_role
   .small-4.columns
     .summary
-      "You should grab some coffee! Because.."
+      .score
+        %span.value 3.2
+        of 5
+      .score-visual
+        = image_tag 'controllers.png'
+        .score-bar{style: 'width: 64%;'} &nbsp;
+      .summary-text You two should grab some coffee!
   .small-4.columns
     .second-consultant-profile
       %h2= @consultant_two.full_name
