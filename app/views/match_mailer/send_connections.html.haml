@@ -2,17 +2,22 @@
 %html
   %head
     %meta(http-equiv="Content-Type" content="text/html; charset=UTF-8")
+    =stylesheet_link_tag 'foundation_and_overrides.css'
     =stylesheet_link_tag 'match_mailer.css'
   %body
-    %div.connection-message
-    %h3
-      Hey,
-      = @consultant.full_name
-      we found a few ThoughtWorkers that could serve as your mentor for these skills!
+    .row
+      .small-6.columns
+        .main-page-logo
+          =image_tag 'connections-header.png'
+    .connection-message
+      %h2
+        Hey,
+        = @consultant.full_name
+        we found a few ThoughtWorkers that could serve as your mentor for these skills!
       %ul
         -@connections.each do |connection|
           %li
             %strong
               %a{ :href => "mailto:#{connection.mentor.email}?subject=Would love to chat! Are you available for mentorship?" }= connection.mentor.full_name
             %br
-              =connection.teachable_skills.to_sentence
+            =connection.teachable_skills.to_sentence
