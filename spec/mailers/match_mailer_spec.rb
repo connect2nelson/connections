@@ -10,7 +10,7 @@ RSpec.describe MatchMailer, :type => :mailer do
                              full_name: "Derek Hammer",
                              skills: {"Ruby"=>"5", "Java"=>"5"})
     @connections = [Connection.new(@mentor, @consultant)]
-    @connections_mailer = MatchMailer.send_connections(@consultant, @connections).deliver
+    @connections_mailer = MatchMailer.send_connections(@consultant, @connections)
   }
   subject { ActionMailer::Base.deliveries.first }
 
