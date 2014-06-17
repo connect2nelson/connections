@@ -1,7 +1,7 @@
 class Connection
   MAX_SCORE = 5
-  MAX_SKILL_GAP = 500.0
-  MAX_SKILL_INTERSECTION = 100.0
+  MAX_SKILL_INTERSECTION = 75.0
+  MAX_SKILL_GAP = MAX_SKILL_INTERSECTION * 5
 
   attr_reader :mentor, :mentee, :skill_gap
   attr_accessor :relevant_skills
