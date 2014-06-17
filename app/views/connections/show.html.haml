@@ -21,10 +21,24 @@
         %dt Role
         %dd= @consultant_two.primary_role
 
-.row
-  .small-3.columns
-  .small-6.columns
+.row.skill-diffs
+  .small-1.columns &nbsp;
+  .small-10.columns
+    - @connection.intersecting_skills.each do |skill_diff|
+      .skill-diff
+        .row
+          .small-5.columns
+            .progress.small-12.round
+              - perc = skill_diff.consultant_one_level.to_i * 20
+              %span.meter{:style=>"width:#{perc}%; margin-left: #{100-perc}%;"}
+          .small-2.columns
+            %h5= skill_diff.name
+          .small-5.columns
+            .progress.small-12.round
+              - perc = skill_diff.consultant_two_level.to_i * 20
+              %span.meter{:style=>"width:#{perc}%"}
+  .small-1.columns &nbsp;
 
-  .small-3.columns
+
 
 

@@ -38,3 +38,13 @@
     width: 100%;
   }
 }
+
+.row.skill-diffs { margin-bottom: 5em; }
+.skill-diff {
+  margin-top: 1em;
+  h5 {
+    text-align: center;
+    font-size: 16px;
+    color: $dark-brown;
+  }
+}
