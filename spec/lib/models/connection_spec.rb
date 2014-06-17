@@ -61,6 +61,16 @@ describe Connection do
 
   end
 
+  context '#score' do
+    let(:mentor) {Consultant.new(skills: {'java'=>2, 'ruby'=>5})}
+    let(:mentee) {Consultant.new(skills: {'java'=>1, 'ruby'=>1})}
+    let(:connection) {Connection.new(mentor, mentee)}
+
+    it 'should return a score of 0.099' do
+      expect(connection.score).to eq(0.099)
+    end
+  end
+
   context 'sorting' do
     let(:mentor) {Consultant.new(skills: {'java' => '5', 'ruby' => '5' }, working_office: 'San Francisco') }
     let(:mentee) {Consultant.new(skills: {'java' => '1', 'ruby' => '1' }, working_office: 'San Francisco') }

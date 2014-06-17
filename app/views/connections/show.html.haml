@@ -8,11 +8,11 @@
   .small-4.columns
     .summary
       .score
-        %span.value 3.2
+        %span.value= number_with_precision(@connection.score, precision: 2)
         of 5
       .score-visual
         = image_tag 'controllers.png'
-        .score-bar{style: 'width: 64%;'} &nbsp;
+        .score-bar{style: "width: #{@connection.score * 20}%;"} &nbsp;
       .summary-text You two should grab some coffee!
   .small-4.columns
     .second-consultant-profile

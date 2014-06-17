@@ -1,4 +1,8 @@
 class Connection
+  MAX_SCORE = 5
+  MAX_SKILL_GAP = 500.0
+  MAX_SKILL_INTERSECTION = 100.0
+
   attr_reader :mentor, :mentee, :skill_gap
   attr_accessor :relevant_skills
 
@@ -23,6 +27,10 @@ class Connection
 
   def can_learn_from?(skill, level)
     mentee.skills[skill].to_i == 1 && level.to_i == 5
+  end
+
+  def score
+    MAX_SCORE * ( 1 - @skill_gap / MAX_SKILL_GAP ) * ( intersecting_skills.size / MAX_SKILL_INTERSECTION )
   end
 
   def calculate_skill_gap
