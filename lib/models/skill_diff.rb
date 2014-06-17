@@ -15,4 +15,12 @@ class SkillDiff
     @consultant_two.skills[@name]
   end
 
+  def total
+    consultant_one_level.to_i + consultant_two_level.to_i
+  end
+
+  def <=>(other)
+    other.total <=> total
+  end
+
 end

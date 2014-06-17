@@ -24,7 +24,7 @@
 .row.skill-diffs
   .small-1.columns &nbsp;
   .small-10.columns
-    - @connection.intersecting_skills.each do |skill_diff|
+    - @connection.intersecting_skills.sort.each do |skill_diff|
       .skill-diff
         .row
           .small-5.columns
