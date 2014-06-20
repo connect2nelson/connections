@@ -6,7 +6,8 @@ class ConsultantsController < ApplicationController
 
   def show
     @consultant = Consultant.find_by(employee_id: params[:id])
-    @connections = ConnectionService.best_match_for(@consultant)
+    @mentors = ConnectionService.best_mentors_for(@consultant)
+    @mentees = ConnectionService.best_mentees_for(@consultant)
     @connected =  ENV["SECURITY_ENABLED"]
   end
 end

@@ -24,5 +24,17 @@ RSpec.describe Consultant, :type => :model do
 
   end
 
+  describe '#skills_to_teach' do
+    before { Consultant.create(full_name: 'Ian Norris', skills: Hash['Ruby'=>'1', 'Java'=>'2', 'Cat'=>'5'])}
+    subject {Consultant.first}
+
+    it 'should return skills with value 5' do
+      skills = subject.skills_to_teach
+      expect(skills.size).to eq 1
+      expect(skills.first).to eq 'Cat'
+    end
+
+  end
+
 
 end

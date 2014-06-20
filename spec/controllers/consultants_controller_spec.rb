@@ -7,7 +7,8 @@ RSpec.describe ConsultantsController, :type => :controller do
     #ENV["SECURITY_ENABLED"] = "enabled"
 
     let(:consultant) {Consultant.new(employee_id: "1")}
-    let(:connections) {[Connection.new(Consultant.new, consultant)]}
+    let(:mentors) {[Connection.new(Consultant.new, consultant)]}
+    let(:mentees) {[Connection.new(consultant, Consultant.new)]}
 
     it 'should show user' do
       expect(Consultant).to receive(:find_by).with({:employee_id=>consultant.employee_id}).and_return consultant
@@ -20,11 +21,18 @@ RSpec.describe ConsultantsController, :type => :controller do
       expect(assigns(:consultant)).to eq consultant
     end
 
-    it 'should assign connections' do
+    it 'should assign mentors' do
       expect(Consultant).to receive(:find_by).with({:employee_id=>consultant.employee_id}).and_return consultant
-      expect(ConnectionService).to receive(:best_match_for).with(consultant).and_return connections
+      expect(ConnectionService).to receive(:best_mentors_for).with(consultant).and_return mentors
       get :show, Hash[id: consultant.employee_id]
-      expect(assigns(:connections)).to eq connections
+      expect(assigns(:mentors)).to eq mentors
+    end
+
+    it 'should assign mentees' do
+      expect(Consultant).to receive(:find_by).with({:employee_id=>consultant.employee_id}).and_return consultant
+      expect(ConnectionService).to receive(:best_mentees_for).with(consultant).and_return mentees
+      get :show, Hash[id: consultant.employee_id]
+      expect(assigns(:mentees)).to eq mentees
     end
 
     it "should not assign user if not authenticated" do

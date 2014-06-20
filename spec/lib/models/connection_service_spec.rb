@@ -66,7 +66,7 @@ describe ConnectionService do
     end
   end
 
-  context '.best_match_for' do
+  context '.best_mentors_for' do
 
     let!(:java_and_ruby_master) {Consultant.create(full_name: 'Charlotte', skills: {"java" => "5", "ruby" => "5" }, working_office: "San Francisco") }
     let!(:ruby_master) {Consultant.create(full_name: 'Billy', skills: {"ruby" => "5" }, working_office: "San Francisco") }
@@ -74,9 +74,24 @@ describe ConnectionService do
     let!(:chicago_ruby_master) {Consultant.create(full_name: 'Billy', skills: {"ruby" => "5" }, working_office: "Chicago") }
 
     it 'should return a list of matches for the mentee' do
-      connections = ConnectionService.best_match_for mentee
+      connections = ConnectionService.best_mentors_for mentee
       expect(connections.size).to eq 2
       expect(connections[0].mentor.full_name).to eq 'Charlotte'
+    end
+
+  end
+
+  context '.best_mentees_for' do
+
+    let!(:java_and_ruby_master) {Consultant.create(full_name: 'Charlotte', skills: {"java" => "5", "ruby" => "5" }, working_office: "San Francisco") }
+    let!(:ruby_kid) {Consultant.create(full_name: 'Billy', skills: {"ruby" => "1" }, working_office: "San Francisco") }
+    let!(:java_and_ruby_kid) {Consultant.create(full_name: 'Adam', skills: {"java" => "1", "ruby"=> "1" }, working_office: "San Francisco") }
+    let!(:chicago_ruby_beginner) {Consultant.create(full_name: 'Billy', skills: {"ruby" => "2" }, working_office: "Chicago") }
+
+    it 'should return a list of matches for the mentee' do
+      connections = ConnectionService.best_mentees_for java_and_ruby_master
+      expect(connections.size).to eq 2
+      expect(connections[0].mentee.full_name).to eq 'Adam'
     end
 
   end
