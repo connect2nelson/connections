@@ -14,7 +14,9 @@ describe 'consultants/show.html.haml' do
     assign :connections, [connection_one, connection_two]
 
     allow(connection_one).to receive(:teachable_skills).and_return(['Java'])
+    allow(connection_one).to receive(:score).and_return(3.24)
     allow(connection_two).to receive(:teachable_skills).and_return(['Clojure'])
+    allow(connection_two).to receive(:score).and_return(1.9900001)
 
     render
   end
@@ -41,6 +43,12 @@ describe 'consultants/show.html.haml' do
     it 'should show teachable skills' do
       expect(rendered).to have_text('Java')
       expect(rendered).to have_text('Clojure')
+    end
+
+    it 'should show compatibility score' do
+      expect(rendered).to have_link('3.24',:href => '/connections/1/and/3')
+      expect(rendered).to have_link('1.99',:href => '/connections/2/and/3')
+      expect(rendered).to_not have_link('1.9900001')
     end
 
   end
