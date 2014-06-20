@@ -74,6 +74,13 @@
   }
 
   .mentor {
+    .score {
+      img {
+        width: 16px;
+      }
+      display: inline-block;
+      float: right;
+    }
     .name {
       margin-left: 0.5em;
       font-size: 1.3rem;
