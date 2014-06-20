@@ -37,6 +37,9 @@
     color: $dark-brown;
   }
   @include profile-attributes('dl');
+  dl {
+    margin-bottom: 0;
+  }
 }
 
 .skills {
