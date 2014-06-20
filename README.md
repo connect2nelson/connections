@@ -16,6 +16,10 @@ The second app is a matchmaker-on-demand that takes the form of a web applicaito
 
 We are currently using Rails as a way to deliver the matchmaker-on-demand app and plan to use whenever to drive the email based notifier. We use a dump of Jigsaw data from early June 2014. To store that data, we are using mongodb.
 
+## Project Team
+
+If you want to participate, join the HipChat team!
+
 ## Future Work
 
 Some other ideas that we had:
