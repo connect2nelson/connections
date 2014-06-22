@@ -6,6 +6,12 @@
 .row
   .small-12.columns
     .search-box
-      = form_tag do
-        =autocomplete_field_tag 'search_field', '', consultants_autocomplete_consultant_full_name_path, placeholder: 'Search for Consultants'
+      = form_tag '/consultants', method: :get do
+        =autocomplete_field_tag 'full_name', '', consultants_autocomplete_consultant_full_name_path, placeholder: 'Search for Consultants'
+- if @search_results
+  .row
+    .small-12.columns
+      %ul
+        - @search_results.each do |result|
+          %li= link_to result.full_name, "/consultants/#{result.employee_id}"
 

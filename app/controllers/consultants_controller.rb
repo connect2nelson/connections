@@ -10,4 +10,9 @@ class ConsultantsController < ApplicationController
     @mentees = ConnectionService.best_mentees_for(@consultant)
     @connected =  ENV["SECURITY_ENABLED"]
   end
+
+  def index
+    @search_results = Consultant.where(full_name: /#{params[:full_name]}/i) if params[:full_name]
+  end
+
 end

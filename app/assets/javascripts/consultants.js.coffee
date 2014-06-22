@@ -1,5 +1,5 @@
 $(document).ready ->
-  $('#search_field').bind 'railsAutocomplete.select', (event, data) ->
+  $('#full_name').bind 'railsAutocomplete.select', (event, data) ->
     window.location = "/consultants/#{data.item.employee_id}"
   onHoverIn = ->
     $(this).find('.label').addClass 'highlight'
