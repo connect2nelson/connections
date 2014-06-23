@@ -3,8 +3,8 @@ class GithubClient
   def events_for_user user_name
     events(user_name).map do |event|
       { repo_name: event['repo']['name'],
-        languages: languages("#{event['repo']['url']}/languages")
-      }
+        languages: languages("#{event['repo']['url']}/languages"),
+        created_at: event['created_at']}
     end
   end
 
