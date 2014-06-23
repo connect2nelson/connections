@@ -21,6 +21,8 @@ gem 'foreman'
 gem 'omniauth-saml'
 gem 'rails_12factor'
 
+gem 'rest_client'
+
 group :test, :development do
    gem 'rspec-rails', '>=2.0.1'
    gem 'capybara'
