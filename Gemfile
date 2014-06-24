@@ -23,6 +23,7 @@ gem 'rails_12factor'
 
 gem 'rest_client'
 
+gem 'rMeetup'
 group :test, :development do
    gem 'rspec-rails', '>=2.0.1'
    gem 'capybara'

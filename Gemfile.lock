@@ -132,6 +132,7 @@ GEM
     premailer-rails (1.7.0)
       actionmailer (>= 3, < 5)
       premailer (~> 1.7, >= 1.7.9)
+    rMeetup (1.0)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -241,6 +242,7 @@ DEPENDENCIES
   nokogiri
   omniauth-saml
   premailer-rails
+  rMeetup
   rails (= 4.0.4)
   rails3-jquery-autocomplete
   rails_12factor
