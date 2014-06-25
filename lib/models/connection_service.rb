@@ -9,6 +9,12 @@ class ConnectionService
     	}.reverse
   end
 
+  def self.all_sf_consultants
+    for_office('San Francisco').map do |consultant|
+        consultant
+    end.flatten
+  end
+
   def self.sf_office
     for_office('San Francisco').map do |consultant|
       for_office('San Francisco').not.where('_id' => consultant.id).map do |other|

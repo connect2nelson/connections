@@ -5,6 +5,7 @@ describe ConnectionService do
     it 'should return zero connections between zero people' do
       expect(ConnectionService.all.size).to eq 0
     end
+
     it 'should return two connections between two people' do
       Consultant.create({full_name: 'Adam'})
       Consultant.create({full_name: 'Billy'})
@@ -44,25 +45,35 @@ describe ConnectionService do
       end
 
     end
-    
   end
 
   context '.sf_office' do
+
     it 'should return zero connections between zero people' do
       expect(ConnectionService.sf_office.size).to eq 0
     end
+
     it 'should return two connections between two people' do
       Consultant.create({full_name: 'Adam', working_office: 'San Francisco'})
       Consultant.create({full_name: 'Billy', working_office: 'San Francisco'})
       Consultant.create({full_name: 'Charlie', working_office: 'Chicago'})
       expect(ConnectionService.sf_office.size).to eq 2
     end
+
     it 'should return six connections between three people' do
-      Consultant.create({full_name: 'Adam', working_office: 'San Francisco'})
-      Consultant.create({full_name: 'Billy', working_office: 'San Francisco'})
-      Consultant.create({full_name: 'Charlotte', working_office: 'San Francisco'})
-      Consultant.create({full_name: 'Denise', working_office: 'Chicago'})
-      expect(ConnectionService.sf_office.size).to eq 6
+        Consultant.create({full_name: 'Adam', working_office: 'San Francisco'})
+        Consultant.create({full_name: 'Billy', working_office: 'San Francisco'})
+        Consultant.create({full_name: 'Charlotte', working_office: 'San Francisco'})
+        Consultant.create({full_name: 'Denise', working_office: 'Chicago'})
+        expect(ConnectionService.sf_office.size).to eq 6
+    end
+
+    it 'should return all sf consultants' do
+        Consultant.create({full_name: 'Adam', working_office: 'San Francisco'})
+        Consultant.create({full_name: 'Billy', working_office: 'San Francisco'})
+        Consultant.create({full_name: 'Charlotte', working_office: 'New York'})
+        Consultant.create({full_name: 'Denise', working_office: 'Chicago'})
+        expect(ConnectionService.all_sf_consultants.size).to eq 2
     end
   end
 
