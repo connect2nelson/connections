@@ -11,6 +11,20 @@ namespace :email do
         MatchMailer.send_connections(pam, connections).deliver
         puts "Email sent!"
     end
+
+    task :mail_one_consultant, [:consultant_full_name] => :environment do |t, args|
+        puts "Finding name in Consultants..."
+        puts "Finding the argument passed in: #{args}"
+        consultant = Consultant.where(full_name: args[:consultant_full_name]).first
+        puts "Finding their connections..."
+        mentors_for_consultant = ConnectionService.best_mentors_for consultant
+        mentees_for_consultant = ConnectionService.best_mentees_for consultant
+        connections = {:mentors => mentors_for_consultant, :mentees => mentees_for_consultant}
+        puts "Crafting connections email..."
+        MatchMailer.send_connections(consultant, connections).deliver
+        puts "Email sent!"
+    end
+
     desc "Send connections email to San Francisco"
     task :sf => :environment do
         puts "Getting all the consultants in San Francisco"
