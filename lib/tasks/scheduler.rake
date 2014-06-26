@@ -16,7 +16,7 @@ task :email_sf => :environment do
     puts "Getting all the consultants in San Francisco"
     sf_thoughtworkers = ConnectionService.for_office('San Francisco')
     sf_thoughtworkers.each do |thoughtworker|
-        puts 'Finding matches for #{thoughtworker.full_name}'
+        puts "Finding matches for #{thoughtworker.full_name}"
         mentors = ConnectionService.best_mentors_for thoughtworker
         mentees = ConnectionService.best_mentees_for thoughtworker
         connections = {:mentors => mentors, :mentees => mentees}

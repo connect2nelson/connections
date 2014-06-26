@@ -12,23 +12,25 @@
       %h2
         Hey,
         = @consultant.full_name
-        we found a few ThoughtWorkers you might be interested in meeting.
+    -if @mentors.empty?
+      We tried to connect you with some ThoughtWorkers we think you should meet, but your Jigsaw profile was empty! Go fill it out!
+    -else
+      We noticed you're motivated to learn and we think you should reach out to these ThoughtWorkers. They may be able to help you sharpen some skills.
       %br
-      These in particular could help you sharpen some skills you've wanted to learn
       %ul
         -@mentors.each do |connection|
           %li
             %strong
-              %a{ :href => "mailto:#{connection.mentor.email}?subject=Would love to chat! Are you available for mentorship?" }= connection.mentor.full_name
+              %a{ :href => "mailto:#{connection.mentor.email}?subject=Lets grab coffee!" }=connection.mentor.full_name
             %br
             =connection.teachable_skills.to_sentence
       -if !@mentees.empty?
-        %br
         You're pretty smart yourself, these ThoughtWorkers could benefit from your knowledge!
+        %br
         %ul
           -@mentees.each do |connection|
             %li
               %strong
-                %a{ :href => "mailto:#{connection.mentee.email}?subject=Would love to chat! Are you available for mentorship?" }= connection.mentee.full_name
+                %a{ :href => "mailto:#{connection.mentee.email}?subject=Lets grab coffee!"}=connection.mentee.full_name
               %br
               =connection.mentor.skills_to_teach.to_sentence
