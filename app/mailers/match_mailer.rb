@@ -4,7 +4,8 @@ class MatchMailer < ActionMailer::Base
 
   def send_connections(consultant, connections)
       @consultant = consultant
-      @connections = connections
+      @mentors = connections[:mentors]
+      @mentees = connections[:mentees]
       mail(to: consultant.email)
   end
 end
