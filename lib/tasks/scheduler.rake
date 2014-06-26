@@ -12,10 +12,11 @@ namespace :email do
         puts "Email sent!"
     end
 
-    task :mail_one_consultant, [:consultant_full_name] => :environment do |t, args|
+    task :mail_one_consultant, [:first_name, :last_name] => :environment do |t, args|
         puts "Finding name in Consultants..."
         puts "Finding the argument passed in: #{args}"
-        consultant = Consultant.where(full_name: args[:consultant_full_name]).first
+        full_name = "#{args[:first_name]} #{args[:last_name]}"
+        consultant = Consultant.where(full_name: full_name).first
         puts "Finding their connections..."
         mentors_for_consultant = ConnectionService.best_mentors_for consultant
         mentees_for_consultant = ConnectionService.best_mentees_for consultant
