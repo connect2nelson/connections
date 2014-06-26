@@ -20,6 +20,7 @@ gem 'mongoid', '>= 2.0.0.beta.19'
 gem 'foreman'
 gem 'omniauth-saml'
 gem 'rails_12factor'
+gem 'metric_fu'
 
 gem 'rest_client'
 
