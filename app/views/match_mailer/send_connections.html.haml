@@ -34,3 +34,7 @@
                 %a{ :href => "mailto:#{connection.mentee.email}?subject=Lets grab coffee!"}=connection.mentee.full_name
               %br
               =connection.mentor.skills_to_teach.to_sentence
+    .row 
+      Interested in learning more about our app or helping out? Check out our
+      = link_to "mythoughtworks page", "https://my.thoughtworks.com/groups/connections"
+      for more information!
