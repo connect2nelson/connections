@@ -20,11 +20,15 @@ We are currently using Rails as a way to deliver the matchmaker-on-demand app an
 
 If you want to participate, join the HipChat team!
 
+## Work in Progress
+
+* Updates from github
+* Connection page - are person A and person B compatible? How compatible? Go to this micro-app to find out
+
 ## Future Work
 
 Some other ideas that we had:
 
-* Updates from other services - includes github, lanyrd, twitter
+* Updates from other services - lanyrd, twitter, meetup
 * Dashboards of aggregate data to discover trends - think a Women in Technology dashboard
-* Connection page - are person A and person B compatible? How compatible? Go to this micro-app to find out
 * Connection badge - integrated into myTW and gives an at-a-glance indication of your connection strength with an individual
