@@ -23,6 +23,14 @@
           %a{:href => "#panel-mentees"} Mentees
   .row.tabs-content
     #panel-activities.content
+      - @activities.each do |activity|
+        .activity
+          = activity[:created_at]
+          = activity[:repo_name]
+          - activity[:languages].each do |key, value|
+            %ul
+              %li= key
+
     #panel-mentees.content
       .small-4.columns
         %h3.skills-header
