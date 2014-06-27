@@ -5,8 +5,8 @@ class ConnectionService
         Connection.new(consultant, other)
       end
     end.flatten.sort_by{ |connection|
-    	  connection.skill_gap
-    	}.reverse
+       connection.skill_gap
+    }.reverse
   end
 
   def self.all_sf_consultants
