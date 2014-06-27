@@ -8,8 +8,6 @@ class ConsultantsController < ApplicationController
     @consultant = Consultant.find_by(employee_id: params[:id])
     @mentors = ConnectionService.best_mentors_for(@consultant)
     @mentees = ConnectionService.best_mentees_for(@consultant)
-    @activities = ActivityService.github_events('pwen')
-    puts @activities
     @connected =  ENV["SECURITY_ENABLED"]
   end
 
