@@ -1,3 +1,15 @@
+namespace :github do
+
+    desc "Fetch github data for employees"
+    task :update => :environment do
+      puts "Finding consultants with github account..."
+      thoughtworkers = ContactService.all_with_github
+      puts "Updating github events for each consultant..."
+      ActivityService.update_github(thoughtworkers)
+      puts "Updated!"
+    end
+end
+
 namespace :email do
     desc "Send connections email to Pam"
     task :pam => :environment do
@@ -38,4 +50,5 @@ namespace :email do
             MatchMailer.send_connections(thoughtworker, connections).deliver
         end
     end
+
 end

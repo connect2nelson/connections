@@ -38,5 +38,32 @@ describe ActivityService do
     end
   end
 
+  describe '.update_github' do
+
+    before do
+      allow(ActivityService).to receive(:github_events)
+        .with(consultant_one[:github_account])
+        .and_return([{event_id: '1', repo_name: 'repo', type: 'PushEvent', languages: {}, created_at: ''}])
+      allow(ActivityService).to receive(:github_events)
+        .with(consultant_two[:github_account])
+        .and_return([{event_id: '2', repo_name: 'repo', type: 'PushEvent', languages: {}, created_at: ''}])
+    end
+
+    let(:consultant_one) {
+      {employee_id: '111', github_account: 'yo'}
+    }
+    let(:consultant_two) {
+      {employee_id: '222', github_account: 'me'}
+    }
+    let(:consultants) {[consultant_one, consultant_two]}
+
+    it 'should create event for each consultant' do
+      expect(GithubEvent).to receive(:create).with({:employee_id=>'111', :event_id=>'1', :type=>'PushEvent', :repo_name => 'repo', :languages=> {}, :created_at => ''})
+      expect(GithubEvent).to receive(:create).with({:employee_id=>'222', :event_id=>'2', :type=>'PushEvent', :repo_name => 'repo', :languages=> {}, :created_at => ''})
+      ActivityService.update_github(consultants)
+    end
+
+
+  end
 
 end
