@@ -6,15 +6,22 @@ class GithubClient
   end
 
   def events_for_user user_name
-    events(user_name).map do |event|
-      { event_id: event['id'],
-        type: event['type'],
-        repo_name: event['repo']['name'],
-        languages: languages("#{event['repo']['url']}/languages"),
-        created_at: event['created_at']}
-    end
+    events(user_name).inject([]) { |all, e| all << create_event(e) if allowed_type?(e); all }
   end
 
+  private
+
+  def allowed_type? event
+    event['type'] == "PushEvent"
+  end
+
+  def create_event event
+    { event_id: event['id'],
+      type: event['type'],
+      repo_name: event['repo']['name'],
+      languages: languages("#{event['repo']['url']}/languages"),
+      created_at: event['created_at']}
+  end
 
   def events user_name
     begin
@@ -26,9 +33,12 @@ class GithubClient
   end
 
   def languages languages_url
-    response = RestClient.get(languages_url + "?client_id=#{@key}&client_secret=#{@secret}")
+    begin
+      response = RestClient.get(languages_url + "?client_id=#{@key}&client_secret=#{@secret}")
+    rescue => e
+      return {}
+    end
     JSON.parse(response.body)
   end
 
 end
-
