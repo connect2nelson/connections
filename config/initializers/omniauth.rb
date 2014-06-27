@@ -1,5 +1,6 @@
 
 Rails.application.config.middleware.use OmniAuth::Builder do
+  provider :github, ENV['GITHUB_KEY'], ENV['GITHUB_SECRET']
   provider :saml,
            :issuer                             => ENV['AUTH_ISSUER'],
            :idp_sso_target_url                 => ENV['AUTH_TARGET_URL'],
