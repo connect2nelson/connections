@@ -1,6 +1,6 @@
 class MatchMailer < ActionMailer::Base
-  default from: "no-reply@thoughtworks.com"
-  default subject: '[Connections] New connection for you!'
+  default from: "connections@thoughtworks.com"
+  default subject: '[Connections] Say hey to these ThoughtWorkers!'
 
   def send_connections(consultant, connections)
       @consultant = consultant

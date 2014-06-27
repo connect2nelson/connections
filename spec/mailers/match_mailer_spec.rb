@@ -29,11 +29,11 @@ RSpec.describe MatchMailer, :type => :mailer do
     end
 
     it 'should send an email from noreply' do
-        expect(@connections_mailer.from).to include 'no-reply@thoughtworks.com'
+        expect(@connections_mailer.from).to include 'connections@thoughtworks.com'
     end
 
-    it 'should send an email with subject [Connnections] New connection for you!' do
-        expect(@connections_mailer.subject).to eq '[Connections] New connection for you!'
+    it 'should send an email with subject [Connnections] Say hey to these ThoughtWorkers!' do
+        expect(@connections_mailer.subject).to eq '[Connections] Say hey to these ThoughtWorkers!'
     end
 
     it 'should have a list of of connection mentors' do
