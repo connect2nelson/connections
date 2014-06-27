@@ -9,6 +9,7 @@ RSpec.describe ConsultantsController, :type => :controller do
     let(:consultant) {Consultant.new(employee_id: "1")}
     let(:mentors) {[Connection.new(Consultant.new, consultant)]}
     let(:mentees) {[Connection.new(consultant, Consultant.new)]}
+    let(:activities) {[GithubEvent.new(event_id: '1234', repo_name: 'repo', languages: {'Ruby'=> '1234'}, created_at: 'time')]}
 
     it 'should show user' do
       expect(Consultant).to receive(:find_by).with({:employee_id=>consultant.employee_id}).and_return consultant
@@ -33,6 +34,13 @@ RSpec.describe ConsultantsController, :type => :controller do
       expect(ConnectionService).to receive(:best_mentees_for).with(consultant).and_return mentees
       get :show, Hash[id: consultant.employee_id]
       expect(assigns(:mentees)).to eq mentees
+    end
+
+    it 'should assign activities' do
+      expect(Consultant).to receive(:find_by).with({:employee_id=>consultant.employee_id}).and_return consultant
+      expect(ActivityService).to receive(:github_events).with(consultant.employee_id).and_return(activities)
+      get :show, Hash[id: consultant.employee_id]
+      expect(assigns(:activities)).to eq activities
     end
 
     it "should not assign user if not authenticated" do

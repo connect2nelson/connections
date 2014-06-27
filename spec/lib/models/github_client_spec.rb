@@ -4,7 +4,6 @@ describe GithubClient do
 
   describe '#events_for_user' do
 
-
     context 'user found' do
 
       let(:event_response) {
@@ -31,7 +30,6 @@ describe GithubClient do
       end
 
       it 'should return languagues' do
-        puts @events.first
         expect(@events.first[:languages].size).to eq 2
         expect(@events.first[:languages]["Ruby"]).to eq 1111
         expect(@events.first[:languages]["Java"]).to eq 1234

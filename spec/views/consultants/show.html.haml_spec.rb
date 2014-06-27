@@ -18,6 +18,8 @@ describe 'consultants/show.html.haml' do
     assign :mentors, [connection_one, connection_two]
     assign :mentees, [mentee_connection_one, mentee_connection_two]
 
+    assign :activities, [GithubEvent.new(repo_name: 'repo', type: 'PushEvent', languages: {'Ruby'=> '1234'}, created_at: 'create time')]
+
     allow(connection_one).to receive(:teachable_skills).and_return(['Java'])
     allow(connection_one).to receive(:score).and_return(3.24)
     allow(connection_two).to receive(:teachable_skills).and_return(['Clojure'])
@@ -79,6 +81,15 @@ describe 'consultants/show.html.haml' do
       expect(rendered).to have_link('4.10',:href => '/connections/3/and/4')
       expect(rendered).to have_link('0.13',:href => '/connections/3/and/5')
       expect(rendered).to_not have_link('0.1333')
+    end
+  end
+
+  describe 'show activities' do
+    it 'should show github events' do
+      expect(rendered).to have_text('repo')
+      expect(rendered).to have_text('create time')
+      expect(rendered).to have_text('Ruby')
+      expect(rendered).to have_text('PushEvent')
     end
 
   end

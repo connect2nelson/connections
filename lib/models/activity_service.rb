@@ -1,14 +1,8 @@
 class ActivityService
 
-  def self.github_events user_name
-    GithubClient.new.events_for_user(user_name).sort_by {|event|
-      event[:created_at]
-    }.reverse
-  end
-
   def self.update_github consultants
     consultants.each do |consultant|
-      events = self.github_events(consultant[:github_account])
+      events = GithubClient.new.events_for_users(consultant[:github_account])
       events.each do |event|
         GithubEvent.create(
           employee_id: consultant[:employee_id],
@@ -20,6 +14,10 @@ class ActivityService
         )
       end
     end
+  end
+
+  def self.github_events employee_id
+    GithubEvent.where(employee_id: employee_id).sort_by {|event| event[:created_at]}.reverse
   end
 
 end
