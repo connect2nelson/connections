@@ -34,10 +34,10 @@ describe ActivityService do
     before do
       github_client = double
       allow(GithubClient).to receive(:new).and_return(github_client)
-      allow(github_client).to receive(:events_for_users)
+      allow(github_client).to receive(:events_for_user)
         .with(consultant_one[:github_account])
         .and_return(events_for_consultant_one)
-      allow(github_client).to receive(:events_for_users)
+      allow(github_client).to receive(:events_for_user)
         .with(consultant_two[:github_account])
         .and_return(events_for_consultant_two)
     end

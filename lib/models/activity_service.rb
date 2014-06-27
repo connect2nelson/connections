@@ -2,7 +2,7 @@ class ActivityService
 
   def self.update_github consultants
     consultants.each do |consultant|
-      events = GithubClient.new.events_for_users(consultant[:github_account])
+      events = GithubClient.new.events_for_user(consultant[:github_account])
       events.each do |event|
         GithubEvent.create(
           employee_id: consultant[:employee_id],
