@@ -46,7 +46,7 @@ RSpec.describe ConsultantsController, :type => :controller do
     it "should not assign user if not authenticated" do
       ENV["SECURITY_ENABLED"] = "ENABLED"
       get :show, Hash[id: consultant.employee_id]
-      response.should redirect_to("/auth/saml")
+      expect(response).to redirect_to("/auth/saml")
       expect(response.location).to include "/auth/saml"
     end
   end
