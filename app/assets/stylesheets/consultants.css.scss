@@ -99,7 +99,23 @@
   }
 }
 
-.matches, .skills {
+.activities {
+  list-style: none;
+  margin: 0;
+
+  > li {
+    border: #ccc solid thin;
+    margin: 1em 0;
+    padding: 0.5em 0.7em 0.7em;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0.2em 0 0 0;
+  }
+}
+
+.matches, .skills, .activities {
   .label {
     font-size: 1.1rem;
     margin-right: 0.2em;
