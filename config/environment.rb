@@ -6,3 +6,6 @@ require File.expand_path('../application', __FILE__)
 
 # Initialize the Rails application.
 Connections::Application.initialize!
+
+# Using Rails Logger
+Rails.logger = Logger.new(STDOUT)
