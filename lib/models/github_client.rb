@@ -20,7 +20,8 @@ class GithubClient
       type: event['type'],
       repo_name: event['repo']['name'],
       languages: languages("#{event['repo']['url']}/languages"),
-      created_at: event['created_at']}
+      created_at: event['created_at'],
+      avatar: event['actor']['avatar_url']}
   end
 
   def events user_name

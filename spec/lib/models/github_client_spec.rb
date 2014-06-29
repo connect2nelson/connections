@@ -7,7 +7,7 @@ describe GithubClient do
     context 'user found' do
 
       let(:event_response) {
-        double(code: 200, body: [Hash['id'=>'1','type'=>'PushEvent','created_at'=>'2014-06-23T21:35:13Z','repo'=>Hash['name'=>'thoughtworks/connections','url'=>'https://api.github.com/repos/thoughtworks/connections']]].to_json )
+        double(code: 200, body: [Hash['id'=>'1','type'=>'PushEvent','created_at'=>'2014-06-23T21:35:13Z','actor'=>Hash['avatar_url'=>'https://avatars.githubusercontent.com/u/784889?'],'repo'=>Hash['name'=>'thoughtworks/connections','url'=>'https://api.github.com/repos/thoughtworks/connections']]].to_json )
       }
       let(:languages_response) {
         double(code: 200, body: Hash['Ruby'=> 1111, 'Java'=> 1234].to_json)
@@ -47,6 +47,9 @@ describe GithubClient do
         expect(@events.first[:type]).to eq "PushEvent"
       end
 
+      it 'should return avatar url' do
+          expect(@events.first[:avatar]).to eq "https://avatars.githubusercontent.com/u/784889?"
+      end
     end
 
   end

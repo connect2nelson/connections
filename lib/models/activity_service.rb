@@ -28,7 +28,8 @@ class ActivityService
       type: event[:type],
       repo_name: event[:repo_name],
       languages: event[:languages],
-      created_at: event[:created_at])
+      created_at: event[:created_at],
+      avatar: event[:avatar])
   end
 
   def self.duplicate_key_error? e
