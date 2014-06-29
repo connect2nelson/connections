@@ -16,6 +16,7 @@
 //= require autocomplete-rails
 //= require foundation
 //= require turbolinks
+//= require local_time
 //= require_tree .
 
 $(function(){ $(document).foundation(); });

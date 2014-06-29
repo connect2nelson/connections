@@ -30,7 +30,7 @@
             %li
               .small-4.columns
                 .date
-                  = activity[:created_at]
+                  = local_time_ago(activity[:created_at])
               .small-8.columns
                 .vertical_line
                   .activity_details

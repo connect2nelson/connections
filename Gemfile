@@ -27,6 +27,8 @@ gem 'omniauth-github'
 gem 'rest_client'
 
 gem 'rMeetup'
+gem 'local_time'
+
 group :test, :development do
    gem 'rspec-rails', '>=2.0.1'
    gem 'capybara'
