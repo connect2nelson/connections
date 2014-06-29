@@ -22,13 +22,13 @@ If you want to participate, join the HipChat team!
 
 ## Work in Progress
 
-* Updates from github
+* Updates from Github
 * Connection page - are person A and person B compatible? How compatible? Go to this micro-app to find out
 
 ## Future Work
 
 Some other ideas that we had:
 
-* Updates from other services - lanyrd, twitter, meetup
+* Updates from other services - Twitter, Lanyrd, Meetup, Goodreads, Linkedin
 * Dashboards of aggregate data to discover trends - think a Women in Technology dashboard
 * Connection badge - integrated into myTW and gives an at-a-glance indication of your connection strength with an individual
