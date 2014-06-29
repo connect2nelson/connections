@@ -62,27 +62,12 @@
 }
 
 .matches {
-  list-style: none;
-  margin: 0;
-
-  > li {
-    border: #ccc solid thin;
-    margin: 1em 0;
-    padding: 0.5em 0.7em 0.7em;
-  }
-
-  ul {
-    list-style: none;
-    margin: 0.2em 0 0 0;
-  }
 
   .mentor {
     .score {
       img {
         width: 16px;
       }
-      display: inline-block;
-      float: right;
     }
     .name {
       margin-left: 0.5em;
@@ -99,11 +84,11 @@
   }
 }
 
-.activities {
+.matches, .activities {
   list-style: none;
   margin: 0;
 
-  > li {
+    > li {
     border: #ccc solid thin;
     margin: 1em 0;
     padding: 0.5em 0.7em 0.7em;
@@ -113,6 +98,22 @@
     list-style: none;
     margin: 0.2em 0 0 0;
   }
+
+  .score, .repo{
+      display: inline-block;
+      float: right;
+  }
+}
+
+.activities {
+
+  .name {
+    color: #F4A460;
+    margin-left: 0.5em;
+    font-size: 1.3rem;
+    display: inline-block;
+  }
+
 }
 
 .matches, .skills, .activities {

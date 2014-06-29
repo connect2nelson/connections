@@ -21,6 +21,7 @@
           %a{:href => "#panel-mentors"} Mentors
         %li.tab-title
           %a{:href => "#panel-mentees"} Mentees
+
   .row.tabs-content
     #panel-activities.content
       .small-4.columns
@@ -35,11 +36,14 @@
         %ul.activities
           - @activities.each do |activity|
             %li
-              = activity[:created_at]
-              = activity[:type]
-              = activity[:repo_name]
-              - activity[:languages].each do |key, value|
-                %ul
+              //= activity[:created_at]
+              .name
+                Github 
+                = activity[:type]
+              .repo
+                = activity[:repo_name]
+              %ul
+                - activity[:languages].each do |key, value|
                   %li.label= key
 
     #panel-mentors.content.active
@@ -64,7 +68,7 @@
                 %ul
                   - connection.teachable_skills.each do |teachable_skill|
                     %li.label= teachable_skill
-                    
+
     #panel-mentees.content
       .small-4.columns
         %h3.skills-header
