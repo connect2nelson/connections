@@ -29,6 +29,6 @@ If you want to participate, join the HipChat team!
 
 Some other ideas that we had:
 
-* Updates from other services - Twitter, Lanyrd, Meetup, Goodreads, Linkedin
+* Updates from other services - Twitter, Lanyrd, Meetup, Goodreads, LinkedIn
 * Dashboards of aggregate data to discover trends - think a Women in Technology dashboard
 * Connection badge - integrated into myTW and gives an at-a-glance indication of your connection strength with an individual
