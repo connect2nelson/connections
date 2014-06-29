@@ -25,18 +25,11 @@
   .row.tabs-content
     #panel-activities.content
       .small-4.columns
-        %h3.skills-header
-          = @consultant.full_name.split.first
-          wants to learn
-        %ul.skills
-          - @consultant.skills_to_learn.sort.each do |skill|
-            %li
-              .label= skill
       .small-8.columns
         %ul.activities
           - @activities.each do |activity|
             %li
-              //= activity[:created_at]
+              = activity[:created_at]
               .name
                 Github 
                 = activity[:type]
