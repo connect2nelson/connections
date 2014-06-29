@@ -28,10 +28,13 @@
         - @activities.each do |activity|
           .activities
             %li
-              .small-4.columns
+              .small-2.columns
                 .date
                   = local_time_ago(activity[:created_at])
-              .small-8.columns
+              .small-1.columns 
+                .avatar 
+                  = image_tag activity[:avatar]
+              .small-9.columns
                 .vertical_line
                   .activity_details
                     .name

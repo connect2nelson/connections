@@ -107,10 +107,16 @@
 
 .activities{
   list-style: none;
-  
+  clear: both;
+
   .date{
-    list-style: none;
-    padding: 0.5em 0.7em 0.7em;
+      list-style: none;
+      padding: 0.5em 0.7em 0.7em;
+  }
+  .avatar {
+      border: 3px solid $blue;
+      border-radius: 5px;
+      margin-bottom: 5px;
   }
   .vertical_line {
     list-style: none;
@@ -119,7 +125,6 @@
   }
 
   .activity_details {
-    margin: 5%;
     border: #ccc solid thin;
     padding: 0.5em 0.7em 0.7em;
 

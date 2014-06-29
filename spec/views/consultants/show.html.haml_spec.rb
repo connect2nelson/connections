@@ -20,7 +20,7 @@ describe 'consultants/show.html.haml' do
 
     @create_time = '2014-06-20 -0700'
     @relative_create_time = 'June 20, 2014 12:00am'
-    assign :activities, [GithubEvent.new(repo_name: 'repo', type: 'PushEvent', languages: {'Ruby'=> '1234'}, created_at: @create_time)]
+    assign :activities, [GithubEvent.new(repo_name: 'repo', type: 'PushEvent', languages: {'Ruby'=> '1234'}, created_at: @create_time, avatar: 'profile.png')]
 
     allow(connection_one).to receive(:teachable_skills).and_return(['Java'])
     allow(connection_one).to receive(:score).and_return(3.24)
@@ -92,6 +92,7 @@ describe 'consultants/show.html.haml' do
       expect(rendered).to have_text(@relative_create_time)
       expect(rendered).to have_text('Ruby')
       expect(rendered).to have_text('PushEvent')
+      expect(rendered).to have_css('div.avatar img')
     end
 
   end
