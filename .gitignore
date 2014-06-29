@@ -73,3 +73,4 @@ config/secrets.yml
 *swp
 .env
 .idea/
+*iml
