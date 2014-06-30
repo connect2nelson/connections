@@ -61,4 +61,15 @@ RSpec.describe MatchMailer, :type => :mailer do
         expect(@connections_mailer.body).to include @connections[:mentees].first.mentee.skills.keys[0]
         expect(@connections_mailer.body).to include @connections[:mentees].first.mentee.skills.keys[1]
     end
+    it 'should send a message about filling jigsaw when no skills are found' do
+        @unskilled_consultant = Consultant.new(employee_id: "15230",
+                                     full_name: "Pam Ocampo",
+                                     working_office: "San Francisco",
+                                     skills: {})
+        @mentee_matches = [Connection.new(@unskilled_consultant, @mentee)]
+        @mentor_matches = [Connection.new(@mentor, @consultant)]
+        @connections = {:mentors => @mentor_matches, :mentees => @mentee_matches}
+        @connections_mailer = MatchMailer.send_connections(@unskilled_consultant, @connections)
+        expect(@connections_mailer.body).to include 'Fill out your skills'
+    end
 end

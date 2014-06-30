@@ -12,9 +12,7 @@
       %h2
         Hey,
         = @consultant.full_name
-    -if @mentors.empty?
-      We tried to connect you with some ThoughtWorkers we think you should meet, but your Jigsaw profile was empty! Go fill it out!
-    -else
+    -if @consultant.has_skills_from_jigsaw?
       We noticed you're motivated to learn and we think you should reach out to these ThoughtWorkers. They may be able to help you sharpen some skills.
       %br
       %ul
@@ -34,7 +32,9 @@
                 %a{ :href => "mailto:#{connection.mentee.email}?subject=Lets grab coffee!"}=connection.mentee.full_name
               %br
               =connection.mentor.skills_to_teach.to_sentence
-    .row 
+    -else
+      We tried to connect you with some ThoughtWorkers we think you should meet, but you haven't added any skills to your Jigsaw profile. Fill out your skills so we can find you interesting ThoughtWorkers to meet!
+    .row
       Interested in learning more about our app or helping out? Check out our
       = link_to "mythoughtworks page", "https://my.thoughtworks.com/groups/connections"
       for more information!
