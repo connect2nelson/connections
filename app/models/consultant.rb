@@ -24,4 +24,8 @@ class Consultant
   def skills_to_teach
     skills.select { |skill, value| value == EXPERT_SKILL }.keys
   end
+
+  def has_skills_from_jigsaw?
+    !skills.empty?
+  end
 end

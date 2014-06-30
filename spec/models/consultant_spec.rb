@@ -36,5 +36,19 @@ RSpec.describe Consultant, :type => :model do
 
   end
 
+  describe '#has_skills_from_jigsaw?' do
+    before do
+      Consultant.create(full_name: 'with data', skills: {'Ruby'=>'1'})
+      Consultant.create(full_name: 'no data', skills: {})
+    end
+
+    it 'should return true if the consultant has jigsaw data' do
+      expect(Consultant.find_by(full_name: 'with data').has_skills_from_jigsaw?).to be true
+    end
+
+    it 'should return false if the consultant has no jigsaw data' do
+      expect(Consultant.find_by(full_name: 'no data').has_skills_from_jigsaw?).to be false
+    end
+  end
 
 end

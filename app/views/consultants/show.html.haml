@@ -47,27 +47,30 @@
                         %li.label= key
 
     #panel-mentors.content.active
-      .small-4.columns
-        %h3.skills-header
-          = @consultant.full_name.split.first
-          wants to learn
-        %ul.skills
-          - @consultant.skills_to_learn.sort.each do |skill|
-            %li
-              .label= skill
-      .small-8.columns
-        %ul.matches
-          - @mentors.take(5).each do |connection|
-            %li
-              .mentor
-                = image_tag 'profile.png'
-                .name= link_to connection.mentor.full_name, "/consultants/#{connection.mentor.employee_id}"
-                .score
-                  = image_tag 'connections-32.png'
-                  = link_to number_with_precision(connection.score, precision: 2), "/connections/#{connection.mentor.employee_id}/and/#{connection.mentee.employee_id}"
-                %ul
-                  - connection.teachable_skills.each do |teachable_skill|
-                    %li.label= teachable_skill
+      - if @consultant.has_skills_from_jigsaw?
+        .small-4.columns
+          %h3.skills-header
+            = @consultant.full_name.split.first
+            wants to learn
+          %ul.skills
+            - @consultant.skills_to_learn.sort.each do |skill|
+              %li
+                .label= skill
+        .small-8.columns
+          %ul.matches
+            - @mentors.take(5).each do |connection|
+              %li
+                .mentor
+                  = image_tag 'profile.png'
+                  .name= link_to connection.mentor.full_name, "/consultants/#{connection.mentor.employee_id}"
+                  .score
+                    = image_tag 'connections-32.png'
+                    = link_to number_with_precision(connection.score, precision: 2), "/connections/#{connection.mentor.employee_id}/and/#{connection.mentee.employee_id}"
+                  %ul
+                    - connection.teachable_skills.each do |teachable_skill|
+                      %li.label= teachable_skill
+      - else
+        = image_tag 'jigsaw-300.jpg'
 
     #panel-mentees.content
       .small-4.columns
