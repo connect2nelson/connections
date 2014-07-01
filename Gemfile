@@ -16,7 +16,7 @@ gem 'premailer-rails'
 gem 'haml', '>= 3.0.0'
 gem 'haml-rails'
 gem 'bson_ext'
-gem 'mongoid', '>= 2.0.0.beta.19'
+gem 'mongoid'
 gem 'foreman'
 gem 'rails_12factor'
 gem 'metric_fu'
@@ -34,6 +34,7 @@ group :test, :development do
    gem 'capybara'
    gem 'mongoid-rspec'
    gem 'letter_opener_web'
+   gem 'pry'
 end
 
 group :doc do

@@ -135,6 +135,7 @@ GEM
       fattr (>= 2.2.0)
       map (>= 5.1.0)
     map (6.5.4)
+    method_source (0.8.2)
     metric_fu (4.11.1)
       cane (~> 2.5, >= 2.5.2)
       churn (~> 0.0.35)
@@ -202,6 +203,10 @@ GEM
     premailer-rails (1.7.0)
       actionmailer (>= 3, < 5)
       premailer (~> 1.7, >= 1.7.9)
+    pry (0.10.0)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
     rMeetup (1.0)
     rack (1.5.2)
     rack-test (0.6.2)
@@ -293,6 +298,7 @@ GEM
       json (~> 1.8)
       rdoc (~> 4.0, < 5.0)
     sexp_processor (4.4.3)
+    slop (3.5.0)
     sprockets (2.11.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -338,12 +344,13 @@ DEPENDENCIES
   letter_opener_web
   local_time
   metric_fu
-  mongoid (>= 2.0.0.beta.19)
+  mongoid
   mongoid-rspec
   nokogiri
   omniauth-github
   omniauth-saml
   premailer-rails
+  pry
   rMeetup
   rails (= 4.0.4)
   rails3-jquery-autocomplete
