@@ -15,12 +15,25 @@ describe GithubClient do
 
       before do
         @github_client = GithubClient.new
-        allow(RestClient).to receive(:get)
+
+        event_request = double
+        allow(RestClient::Resource).to receive(:new)
           .with(/\/events/)
+          .and_return(event_request)
+        allow(event_request).to receive(:get)
           .and_return(event_response)
-        allow(RestClient).to receive(:get)
+
+        languages_request = double
+        allow(RestClient::Resource).to receive(:new)
           .with(/\/languages/)
+          .and_return(languages_request)
+        allow(languages_request).to receive(:get)
           .and_return(languages_response)
+
+        # allow(RestClient).to receive(:get)
+          # .with(/\/languages/)
+          # .and_return(languages_response)
+
         @events = @github_client.events_for_user("some_name")
       end
 

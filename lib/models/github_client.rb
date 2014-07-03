@@ -1,8 +1,8 @@
 class GithubClient
 
   def initialize
-    @key = ENV['GITHUB_KEY']
-    @secret = ENV['GITHUB_SECRET']
+    @base_url = "https://api.github.com"
+    @credentials = "?client_id=#{ENV['GITHUB_KEY']}&client_secret=#{ENV['GITHUB_SECRET']}"
   end
 
   def events_for_user user_name
@@ -26,7 +26,8 @@ class GithubClient
 
   def events user_name
     begin
-      response = RestClient.get("https://api.github.com/users/#{user_name}/events?client_id=#{@key}&client_secret=#{@secret}")
+      events_request = request @base_url + "/users/#{user_name}/events"
+      response = events_request.get
     rescue => e
       return []
     end
@@ -35,11 +36,16 @@ class GithubClient
 
   def languages languages_url
     begin
-      response = RestClient.get(languages_url + "?client_id=#{@key}&client_secret=#{@secret}")
+      languages_request = request languages_url
+      response = languages_request.get
     rescue => e
       return {}
     end
     JSON.parse(response.body)
+  end
+
+  def request path
+    RestClient::Resource.new path + @credentials
   end
 
 end
