@@ -6,10 +6,11 @@ class GithubClient
   end
 
   def events_for_user user_name
-    events(user_name).inject([]) { |all, e| all << create_event(e) if allowed_type?(e); all }
+    etag = ApiCall.only(:etag).find_by(url: @base_url + "/users/#{user_name}/events")
+    events(user_name, etag).inject([]) { |all, e| all << create_event(e) if allowed_type?(e); all }
   end
 
-  private
+  # private
 
   def allowed_type? event
     event['type'] == "PushEvent"
@@ -24,13 +25,19 @@ class GithubClient
       avatar: event['actor']['avatar_url']}
   end
 
-  def events user_name
+  def events user_name, etag
     begin
       events_request = request @base_url + "/users/#{user_name}/events"
-      response = events_request.get
+      response = events_request.get(:if_none_match => etag)
     rescue => e
       return []
     end
+
+    if response.code == '304'
+      puts response.code
+      return []
+    end
+
     JSON.parse(response.body)
   end
 
