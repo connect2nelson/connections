@@ -6,31 +6,24 @@ describe GithubClient do
 
     context 'returns 200 OK' do
 
-      let(:new_etag) { 'new_etag' }
-      let(:old_etag) { 'old_etag' }
       let(:user_name) {'some_name'}
-      let(:event_response) {
-        double(code: 200, headers: {etag: new_etag}, body: [Hash['id'=>'1','type'=>'PushEvent','created_at'=>'2014-06-23T21:35:13Z','actor'=>Hash['avatar_url'=>'https://avatars.githubusercontent.com/u/784889?'],'repo'=>Hash['name'=>'thoughtworks/connections','url'=>'https://api.github.com/repos/thoughtworks/connections']]].to_json )
+      let(:events) {
+        [{'id'=>'1','type'=>'PushEvent',
+         'created_at'=>'2014-06-23T21:35:13Z',
+         'actor'=> {'avatar_url'=>'https://avatars.githubusercontent.com/u/784889?'},
+         'repo'=> {'name'=>'thoughtworks/connections','url'=>'https://api.github.com/repos/thoughtworks/connections'}
+        }]
       }
-      let(:languages_response) {
-        double(code: 200, body: Hash['Ruby'=> 1111, 'Java'=> 1234].to_json)
+      let(:languages) {
+        {'Ruby'=> 1111, 'Java'=> 1234}
       }
+
       before do
         @github_client = GithubClient.new
-        allow(ApiCallService).to receive(:etag_from)
-          .and_return(old_etag)
-        event_request = double
-        allow(RestClient::Resource).to receive(:new)
-          .with(/\/events/)
-          .and_return(event_request)
-        allow(event_request).to receive(:get)
-          .and_return(event_response)
-        languages_request = double
-        allow(RestClient::Resource).to receive(:new)
-          .with(/\/languages/)
-          .and_return(languages_request)
-        allow(languages_request).to receive(:get)
-          .and_return(languages_response)
+        allow(EtagRequestService).to receive(:create)
+          .with(/\/events/).and_return(events)
+        allow(EtagRequestService).to receive(:create)
+          .with(/\/languages/).and_return(languages)
         @events = @github_client.events_for_user(user_name)
       end
 
@@ -61,36 +54,7 @@ describe GithubClient do
           expect(@events.first[:avatar]).to eq "https://avatars.githubusercontent.com/u/784889?"
       end
 
-      it 'should save or update etag' do
-        expect(ApiCallService).to receive(:save).once
-          .with("https://api.github.com/users/#{user_name}/events", new_etag)
-        @github_client.events_for_user(user_name)
-      end
-
     end
   end
 
-  context 'returns exception code' do
-
-    before do
-      @github_client = GithubClient.new
-      allow(ApiCallService).to receive(:etag)
-      event_request = double
-      allow(RestClient::Resource).to receive(:new)
-        .with(/\/events/)
-        .and_return(event_request)
-      allow(event_request).to receive(:get)
-        .and_raise(RestClient::Exception)
-      @events = @github_client.events_for_user("some_name")
-    end
-
-    it 'should return empty list' do
-      expect(@events.size).to eq 0
-    end
-
-    it 'should not update etag' do
-      expect(ApiCallService).to receive(:save).exactly(0).times
-    end
-
-  end
 end
