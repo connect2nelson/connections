@@ -7,7 +7,7 @@ class GithubClient
 
   def events_for_user user_name
     event_url = "#{@base_url}/users/#{user_name}/events"
-    EtagRequestService.create(event_url).inject([]) { |all, e| all << create_event(e) if allowed_type?(e); all }
+    EtagRequestService.create(event_url, []).inject([]) { |all, e| all << create_event(e) if allowed_type?(e); all }
   end
 
   private
@@ -17,7 +17,7 @@ class GithubClient
     { event_id: event['id'],
       type: event['type'],
       repo_name: event['repo']['name'],
-      languages: EtagRequestService.create("#{event['repo']['url']}/languages"),
+      languages: EtagRequestService.create("#{event['repo']['url']}/languages", {}),
       created_at: event['created_at'],
       avatar: event['actor']['avatar_url']}
   end
