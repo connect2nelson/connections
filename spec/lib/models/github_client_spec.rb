@@ -21,9 +21,9 @@ describe GithubClient do
       before do
         @github_client = GithubClient.new
         allow(EtagRequestService).to receive(:create)
-          .with(/\/events/).and_return(events)
+          .with(/\/events/, []).and_return(events)
         allow(EtagRequestService).to receive(:create)
-          .with(/\/languages/).and_return(languages)
+          .with(/\/languages/, {}).and_return(languages)
         @events = @github_client.events_for_user(user_name)
       end
 

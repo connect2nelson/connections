@@ -25,12 +25,12 @@ describe EtagRequestService do
     it 'should save etag to url' do
       expect(ApiCallService).to receive(:save)
         .with(url, mocked_response.headers[:etag])
-      EtagRequestService.create url
+      EtagRequestService.create url, []
     end
 
     it 'should return response' do
       allow(ApiCallService).to receive(:save)
-      expect(EtagRequestService.create url).to eq []
+      expect(EtagRequestService.create url, []).to eq []
     end
   end
 
@@ -40,11 +40,8 @@ describe EtagRequestService do
     it 'should return empty list' do
       allow(mocked_request).to receive(:response)
         .and_raise(RestClient::Exception)
-      expect(EtagRequestService.create url).to eq []
+      expect(EtagRequestService.create url, []).to eq []
     end
   end
-
-
-
 
 end
