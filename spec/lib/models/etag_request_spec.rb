@@ -1,4 +1,5 @@
-require 'rails_helper'
+require 'spec_helper'
+require 'rest_client'
 
 describe EtagRequest do
 
