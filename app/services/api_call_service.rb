@@ -1,17 +1,11 @@
 class ApiCallService
 
   def self.etag_from url
-    api_call = ApiCall.where(url: url).first
-    api_call[:etag] if api_call
+    ApiCall.where(url: url).pluck(:etag).first
   end
 
   def self.save url, etag
-    existingApiCall = ApiCall.where(url: url).first
-    if existingApiCall
-      existingApiCall.update_attributes(etag: etag)
-    else
-      ApiCall.create(:url => url, :etag => etag)
-    end
+    ApiCall.where(url: url).first_or_initialize.update_attributes(url: url, etag: etag)
   end
 
 end
