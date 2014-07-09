@@ -31,7 +31,7 @@ describe ActivityService do
 
   describe '.update_github' do
 
-    context 'no moped errors thrown' do
+    context 'all new events' do
 
       before do
         github_client = double
@@ -65,44 +65,32 @@ describe ActivityService do
       end
     end
 
-    context 'moped error thrown' do
+    context 'some old events' do
+      let(:events_for_consultant) { [{event_id: '3'}, {event_id: '4'}, {event_id: '5'}] }
+      let(:existing_event_ids) { ['1', '2', '3'] }
+      let(:consultant) {
+        {employee_id: '111', github_account: 'yo'}
+      }
+      let(:consultants) {[consultant]}
 
       before do
         github_client = double
+        pluckable_events = double
         allow(GithubClient).to receive(:new).and_return(github_client)
         allow(github_client).to receive(:events_for_user)
           .with(consultant[:github_account])
           .and_return(events_for_consultant)
-        allow(GithubEvent).to receive(:create).and_raise(error)
+        allow(GithubEvent).to receive(:where)
+          .with(employee_id: consultant[:employee_id])
+          .and_return(pluckable_events)
+        allow(pluckable_events).to receive(:pluck)
+          .with(:event_id)
+          .and_return(existing_event_ids)
       end
 
-      context 'duplicate entry' do
-        let(:consultant) {
-          {employee_id: '111', github_account: 'yo'}
-        }
-        let(:consultants) {[consultant]}
-        let(:events_for_consultant) { [{}] }
-        let(:error) { Moped::Errors::OperationFailure.new("duplicate key", {'code'=> 11000}) }
-
-        it 'should catch duplicate key error for the second event ' do
-          expect(Rails.logger).to receive(:info)
-          ActivityService.update_github(consultants)
-        end
-
-      end
-
-      context 'any other failure' do
-        let(:consultant) {
-          {employee_id: '111', github_account: 'yo'}
-        }
-        let(:consultants) {[consultant]}
-        let(:events_for_consultant) { [{}] }
-        let(:error) { Moped::Errors::OperationFailure.new("any other failure", {'code'=> 20000}) }
-
-        it 'raise error' do
-          expect{ActivityService.update_github(consultants)}.to raise_error(error)
-        end
-
+      it 'should only persist new events' do
+        expect(GithubEvent).to receive(:create).twice
+        ActivityService.update_github(consultants)
       end
     end
 
