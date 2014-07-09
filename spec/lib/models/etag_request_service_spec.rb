@@ -1,4 +1,6 @@
-require 'rails_helper'
+require 'spec_helper'
+require './app/services/api_call_service'
+require 'rest_client'
 
 describe EtagRequestService do
 
@@ -6,7 +8,7 @@ describe EtagRequestService do
   let(:etag) {'some_etag'}
   let(:mocked_request) { double(:response) }
   let(:mocked_response) {
-    double(headers: {etag: ''}, body: [])
+    double(headers: {etag: ''}, body: "[{\"event_id\": \"1\"}]")
   }
 
   before do
@@ -25,22 +27,20 @@ describe EtagRequestService do
     it 'should save etag to url' do
       expect(ApiCallService).to receive(:save)
         .with(url, mocked_response.headers[:etag])
-      EtagRequestService.create url, []
+      EtagRequestService.create url
     end
 
     it 'should return response' do
       allow(ApiCallService).to receive(:save)
-      expect(EtagRequestService.create url, []).to eq []
+      expect(EtagRequestService.create(url).as_array.first["event_id"]).to eq "1"
     end
   end
 
   context 'returns exception code' do
-    before do
-    end
-    it 'should return empty list' do
+    it 'should return null etag response' do
       allow(mocked_request).to receive(:response)
         .and_raise(RestClient::Exception)
-      expect(EtagRequestService.create url, []).to eq []
+      expect(EtagRequestService.create url).to be_kind_of EtagNullResponse
     end
   end
 

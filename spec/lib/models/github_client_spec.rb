@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'spec_helper'
 
 describe GithubClient do
 
@@ -21,9 +21,9 @@ describe GithubClient do
       before do
         @github_client = GithubClient.new
         allow(EtagRequestService).to receive(:create)
-          .with(/\/events/, []).and_return(events)
+          .with(/\/events/).and_return(EtagResponse.new(double(body: events.to_json)))
         allow(EtagRequestService).to receive(:create)
-          .with(/\/languages/, {}).and_return(languages)
+          .with(/\/languages/).and_return(EtagResponse.new(double(body: languages.to_json)))
         @events = @github_client.events_for_user(user_name)
       end
 
@@ -34,8 +34,8 @@ describe GithubClient do
 
       it 'should return languagues' do
         expect(@events.first[:languages].size).to eq 2
-        expect(@events.first[:languages]["Ruby"]).to eq 1111
-        expect(@events.first[:languages]["Java"]).to eq 1234
+        expect(@events.first[:languages][:Ruby]).to eq 1111
+        expect(@events.first[:languages][:Java]).to eq 1234
       end
 
       it 'should return created_at time' do
@@ -53,8 +53,6 @@ describe GithubClient do
       it 'should return avatar url' do
           expect(@events.first[:avatar]).to eq "https://avatars.githubusercontent.com/u/784889?"
       end
-
     end
   end
-
 end
