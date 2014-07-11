@@ -41,9 +41,9 @@
                       Github 
                       = activity[:type]
                     .repo
-                      = activity[:repo_name]
+                      = activity.github_repository[:repo_name]
                     %ul
-                      - activity[:languages].each do |key, value|
+                      - activity.github_repository[:languages].each do |key, value|
                         %li.label= key
 
     #panel-mentors.content.active

@@ -20,7 +20,8 @@ describe 'consultants/show.html.haml' do
 
     @create_time = '2014-06-20 -0700'
     @relative_create_time = 'June 20, 2014 12:00am'
-    assign :activities, [GithubEvent.new(repo_name: 'repo', type: 'PushEvent', languages: {'Ruby'=> '1234'}, created_at: @create_time, avatar: 'profile.png')]
+
+    assign :activities, [GithubEvent.new(type: 'PushEvent', github_repository: GithubRepository.new(languages: {'Ruby'=> '1234'}, repo_name: 'repo'), created_at: @create_time, avatar: 'profile.png')]
 
     allow(connection_one).to receive(:teachable_skills).and_return(['Java'])
     allow(connection_one).to receive(:score).and_return(3.24)

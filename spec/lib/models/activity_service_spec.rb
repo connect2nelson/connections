@@ -34,7 +34,6 @@ describe ActivityService do
     context 'all new events' do
 
       before do
-        github_client = double
         allow(GithubClient).to receive(:new).and_return(github_client)
         allow(github_client).to receive(:events_for_user)
           .with(consultant_one[:github_account])
@@ -44,6 +43,7 @@ describe ActivityService do
           .and_return(events_for_consultant_two)
       end
 
+      let(:github_client) { double }
       let(:consultant_one) {
         {employee_id: '111', github_account: 'yo'}
       }
@@ -57,16 +57,45 @@ describe ActivityService do
       let(:events_for_consultant_two) {
         [{event_id: '2', repo_name: 'repo', type: 'PushEvent', languages: {}, created_at: '', avatar: ''}]
       }
+      let(:some_languages) { Hash['Ruby' => 1, 'Java' => 5] }
+      let(:events_for_consultant_two_with_languages) {
+        [{event_id: '2', repo_name: 'repo', type: 'PushEvent', languages: some_languages, created_at: '', avatar: ''}]
+      }
+      let(:repository) { GithubRepository.new }
 
       it 'should persist unique event for each consultant' do
-        expect(GithubEvent).to receive(:create).with({:employee_id=>'111', :event_id=>'1', :type=>'PushEvent', :repo_name => 'repo', :languages=> {}, :created_at => '', :avatar => ''})
-        expect(GithubEvent).to receive(:create).with({:employee_id=>'222', :event_id=>'2', :type=>'PushEvent', :repo_name => 'repo', :languages=> {}, :created_at => '', :avatar=> ''})
+        allow(GithubRepository).to receive(:find_or_create_by).and_return repository
+        expect(GithubEvent).to receive(:create).with({:employee_id=>'111', :event_id=>'1', :type=>'PushEvent', :created_at => '', :avatar => '', :github_repository => repository})
+        expect(GithubEvent).to receive(:create).with({:employee_id=>'222', :event_id=>'2', :type=>'PushEvent', :github_repository => repository, :created_at => '', :avatar=> ''})
+        ActivityService.update_github(consultants)
+      end
+
+      it 'should persist github repo' do
+        allow(GithubEvent).to receive(:create)
+        expect(GithubRepository).to receive(:find_or_create_by).with(:repo_name=>'repo').twice
+        ActivityService.update_github(consultants)
+      end
+
+      it 'should update languages when not empty' do
+        allow(GithubEvent).to receive(:create)
+        allow(GithubRepository).to receive(:find_or_create_by).and_return repository
+        allow(github_client).to receive(:events_for_user)
+          .with(consultant_two[:github_account])
+          .and_return(events_for_consultant_two_with_languages)
+        expect(repository).to receive(:update_attributes).with(languages: some_languages)
+        ActivityService.update_github(consultants)
+      end
+
+      it 'should not update languages when empty' do
+        allow(GithubEvent).to receive(:create)
+        allow(GithubRepository).to receive(:find_or_create_by).and_return repository
+        expect(repository).to receive(:update_attributes).with(languages: some_languages).never
         ActivityService.update_github(consultants)
       end
     end
 
     context 'some old events' do
-      let(:events_for_consultant) { [{event_id: '3'}, {event_id: '4'}, {event_id: '5'}] }
+      let(:events_for_consultant) { [{event_id: '3', languages: {}}, {event_id: '4', languages: {}}, {event_id: '5', languages: {}}] }
       let(:existing_event_ids) { ['1', '2', '3'] }
       let(:consultant) {
         {employee_id: '111', github_account: 'yo'}
@@ -86,6 +115,8 @@ describe ActivityService do
         allow(pluckable_events).to receive(:pluck)
           .with(:event_id)
           .and_return(existing_event_ids)
+        allow(GithubEvent).to receive(:where)
+          .with(hash_including("github_repository_id"))
       end
 
       it 'should only persist new events' do

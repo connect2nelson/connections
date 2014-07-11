@@ -9,7 +9,7 @@ RSpec.describe ConsultantsController, :type => :controller do
     let(:consultant) {Consultant.new(employee_id: "1")}
     let(:mentors) {[Connection.new(Consultant.new, consultant)]}
     let(:mentees) {[Connection.new(consultant, Consultant.new)]}
-    let(:activities) {[GithubEvent.new(event_id: '1234', repo_name: 'repo', languages: {'Ruby'=> '1234'}, created_at: 'time')]}
+    let(:activities) {[GithubEvent.new(event_id: '1234', created_at: 'time')]}
 
     it 'should show user' do
       expect(Consultant).to receive(:find_by).with({:employee_id=>consultant.employee_id}).and_return consultant

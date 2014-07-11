@@ -32,13 +32,14 @@ class ActivityService
   end
 
   def persist_event(event)
+    repo = GithubRepository.find_or_create_by(repo_name: event[:repo_name])
+    repo.update_attributes(languages: event[:languages]) unless event[:languages].empty?
     GithubEvent.create(
       employee_id: @consultant[:employee_id],
       event_id: event[:event_id],
       type: event[:type],
-      repo_name: event[:repo_name],
-      languages: event[:languages],
       created_at: event[:created_at],
+      github_repository: repo,
       avatar: event[:avatar])
   end
 end

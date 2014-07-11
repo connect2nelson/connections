@@ -11,9 +11,10 @@ class GithubClient
     events.inject([]) { |all, e| all << create_event(e) if allowed_type?(e); all }
   end
 
+
+
   private
 
-  # don't want to save the old ones
   def create_event event
     { event_id: event[:id],
       type: event[:type],
