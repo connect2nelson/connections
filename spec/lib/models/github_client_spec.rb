@@ -10,7 +10,6 @@ describe GithubClient do
       let(:events) {
         [{'id'=>'1','type'=>'PushEvent',
          'created_at'=>'2014-06-23T21:35:13Z',
-         'actor'=> {'avatar_url'=>'https://avatars.githubusercontent.com/u/784889?'},
          'repo'=> {'name'=>'thoughtworks/connections','url'=>'https://api.github.com/repos/thoughtworks/connections'}
         }]
       }
@@ -50,9 +49,6 @@ describe GithubClient do
         expect(@events.first[:type]).to eq "PushEvent"
       end
 
-      it 'should return avatar url' do
-          expect(@events.first[:avatar]).to eq "https://avatars.githubusercontent.com/u/784889?"
-      end
     end
   end
 end

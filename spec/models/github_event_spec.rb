@@ -4,7 +4,7 @@ RSpec.describe GithubEvent, :type => :model do
 
   describe 'attributes' do
     it 'should have attributes' do
-      expect(subject).to have_fields(:event_id, :employee_id, :type, :created_at, :avatar)
+      expect(subject).to have_fields(:event_id, :employee_id, :type, :created_at)
     end
 
     it 'should have indexes' do

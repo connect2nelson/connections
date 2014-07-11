@@ -20,8 +20,7 @@ class GithubClient
       type: event[:type],
       repo_name: event[:repo][:name],
       languages: EtagRequestService.create("#{event[:repo][:url]}/languages").as_hash,
-      created_at: event[:created_at],
-      avatar: event[:actor][:avatar_url]}
+      created_at: event[:created_at] }
   end
 
   def allowed_type? event

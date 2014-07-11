@@ -13,10 +13,10 @@ describe ActivityService do
     context 'github events found' do
       let(:employee_id) { '1234' }
       let(:event_one) {
-        {repo_name: 'earlier', languagues: {"Ruby"=>1111}, created_at: '2014-06-23T21:35:13Z', avatar: 'https://avatars.githubusercontent.com/u/784889?' }
+        {repo_name: 'earlier', languagues: {"Ruby"=>1111}, created_at: '2014-06-23T21:35:13Z'}
       }
       let(:event_two) {
-        {repo_name: 'later', languagues: {"Ruby"=>1234}, created_at: '2014-06-29T20:20:00Z', avatar: 'https://avatars.githubusercontent.com/u/784889?' }
+        {repo_name: 'later', languagues: {"Ruby"=>1234}, created_at: '2014-06-29T20:20:00Z'}
       }
       let(:events) { [event_one, event_two] }
 
@@ -52,21 +52,21 @@ describe ActivityService do
       }
       let(:consultants) {[consultant_one, consultant_two]}
       let(:events_for_consultant_one) {
-        [{event_id: '1', repo_name: 'repo', type: 'PushEvent', languages: {}, created_at: '', avatar: ''}]
+        [{event_id: '1', repo_name: 'repo', type: 'PushEvent', languages: {}, created_at: ''}]
       }
       let(:events_for_consultant_two) {
-        [{event_id: '2', repo_name: 'repo', type: 'PushEvent', languages: {}, created_at: '', avatar: ''}]
+        [{event_id: '2', repo_name: 'repo', type: 'PushEvent', languages: {}, created_at: ''}]
       }
       let(:some_languages) { Hash['Ruby' => 1, 'Java' => 5] }
       let(:events_for_consultant_two_with_languages) {
-        [{event_id: '2', repo_name: 'repo', type: 'PushEvent', languages: some_languages, created_at: '', avatar: ''}]
+        [{event_id: '2', repo_name: 'repo', type: 'PushEvent', languages: some_languages, created_at: ''}]
       }
       let(:repository) { GithubRepository.new }
 
       it 'should persist unique event for each consultant' do
         allow(GithubRepository).to receive(:find_or_create_by).and_return repository
-        expect(GithubEvent).to receive(:create).with({:employee_id=>'111', :event_id=>'1', :type=>'PushEvent', :created_at => '', :avatar => '', :github_repository => repository})
-        expect(GithubEvent).to receive(:create).with({:employee_id=>'222', :event_id=>'2', :type=>'PushEvent', :github_repository => repository, :created_at => '', :avatar=> ''})
+        expect(GithubEvent).to receive(:create).with({:employee_id=>'111', :event_id=>'1', :type=>'PushEvent', :created_at => '', :github_repository => repository})
+        expect(GithubEvent).to receive(:create).with({:employee_id=>'222', :event_id=>'2', :type=>'PushEvent', :github_repository => repository, :created_at => ''})
         ActivityService.update_github(consultants)
       end
 

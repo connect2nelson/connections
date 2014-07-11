@@ -39,7 +39,6 @@ class ActivityService
       event_id: event[:event_id],
       type: event[:type],
       created_at: event[:created_at],
-      github_repository: repo,
-      avatar: event[:avatar])
+      github_repository: repo)
   end
 end
