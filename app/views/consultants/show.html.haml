@@ -24,77 +24,10 @@
 
   .row.tabs-content
     #panel-activities.content
-      %ul
-        - @activities.each do |activity|
-          .activities
-            %li
-              .small-2.columns
-                .date
-                  = local_time_ago(activity[:created_at])
-              .small-1.columns 
-                .avatar 
-                  = image_tag activity[:avatar]
-              .small-9.columns
-                .vertical_line
-                  .activity_details
-                    .name
-                      Github 
-                      = activity[:type]
-                    .repo
-                      = activity.github_repository[:repo_name]
-                    %ul
-                      - activity.github_repository[:languages].each do |key, value|
-                        %li.label= key
+      = render 'activities', activities: @activities
 
     #panel-mentors.content.active
-      - if @consultant.has_skills_from_jigsaw?
-        .small-4.columns
-          %h3.skills-header
-            = @consultant.full_name.split.first
-            wants to learn
-          %ul.skills
-            - @consultant.skills_to_learn.sort.each do |skill|
-              %li
-                .label= skill
-        .small-8.columns
-          %ul.matches
-            - @mentors.take(5).each do |connection|
-              %li
-                .mentor
-                  = image_tag 'profile.png'
-                  .name= link_to connection.mentor.full_name, "/consultants/#{connection.mentor.employee_id}"
-                  .score
-                    = image_tag 'connections-32.png'
-                    = link_to number_with_precision(connection.score, precision: 2), "/connections/#{connection.mentor.employee_id}/and/#{connection.mentee.employee_id}"
-                  %ul
-                    - connection.teachable_skills.each do |teachable_skill|
-                      %li.label= teachable_skill
-      - else
-        .small-4.columns &nbsp;
-        .small-8.columns
-          = image_tag 'jigsaw-300.jpg'
+      = render 'mentors', consultant: @consultant, mentors: @mentors
 
     #panel-mentees.content
-      .small-4.columns
-        %h3.skills-header
-          = @consultant.full_name.split.first
-          can teach
-        %ul.skills
-          - @consultant.skills_to_teach.sort.each do |skill|
-            %li
-              .label= skill
-      .small-8.columns
-        %ul.matches
-          - @mentees.take(5).each do |connection|
-            %li
-              .mentor
-                = image_tag 'profile.png'
-                .name= link_to connection.mentee.full_name, "/consultants/#{connection.mentee.employee_id}"
-                .score
-                  = image_tag 'connections-32.png'
-                  = link_to number_with_precision(connection.score, precision: 2), "/connections/#{connection.mentor.employee_id}/and/#{connection.mentee.employee_id}"
-                %ul
-                  - connection.teachable_skills.each do |teachable_skill|
-                    %li.label= teachable_skill
-
-
+      = render 'mentees', consultant: @consultant, mentees: @mentees

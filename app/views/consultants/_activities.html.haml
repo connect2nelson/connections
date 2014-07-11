@@ -1,0 +1,21 @@
+%ul
+  - @activities.each do |activity|
+    .activities
+      %li
+        .small-2.columns
+          .date
+            = local_time_ago(activity[:created_at])
+        .small-1.columns 
+          .avatar 
+            = image_tag activity[:avatar]
+        .small-9.columns
+          .vertical_line
+            .activity_details
+              .name
+                Github 
+                = activity[:type]
+              .repo
+                = activity.github_repository[:repo_name]
+              %ul
+                - activity.github_repository[:languages].each do |key, value|
+                  %li.label= key
