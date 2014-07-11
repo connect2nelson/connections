@@ -2,20 +2,19 @@
   - @activities.each do |activity|
     .activities
       %li
-        .small-2.columns
+        .small-3.columns
           .date
             = local_time_ago(activity[:created_at])
-        .small-1.columns 
-          .avatar 
-            = image_tag activity[:avatar]
+            %span.dot
+              &#183;
         .small-9.columns
-          .vertical_line
-            .activity_details
-              .name
-                Github 
-                = activity[:type]
+          .activity-details-container
+            .activity-details
               .repo
-                = activity.github_repository[:repo_name]
-              %ul
-                - activity.github_repository[:languages].each do |key, value|
-                  %li.label= key
+                %ul
+                  - activity.github_repository[:languages].each do |key, value|
+                    %li.label= key
+              .name
+                = image_tag 'github.png'
+                Pushed to 
+                = link_to activity.github_repository[:repo_name], "//www.github.com/#{activity.github_repository[:repo_name]}"

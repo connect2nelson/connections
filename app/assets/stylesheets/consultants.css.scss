@@ -85,10 +85,10 @@
   }
 }
 
-.matches, .activity_details {
+.matches, .activity-details {
   list-style: none;
 
-    > li {
+  > li {
     border: #ccc solid thin;
     margin: 1em 0;
     padding: 0.5em 0.7em 0.7em;
@@ -111,28 +111,45 @@
 
   .date{
       list-style: none;
-      padding: 0.5em 0.7em 0.7em;
+      padding: 1em 0.7em 5em;
+      text-align: right;
+      border-right: 3px solid #333;
+  }
+  .dot {
+    font-size: 95px;
+    position: absolute;
+    line-height: 0.2;
   }
   .avatar {
       border: 3px solid $blue;
       border-radius: 5px;
       margin-bottom: 5px;
   }
-  .vertical_line {
+  .activity-details-container {
     list-style: none;
-    border-left: 10px solid black;
     height: 100%;
+    background-image: image-url('github-bg.png');
+    background-size: cover;
+    margin: 0.5em 0;
   }
 
-  .activity_details {
+  .activity-details {
     border: #ccc solid thin;
-    padding: 0.5em 0.7em 0.7em;
+    padding: 2em 1em;
+    background-color: rgba(255, 255, 255, 0.8);
+
+    img {
+      width: 32px;
+      margin-right: 0.5em;
+    }
 
     .name {
       color: #F4A460;
       margin-left: 0.5em;
       font-size: 1.3rem;
-      display: inline-block;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
     }
   }
 }
