@@ -20,6 +20,8 @@ RSpec.describe ConnectionsController, :type => :controller do
       expect(response).to redirect_to("/auth/saml")
       expect(response.location).to include "/auth/saml"
     end
+
+    after {ENV["SECURITY_ENABLED"] = nil}
   end
 
 
