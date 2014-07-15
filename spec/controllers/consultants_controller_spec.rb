@@ -43,12 +43,6 @@ RSpec.describe ConsultantsController, :type => :controller do
       expect(assigns(:activities)).to eq activities
     end
 
-    it "should not assign user if not authenticated" do
-      ENV["SECURITY_ENABLED"] = "ENABLED"
-      get :show, Hash[id: consultant.employee_id]
-      expect(response).to redirect_to("/auth/saml")
-      expect(response.location).to include "/auth/saml"
-    end
   end
 
   describe 'GET #index' do

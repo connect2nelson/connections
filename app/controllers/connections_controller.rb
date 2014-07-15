@@ -1,7 +1,5 @@
 class ConnectionsController < ApplicationController
 
-  before_action :authenticate_user
-
   def show
     @consultant_one = Consultant.find_by(employee_id: params[:first_employee_id])
     @consultant_two = Consultant.find_by(employee_id: params[:second_employee_id])

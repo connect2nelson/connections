@@ -14,14 +14,7 @@ RSpec.describe ConnectionsController, :type => :controller do
       get 'show', first_employee_id: '1', second_employee_id: '2'
     end
 
-    it "should not assign user if not authenticated" do
-      ENV["SECURITY_ENABLED"] = "ENABLED"
-      get 'show', first_employee_id: '1', second_employee_id: '2'
-      expect(response).to redirect_to("/auth/saml")
-      expect(response.location).to include "/auth/saml"
-    end
-
-    after {ENV["SECURITY_ENABLED"] = nil}
+ 
   end
 
 
