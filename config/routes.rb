@@ -1,8 +1,7 @@
 Connections::Application.routes.draw do
 
-  get "offices/index"
-  get "offices/show"
-  get 'connections/:first_employee_id/and/:second_employee_id', controller: :connections, action: :show
+  get "offices/:name" => "offices#show"
+  get 'connections/:first_employee_id/and/:second_employee_id' => "connections#show"
   get 'consultants/autocomplete_consultant_full_name'
   resources :consultants
 

@@ -1,7 +1,7 @@
 class OfficesController < ApplicationController
-  def index
-  end
 
   def show
+    titleized_name = params[:name].titleize
+    @office = OfficeService.find_by_name(name: titleized_name)
   end
 end
