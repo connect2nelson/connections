@@ -1,2 +1,5 @@
-- @office.consultants.each do |consultant|
-  %h3= consultant.full_name
+%h1= @office.name
+- @office.skill_groups.each do |skill_name, consultants|
+  %h3= skill_name
+  - consultants.each do |consultant|
+    %h4= consultant.full_name

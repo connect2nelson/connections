@@ -5,8 +5,16 @@ class Office
     @consultants = consultants
   end
 
+  def name
+    consultants.first.home_office
+  end
+
   def top_skills
     Skillset.new(consultants).top_skill_names
+  end
+
+  def skill_groups
+    Skillset.new(consultants).skill_groups
   end
 
 end
