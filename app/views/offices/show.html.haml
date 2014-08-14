@@ -1,5 +1,8 @@
 %h1= @office.name
 - @office.skill_groups.each do |skill_name, consultants|
-  %h3= skill_name
-  - consultants.take(5).each do |consultant|
-    %h4= consultant.full_name
+  .panel.small-8.columns.small-offset-2
+    %h3= skill_name
+    %ul.small-block-grid-5
+      - consultants.take(5).each do |consultant|
+        %li
+          %h4= consultant.full_name
