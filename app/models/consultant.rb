@@ -28,4 +28,8 @@ class Consultant
   def has_skills_from_jigsaw?
     !skills.empty?
   end
+
+  def has_skill?(skill)
+    skills.keys.include? skill
+  end
 end

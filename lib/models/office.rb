@@ -6,14 +6,8 @@ class Office
   end
 
   def top_skills
-    consultants.inject({}) do |sum, consultant|
-      sum.merge(skills_for(consultant, sum))
-    end
+    Skillset.new(consultants).top_skill_names
   end
 
-  private
-
-  def skills_for(consultant, aggregate={})
-    consultant.skills.inject(aggregate) {|sum, (k, v)| sum.merge(k => sum[k].to_i + v.to_i) }
-  end
 end
+

@@ -12,6 +12,17 @@ RSpec.describe Consultant, :type => :model do
     end
   end
 
+  describe "#has_skill?" do
+    subject { Consultant.new(skills: {'Java' => 4}) }
+    it 'should have skill for java' do
+      expect(subject).to have_skill('Java')
+    end
+    it 'should not have skill for ruby' do
+      expect(subject).to_not have_skill('Ruby')
+    end
+
+  end
+
   describe '#skills_to_learn' do
     before { Consultant.create(full_name: 'Ian Norris', skills: Hash['Ruby'=>'1', 'Java'=>'2', 'Cat'=>'5'])}
     subject {Consultant.first}
