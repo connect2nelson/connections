@@ -27,7 +27,7 @@ describe Office do
 
   describe '#skill_groups' do
     it 'should consultants in multiple skill groups' do
-      consultant_one = Consultant.new(skills: {'Ruby' => '2', 'Java' => '4'})
+      consultant_one = Consultant.new(skills: {'Ruby' => '5', 'Java' => '5'})
       consultants = [consultant_one]
       expect(Office.new(consultants).skill_groups).to eq('Ruby' => consultants, 'Java' => consultants)
     end
