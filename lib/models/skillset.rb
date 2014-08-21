@@ -6,7 +6,12 @@ class Skillset
   end
 
   def skill_groups
-    top_skill_names.inject({}) {|sum, skill_name| sum.merge(group_for(skill_name))}
+    sum = {}
+    top_skill_names.each do |skill_name|
+      group = group_for skill_name
+      sum.merge!(group) unless group[skill_name].empty?
+    end
+    sum
   end
 
   def top_skill_names
@@ -26,6 +31,6 @@ class Skillset
   end
 
   def group_for skill_name
-    {skill_name => consultants.select { |consultant| consultant.has_skill?(skill_name) }}
+    {skill_name => consultants.select { |consultant| consultant.expert_in?(skill_name) }}
   end
 end

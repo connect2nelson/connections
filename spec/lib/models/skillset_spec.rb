@@ -32,23 +32,36 @@ describe Skillset do
     end
 
     it 'should return consultants of one skill' do
-      consultant_one = Consultant.new(skills: {'Ruby' => '2'})
-      consultant_two = Consultant.new(skills: {'Ruby' => '3'})
+      consultant_one = Consultant.new(skills: {'Ruby' => '5'})
+      consultant_two = Consultant.new(skills: {'Ruby' => '5'})
       consultants = [consultant_one, consultant_two]
       expect(skill_groups(consultants)).to eq('Ruby' => consultants)
     end
 
     it 'should exclude consultants not having a skill' do
-      consultant_one = Consultant.new(skills: {'Ruby' => '2'})
+      consultant_one = Consultant.new(skills: {'Ruby' => '5'})
       consultant_two = Consultant.new(skills: {})
       consultants = [consultant_one, consultant_two]
       expect(skill_groups(consultants)).to eq('Ruby' => [consultant_one])
     end
 
     it 'should return consultant in multiple skill groups' do
-      consultant_one = Consultant.new(skills: {'Ruby' => '2', 'Java' => '4'})
+      consultant_one = Consultant.new(skills: {'Ruby' => '5', 'Java' => '5'})
       consultants = [consultant_one]
       expect(skill_groups(consultants)).to eq('Ruby' => consultants, 'Java' => consultants)
+    end
+
+    it 'should only return expert consultants' do
+      consultant_one = Consultant.new(skills: {'Ruby' => '3', 'Java' => '5'})
+      consultant_two = Consultant.new(skills: {'Ruby' => '5', 'Java' => '2'})
+      consultants = [consultant_one, consultant_two]
+      expect(skill_groups(consultants)).to eq('Ruby' => [consultant_two], 'Java' => [consultant_one])
+    end
+
+    it 'should not return skill groups with no expert consultants' do
+      consultant_one = Consultant.new(skills: {'Ruby' => '3', 'Java' => '5'})
+      consultants = [consultant_one]
+      expect(skill_groups(consultants)).to eq('Java' => [consultant_one])
     end
 
   end
@@ -88,6 +101,7 @@ describe Skillset do
       consultants = [Consultant.new(skills: skillset_one), Consultant.new(skills: skillset_two)]
       expect(top_skills(consultants)).to eq('Ruby' => 7, 'Javascript' => 5, 'Clojure' => 2)
     end
+
 
   end
 end
