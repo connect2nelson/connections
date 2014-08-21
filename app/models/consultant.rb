@@ -32,4 +32,9 @@ class Consultant
   def has_skill?(skill)
     skills.keys.include? skill
   end
+
+  def expert_in? skill
+    skills[skill] == EXPERT_SKILL
+  end
+
 end

@@ -62,4 +62,25 @@ RSpec.describe Consultant, :type => :model do
     end
   end
 
+  describe '#expert_in?' do
+
+    it 'should return true if the consultant has 5 in one skill' do
+      consultant = Consultant.new(skills: {'Ruby'=>'5'})
+      expect(consultant).to be_expert_in 'Ruby'
+    end
+
+    (1..4).each do |i|
+      it "should return false if the consultant skill level is #{i}" do
+        consultant = Consultant.new(skills: {'Ruby'=>i.to_s})
+        expect(consultant).to_not be_expert_in 'Ruby'
+      end
+    end
+
+    it 'should return false if the consultant has no skills' do
+      consultant = Consultant.new(skills: {})
+      expect(consultant).to_not be_expert_in 'Ruby'
+    end
+
+  end
+
 end
