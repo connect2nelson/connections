@@ -12,11 +12,10 @@ class Skillset
       group = group_for skill_name
       if !group[skill_name].empty?
         type = @skill_type.type_of(skill_name.downcase)
-        sum[type]  = {} if !sum.has_key? type
+        sum[type]  = {} unless sum.has_key? type
         sum[type].merge!(group)
       end
     end
-    puts sum['tech']
     sum
   end
 

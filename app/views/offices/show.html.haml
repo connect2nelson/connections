@@ -17,12 +17,12 @@
       %li.tab-title
         %a{:href => "#panel-consulting"} Consulting
 
-- @office.skill_groups.each do |skill_type, skill_group|
-  - skill_group.each do |skill_name, consultants|
-    .row
-      .panel.small-12.columns
-        %h3= skill_name
-        %ul.small-block-grid-5
-          - consultants.take(5).each do |consultant|
-            %li
-              %h4= consultant.full_name
+.row.tabs-content
+  #panel-all.content.active
+    = render 'office', skill_group: @office.skill_groups
+
+  #panel-tech.content
+    = render 'skill_groups', skill_group: @office.skill_groups['tech']
+
+  #panel-consulting.content
+    = render 'skill_groups', skill_group: @office.skill_groups['consulting']
