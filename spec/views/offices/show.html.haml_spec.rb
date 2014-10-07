@@ -16,6 +16,7 @@ RSpec.describe "offices/show.html.haml", :type => :view do
   describe 'show filter buttons' do
     specify{expect(rendered).to have_text('All')}
     specify{expect(rendered).to have_text('Tech')}
+    specify{expect(rendered).to have_text('Testing')}
     specify{expect(rendered).to have_text('Consulting')}
   end
 end

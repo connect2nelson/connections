@@ -15,6 +15,8 @@
       %li.tab-title
         %a{:href => "#panel-tech"} Tech
       %li.tab-title
+        %a{:href => "#panel-testing"} Testing
+      %li.tab-title
         %a{:href => "#panel-consulting"} Consulting
 
 .row.tabs-content
@@ -23,6 +25,9 @@
 
   #panel-tech.content
     = render 'skill_groups', skill_group: @office.skill_groups['tech']
+
+  #panel-testing.content
+    = render 'skill_groups', skill_group: @office.skill_groups['testing']
 
   #panel-consulting.content
     = render 'skill_groups', skill_group: @office.skill_groups['consulting']

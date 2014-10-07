@@ -11,8 +11,9 @@ describe SkillType do
       expect(skill_type.consulting_skills).to_not be_empty
     end
 
-    it 'should return whether a skill is of type tech or consulting' do
+    it 'should return whether a skill is of type tech, testing, or consulting' do
       expect(skill_type.type_of('java')).to eq('tech')
+      expect(skill_type.type_of('mobile test automation - ios')).to eq('testing')
       expect(skill_type.type_of('problem solving')).to eq('consulting')
     end
 

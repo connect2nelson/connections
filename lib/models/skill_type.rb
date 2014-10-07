@@ -8,6 +8,10 @@ class SkillType
                     'javaScript application development' => 1, 'ui development' => 1, 'ruby application development' => 1,
                     'c# application development' => 1, 'groovy application development' => 1}
 
+    @testing_skills = {'c# test automation' => 1, 'groovy test automation' => 1, 'java test automation' => 1, 'load testing' => 1,
+                      'manual/exploratory testing' => 1, 'mobile test automation - ios' => 1, 'performance testing' => 1,
+                      'selenium-webdriver' => 1, 'test parallelization (seleniumgrid, etc)' => 1}
+
     @consulting_skills = {'problem solving' => 1, 'communication' => 1, 'teaching' => 1, 'presenting' => 1, 'questioning' => 1,
                           'facilitation' => 1, 'influence' => 1, 'planning' => 1, 'negotiation' => 1, 'innovating' => 1,
                           'system thinking' => 1, 'relationship building' => 1, 'establish & Cultivate Relationships' => 1,
@@ -19,6 +23,8 @@ class SkillType
   def type_of(name)
     if @tech_skills.has_key? name
       return 'tech'
+    elsif @testing_skills.has_key? name
+      return 'testing'
     elsif @consulting_skills.has_key? name
       return 'consulting'
     else
