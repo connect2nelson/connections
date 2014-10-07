@@ -19,4 +19,9 @@ RSpec.describe "offices/show.html.haml", :type => :view do
     specify {expect(rendered).to have_text('Java', count: 1)}
     specify {expect(rendered).to have_css('h3:first-of-type', text: 'Ruby')}
   end
+
+  describe 'show filter buttons' do
+    specify{expect(rendered).to have_text('Tech')}
+    specify{expect(rendered).to have_text('Consulting')}
+  end
 end

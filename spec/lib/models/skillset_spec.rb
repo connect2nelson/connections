@@ -35,33 +35,33 @@ describe Skillset do
       consultant_one = Consultant.new(skills: {'Ruby' => '5'})
       consultant_two = Consultant.new(skills: {'Ruby' => '5'})
       consultants = [consultant_one, consultant_two]
-      expect(skill_groups(consultants)).to eq('Ruby' => consultants)
+      expect(skill_groups(consultants)).to eq('tech' => {'Ruby' => consultants})
     end
 
     it 'should exclude consultants not having a skill' do
       consultant_one = Consultant.new(skills: {'Ruby' => '5'})
       consultant_two = Consultant.new(skills: {})
       consultants = [consultant_one, consultant_two]
-      expect(skill_groups(consultants)).to eq('Ruby' => [consultant_one])
+      expect(skill_groups(consultants)).to eq('tech' => {'Ruby' => [consultant_one]})
     end
 
     it 'should return consultant in multiple skill groups' do
       consultant_one = Consultant.new(skills: {'Ruby' => '5', 'Java' => '5'})
       consultants = [consultant_one]
-      expect(skill_groups(consultants)).to eq('Ruby' => consultants, 'Java' => consultants)
+      expect(skill_groups(consultants)).to eq('tech' => {'Ruby' => consultants, 'Java' => consultants})
     end
 
     it 'should only return expert consultants' do
       consultant_one = Consultant.new(skills: {'Ruby' => '3', 'Java' => '5'})
       consultant_two = Consultant.new(skills: {'Ruby' => '5', 'Java' => '2'})
       consultants = [consultant_one, consultant_two]
-      expect(skill_groups(consultants)).to eq('Ruby' => [consultant_two], 'Java' => [consultant_one])
+      expect(skill_groups(consultants)).to eq('tech' => {'Ruby' => [consultant_two], 'Java' => [consultant_one]})
     end
 
     it 'should not return skill groups with no expert consultants' do
       consultant_one = Consultant.new(skills: {'Ruby' => '3', 'Java' => '5'})
       consultants = [consultant_one]
-      expect(skill_groups(consultants)).to eq('Java' => [consultant_one])
+      expect(skill_groups(consultants)).to eq('tech' => {'Java' => [consultant_one]})
     end
 
   end

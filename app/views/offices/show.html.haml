@@ -6,11 +6,23 @@
     %ul.tabs{"data-tab"=>""}
       %li.tab-title.active
         %a{:href => "#skills"} Skills
-- @office.skill_groups.each do |skill_name, consultants|
-  .row
-    .panel.small-12.columns
-      %h3= skill_name
-      %ul.small-block-grid-5
-        - consultants.take(5).each do |consultant|
-          %li
-            %h4= consultant.full_name
+
+.row
+  .small-.columns
+    %ul.tabs{"data-tab"=>""}
+      %li.tab-title.active
+        %a{:href => "#panel-all"} All
+      %li.tab-title
+        %a{:href => "#panel-tech"} Tech
+      %li.tab-title
+        %a{:href => "#panel-consulting"} Consulting
+
+- @office.skill_groups.each do |skill_type, skill_group|
+  - skill_group.each do |skill_name, consultants|
+    .row
+      .panel.small-12.columns
+        %h3= skill_name
+        %ul.small-block-grid-5
+          - consultants.take(5).each do |consultant|
+            %li
+              %h4= consultant.full_name
