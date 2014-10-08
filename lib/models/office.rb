@@ -17,5 +17,9 @@ class Office
     Skillset.new(consultants).skill_groups
   end
 
+  def git_repo_groups
+    GithubRepos.new(consultants).repo_groups
+  end
+
 end
 

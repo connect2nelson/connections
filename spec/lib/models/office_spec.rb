@@ -33,6 +33,23 @@ describe Office do
     end
   end
 
+  describe '#git_repo_groups' do
+    it 'should return the git repos for the office with contributors' do
+
+      repo = GithubRepository.create(:repo_name => "grezha")
+
+      consultant = Consultant.new(:employee_id => "1")
+      another_consultant = Consultant.new(:employee_id => "2")
+      consultants = [consultant, another_consultant]
+
+      GithubEvent.create(:employee_id => consultant.employee_id, :github_repository_id => repo.id)
+      GithubEvent.create(:employee_id => another_consultant.employee_id, :github_repository_id => repo.id)
+      GithubEvent.create(:employee_id => another_consultant.employee_id, :github_repository_id => repo.id)
+
+      repo_groups = Office.new(consultants).git_repo_groups
+      expect(repo_groups[repo.repo_name]).to eq([another_consultant, consultant])
+    end
+  end
 
 end
 
