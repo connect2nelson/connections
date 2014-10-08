@@ -1,0 +1,8 @@
+-repo_groups.sort.each do |repo_name, consultants|
+  .row
+    .panel.small-12.columns
+      %h3= repo_name
+      %ul.small-block-grid-5
+        - consultants.take(5).each do |consultant|
+          %li
+            %h4= consultant.full_name

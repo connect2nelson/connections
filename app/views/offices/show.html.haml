@@ -5,29 +5,13 @@
   .small-12.columns
     %ul.tabs{"data-tab"=>""}
       %li.tab-title.active
-        %a{:href => "#skills"} Skills
-
-.row
-  .small-.columns
-    %ul.tabs{"data-tab"=>""}
-      %li.tab-title.active
-        %a{:href => "#panel-all"} All
+        %a{:href => "#panel-skill_tab"} Skills
       %li.tab-title
-        %a{:href => "#panel-tech"} Tech
-      %li.tab-title
-        %a{:href => "#panel-testing"} Testing
-      %li.tab-title
-        %a{:href => "#panel-consulting"} Consulting
+        %a{:href => "#panel-github_groups"} Github Repos
 
 .row.tabs-content
-  #panel-all.content.active
-    = render 'office', skill_group: @office.skill_groups
+  #panel-skill_tab.content.active
+    = render 'skill_tab', office: @office
 
-  #panel-tech.content
-    = render 'skill_groups', skill_group: @office.skill_groups['tech']
-
-  #panel-testing.content
-    = render 'skill_groups', skill_group: @office.skill_groups['testing']
-
-  #panel-consulting.content
-    = render 'skill_groups', skill_group: @office.skill_groups['consulting']
+  #panel-github_groups.content
+    = render 'github_groups', repo_groups: @office.git_repo_groups

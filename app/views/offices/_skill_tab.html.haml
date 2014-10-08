@@ -1,0 +1,24 @@
+.row
+  .small-.columns
+    %ul.tabs{"data-tab"=>""}
+      %li.tab-title.active
+        %a{:href => "#panel-all"} All
+      %li.tab-title
+        %a{:href => "#panel-tech"} Tech
+      %li.tab-title
+        %a{:href => "#panel-testing"} Testing
+      %li.tab-title
+        %a{:href => "#panel-consulting"} Consulting
+
+.row.tabs-content
+  #panel-all.content.active
+    = render 'office', skill_group: @office.skill_groups
+
+  #panel-tech.content
+    = render 'skill_groups', skill_group: @office.skill_groups['tech']
+
+  #panel-testing.content
+    = render 'skill_groups', skill_group: @office.skill_groups['testing']
+
+  #panel-consulting.content
+    = render 'skill_groups', skill_group: @office.skill_groups['consulting']
