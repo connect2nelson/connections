@@ -6,7 +6,7 @@
           .repo_name
             = image_tag 'github.png'
             = link_to repo_array[0], "https://github.com/"+repo_array[0]
-          %ul.small-block-grid-5
+          %ul.consultants
             - repo_array[1].take(5).each do |consultant|
-              %li
+              %li.label
                 %h4= link_to consultant.full_name, "/consultants/#{consultant.employee_id}"

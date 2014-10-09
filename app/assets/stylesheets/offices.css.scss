@@ -1,26 +1,46 @@
 // Place all the styles related to the offices controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.github_group {
-  list-style: none;
+@import "foundation_and_overrides";
+@import "modules/profile-attributes";
 
+.skills_group, .github_detail {
+  margin: 0.5em 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: #ccc solid thin;
+  padding: 1em 1em;
+
+  .label {
+    background-color: #ccc;
+    margin-bottom: 0em;
+  }
+
+  .consultants{
+    margin-bottom: 0em;
+  }
+}
+
+.github_group {
   background-image: image-url('github-bg.png');
   background-size: cover;
   margin: 0.5em 0;
 
   .github_detail {
-    background-color: rgba(255, 255, 255, 0.8);
-    border: #ccc solid thin;
-    padding: 2em 1em;
 
     img {
-      width: 25px;
+      width: 32px;
       margin-right: 0.5em;
     }
 
     .repo_name{
+      margin: 0.5em 0em;
       font-size: 1.6875rem;
     }
   }
+}
 
+.skills_group {
+  h3{
+    color: $dark-brown
+  }
 }

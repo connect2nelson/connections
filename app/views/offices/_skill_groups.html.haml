@@ -1,9 +1,9 @@
 -skill_group.sort.each do |skill_name, consultants|
   .row
     .small-12.columns
-      .panel
+      .skills_group
         %h3= skill_name
-        %ul.small-block-grid-5
+        %ul.consultants
           - consultants.take(5).each do |consultant|
-            %li
-              %h4= consultant.full_name
+            %li.label
+              %h4= link_to consultant.full_name, "/consultants/#{consultant.employee_id}"
