@@ -11,7 +11,9 @@
 
 .row.tabs-content
   #panel-skill_tab.content.active
-    = render 'skill_tab', office: @office
+    .small-12.columns
+      = render 'skill_tab', office: @office
 
   #panel-github_groups.content
-    = render 'github_groups', repo_groups: @office.git_repo_groups
+    .small-12.columns
+      = render 'github_groups', repo_groups: @office.git_repo_groups

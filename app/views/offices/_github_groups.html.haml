@@ -1,8 +1,9 @@
 -repo_groups.each do |repo_array|
   .row
-    .panel.small-12.columns
-      %h3= link_to repo_array[0], "https://github.com/"+repo_array[0]
-      %ul.small-block-grid-5
-        - repo_array[1].take(5).each do |consultant|
-          %li
-            %h4= link_to consultant.full_name, "/consultants/#{consultant.employee_id}"
+    .small-12.columns
+      .panel
+        %h3= link_to repo_array[0], "https://github.com/"+repo_array[0]
+        %ul.small-block-grid-5
+          - repo_array[1].take(5).each do |consultant|
+            %li
+              %h4= link_to consultant.full_name, "/consultants/#{consultant.employee_id}"

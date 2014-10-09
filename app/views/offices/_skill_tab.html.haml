@@ -1,5 +1,5 @@
 .row
-  .small-.columns
+  .small-12.columns
     %ul.tabs{"data-tab"=>""}
       %li.tab-title.active
         %a{:href => "#panel-all"} All
@@ -12,13 +12,17 @@
 
 .row.tabs-content
   #panel-all.content.active
-    = render 'office', skill_group: @office.skill_groups
+    .small-12.columns
+      = render 'office', skill_group: @office.skill_groups
 
   #panel-tech.content
-    = render 'skill_groups', skill_group: @office.skill_groups['tech']
+    .small-12.columns
+      = render 'skill_groups', skill_group: @office.skill_groups['tech']
 
   #panel-testing.content
-    = render 'skill_groups', skill_group: @office.skill_groups['testing']
+    .small-12.columns
+      = render 'skill_groups', skill_group: @office.skill_groups['testing']
 
   #panel-consulting.content
-    = render 'skill_groups', skill_group: @office.skill_groups['consulting']
+    .small-12.columns
+      = render 'skill_groups', skill_group: @office.skill_groups['consulting']
