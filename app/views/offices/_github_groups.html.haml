@@ -1,8 +1,8 @@
--repo_groups.sort.each do |repo_name, consultants|
+-repo_groups.each do |repo_array|
   .row
     .panel.small-12.columns
-      %h3= repo_name
+      %h3= repo_array[0]
       %ul.small-block-grid-5
-        - consultants.take(5).each do |consultant|
+        - repo_array[1].take(5).each do |consultant|
           %li
             %h4= consultant.full_name

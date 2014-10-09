@@ -47,8 +47,9 @@ describe Office do
       GithubEvent.create(:employee_id => another_consultant.employee_id, :github_repository_id => repo.id)
 
       repo_groups = Office.new(consultants).git_repo_groups
-      expect(repo_groups[repo.repo_name]).to eq([another_consultant, consultant])
+      expect(repo_groups[0][1]).to eq([another_consultant, consultant])
     end
+
   end
 
 end

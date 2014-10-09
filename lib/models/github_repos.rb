@@ -29,7 +29,7 @@ class GithubRepos
       repo_groups[repo] = sort_contributors_by_commits consultant_contributions
     end
 
-    repo_groups
+    repo_groups.sort_by{|repo_name, consultants| consultants.length}.reverse
   end
 
   def sort_contributors_by_commits contributions
