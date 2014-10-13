@@ -3,15 +3,13 @@ require 'rails_helper'
 RSpec.describe "consultants/_mentees.html.haml", :type => :view do
 
   before do
-    consultant = Consultant.new(employee_id: '3', full_name: 'Ian Norris', primary_role: 'Dev', home_office: 'Chicago', working_office: 'San Francisco', skills: Hash['Ruby'=>'1', 'Cat'=>'5'])
+    a_consultant = Consultant.new(employee_id: '3', full_name: 'Ian Norris', primary_role: 'Dev', home_office: 'Chicago', working_office: 'San Francisco', skills: Hash['Ruby'=>'1', 'Cat'=>'5'])
     mentee_one = Consultant.new(full_name: 'Charlie', employee_id: '4', skills: {})
     mentee_two = Consultant.new(full_name: 'Dee', employee_id: '5', skills: {})
 
-    assign :consultant, consultant
-
-    mentee_connection_one = Connection.new(consultant, mentee_one)
-    mentee_connection_two = Connection.new(consultant, mentee_two)
-    assign :mentees, [mentee_connection_one, mentee_connection_two]
+    mentee_connection_one = Connection.new(a_consultant, mentee_one)
+    mentee_connection_two = Connection.new(a_consultant, mentee_two)
+    some_mentees = [mentee_connection_one, mentee_connection_two]
 
     @create_time = '2014-06-20 -0700'
     @relative_create_time = 'June 20, 2014 12:00am'
@@ -21,9 +19,8 @@ RSpec.describe "consultants/_mentees.html.haml", :type => :view do
     allow(mentee_connection_two).to receive(:teachable_skills).and_return(['Mandarin'])
     allow(mentee_connection_two).to receive(:score).and_return(0.1333)
 
-    render
+    render 'consultants/mentees', consultant: a_consultant, mentees: some_mentees
   end
-
 
   describe 'show mentees' do
     specify {expect(rendered).to have_link('Charlie', :href => '/consultants/4')}

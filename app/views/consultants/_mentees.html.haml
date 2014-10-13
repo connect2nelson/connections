@@ -1,23 +1,26 @@
 .small-4.columns
   %h3.skills-header
-    = @consultant.full_name.split.first
+    = consultant.full_name.split.first
     can teach
   %ul.skills
-    - @consultant.skills_to_teach.sort.each do |skill|
+    - consultant.skills_to_teach.sort.each do |skill|
       %li
         .label= skill
 .small-8.columns
   %ul.matches
-    - @mentees.take(5).each do |connection|
-      %li
-        .mentor
-          = image_tag 'profile.png'
-          .name= link_to connection.mentee.full_name, "/consultants/#{connection.mentee.employee_id}"
-          .score
-            = image_tag 'connections-32.png'
-            = link_to number_with_precision(connection.score, precision: 2), "/connections/#{connection.mentor.employee_id}/and/#{connection.mentee.employee_id}"
-          %ul
-            - connection.teachable_skills.each do |teachable_skill|
-              %li.label= teachable_skill
+    - if mentees.empty?
+      %h4 "Couldn't find any matches"
+    -else
+      - mentees.take(5).each do |connection|
+        %li
+          .mentor
+            = image_tag 'profile.png'
+            .name= link_to connection.mentee.full_name, "/consultants/#{connection.mentee.employee_id}"
+            .score
+              = image_tag 'connections-32.png'
+              = link_to number_with_precision(connection.score, precision: 2), "/connections/#{connection.mentor.employee_id}/and/#{connection.mentee.employee_id}"
+            %ul
+              - connection.teachable_skills.each do |teachable_skill|
+                %li.label= teachable_skill
 
 

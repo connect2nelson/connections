@@ -6,10 +6,13 @@ RSpec.describe ConsultantsController, :type => :controller do
 
     #ENV["SECURITY_ENABLED"] = "enabled"
 
-    let(:consultant) {Consultant.new(employee_id: "1")}
+    consultant = Consultant.new(employee_id: "1")
+    let(:consultant) {consultant}
     let(:mentors) {[Connection.new(Consultant.new, consultant)]}
     let(:mentees) {[Connection.new(consultant, Consultant.new)]}
     let(:activities) {[GithubEvent.new(event_id: '1234', created_at: 'time')]}
+    sponsee = Connection.new(consultant, Consultant.new(employee_id: "2"))
+    let(:sponsees) {[sponsee]}
 
     it 'should show user' do
       expect(Consultant).to receive(:find_by).with({:employee_id=>consultant.employee_id}).and_return consultant
@@ -41,6 +44,13 @@ RSpec.describe ConsultantsController, :type => :controller do
       expect(ActivityService).to receive(:github_events).with(consultant.employee_id).and_return(activities)
       get :show, Hash[id: consultant.employee_id]
       expect(assigns(:activities)).to eq activities
+    end
+
+    it 'should assign sponsees' do
+      expect(Consultant).to receive(:find_by).with({:employee_id=>consultant.employee_id}).and_return consultant
+      expect(SponsorshipService).to receive(:get_sponsees_for).with(consultant).and_return sponsees
+      get :show, Hash[id: consultant.employee_id]
+      expect(assigns(:sponsees)).to eq sponsees
     end
 
   end
