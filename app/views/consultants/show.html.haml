@@ -21,6 +21,8 @@
           %a{:href => "#panel-mentors"} Mentors
         %li.tab-title
           %a{:href => "#panel-mentees"} Mentees
+        %li.tab-title
+          %a{:href => "#panel-sponsorship"} Sponsorship
 
   .row.tabs-content
     #panel-activities.content
@@ -30,4 +32,7 @@
       = render 'mentors', consultant: @consultant, mentors: @mentors
 
     #panel-mentees.content
+      = render 'mentees', consultant: @consultant, mentees: @mentees
+
+    #panel-sponsorship.content
       = render 'mentees', consultant: @consultant, mentees: @mentees
