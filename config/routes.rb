@@ -11,6 +11,8 @@ Connections::Application.routes.draw do
 
     get 'about', to: 'welcome#about'
 
+    put 'sponsorship', to: "sponsorship#create"
+    get 'sponsorship/autocomplete_consultant_full_name'
     root 'consultants#index'
 
     if Rails.env.development?

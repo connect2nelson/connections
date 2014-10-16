@@ -1,1 +1,12 @@
 = render 'mentees', consultant: consultant, mentees: sponsees
+.small-8.columns
+  %ul.matches
+    %li
+      .mentor
+        - if flash[:alert]
+          .alert= flash[:alert]
+        = form_tag '/sponsorship', method: :put do
+          = autocomplete_field_tag 'sponsee_full_name', '', sponsorship_autocomplete_consultant_full_name_path, placeholder: 'Search for Consultants'
+          = hidden_field_tag 'sponsee_id'
+          = hidden_field_tag 'sponsor_id', consultant.employee_id
+          = submit_tag("Add Sponsee")

@@ -19,6 +19,7 @@ RSpec.describe "consultants/_mentees.html.haml", :type => :view do
     allow(mentee_connection_two).to receive(:teachable_skills).and_return(['Mandarin'])
     allow(mentee_connection_two).to receive(:score).and_return(0.1333)
 
+    stub_template "consultants/_sponsorship.html.haml" => ""
     render 'consultants/mentees', consultant: a_consultant, mentees: some_mentees
   end
 
