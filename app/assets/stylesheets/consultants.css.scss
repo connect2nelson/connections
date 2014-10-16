@@ -75,9 +75,18 @@
       font-size: 1.3rem;
       display: inline-block;
     }
-    .search-box{
-      margin: 3em 3em 0 3em;
+    .sponsee_search{
       width: 70%;
+      display: inline-block;
+      margin: 0;
+    }
+    .submit_sponsee{
+      background-color: $blue;
+      border: #ccc solid thin;
+      margin: 0;
+      padding: 0.5em 0.5em 0.5em;
+      font-size: 1.1rem;
+      color: #ffffff;
     }
     img {
       max-width: 30px;
