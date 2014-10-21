@@ -61,7 +61,7 @@
   text-align: right;
 }
 
-.matches {
+.matches, .sponsee-search {
   margin: 0;
 
   .mentor {
@@ -98,7 +98,7 @@
   }
 }
 
-.matches, .activity-details {
+.matches, .activity-details, .sponsee-search {
   list-style: none;
 
   > li {

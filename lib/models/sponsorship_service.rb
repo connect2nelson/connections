@@ -10,4 +10,8 @@ class SponsorshipService
     end
     sponsees
   end
+
+  def self.get_connection_for sponsorship
+    Connection.new(Consultant.find_by(employee_id: sponsorship.sponsor_id), Consultant.find_by(employee_id: sponsorship.sponsee_id))
+  end
 end

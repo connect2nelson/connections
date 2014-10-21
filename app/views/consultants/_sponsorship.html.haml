@@ -1,11 +1,11 @@
 = render 'mentees', consultant: consultant, mentees: sponsees
 .small-8.columns
-  %ul.matches
+  %ul.sponsee-search
     %li
       .mentor
         - if flash[:alert]
           .alert= flash[:alert]
-        = form_tag '/sponsorship', method: :put do
+        = form_tag '/sponsorship', remote: true, method: :put do
           = autocomplete_field_tag 'sponsee_full_name', '', sponsorship_autocomplete_consultant_full_name_path, placeholder: 'Search for Consultants', class: "sponsee_search"
           = hidden_field_tag 'sponsee_id'
           = hidden_field_tag 'sponsor_id', consultant.employee_id
