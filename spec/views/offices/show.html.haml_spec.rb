@@ -10,11 +10,13 @@ RSpec.describe "offices/show.html.haml", :type => :view do
 
     stub_template "offices/_office.html.haml" => ""
     stub_template "offices/_skill_groups.html.haml" => "Example skill"
+    stub_template "offices/_sponsorships.html" => ""
     render
   end
 
   describe 'show skills and Github tabs' do
     specify{expect(rendered).to have_text('Skills')}
     specify{expect(rendered).to have_text('Github Repos')}
+    specify{expect(rendered).to have_text('Sponsorship Network')}
   end
 end

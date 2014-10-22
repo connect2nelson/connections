@@ -1,28 +1,8 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
-<style>
-
-    .node {
-        stroke: #fff;
-        stroke-width: 1.5px;
-    }
-
-    .link {
-        stroke: #999;
-        stroke-opacity: .6;
-    }
-
-</style>
-<body>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
 
     var width = 960,
             height = 500;
-
-    d3.selectAll("body")
-            .append("text")
-            .text("Hello girls");
 
     var color = d3.scale.category20();
 
@@ -35,13 +15,8 @@
             .attr("width", width)
             .attr("height", height);
 
-    console.log("I'm in the JS!");
-
     d3.json("/offices/SanFrancisco/network", function(error, graph) {
         graph = JSON.parse(graph);
-        console.log(typeof graph);
-        console.log(graph.nodes);
-        console.log(graph.links);
 
         force
                 .nodes(graph.nodes)

@@ -8,6 +8,8 @@
         %a{:href => "#panel-skill_tab"} Skills
       %li.tab-title
         %a{:href => "#panel-github_groups"} Github Repos
+      %li.tab-title
+        %a{:href => "#panel-sponsorship-network"} Sponsorship Network
 
 .row.tabs-content
   #panel-skill_tab.content.active
@@ -17,3 +19,7 @@
   #panel-github_groups.content
     .small-12.columns
       = render 'github_groups', repo_groups: @office.git_repo_groups
+
+  #panel-sponsorship-network.content
+    .small-12.columns
+      = render 'sponsorships'

@@ -14,7 +14,4 @@ class OfficesController < ApplicationController
     end
   end
 
-  def show_network
-    render "network"
-  end
 end
