@@ -1,6 +1,8 @@
 Connections::Application.routes.draw do
 
     get "offices/:name" => "offices#show"
+    get "offices/:name/network" => "offices#network", defaults: { format: 'json' }
+    get "offices/:name/show_network" => "offices#show_network"
     get 'connections/:first_employee_id/and/:second_employee_id' => "connections#show"
     get 'consultants/autocomplete_consultant_full_name'
     resources :consultants

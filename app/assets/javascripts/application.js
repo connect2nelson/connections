@@ -17,6 +17,7 @@
 //= require foundation
 //= require turbolinks
 //= require local_time
+//= require d3.v3
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
