@@ -8,19 +8,26 @@ class Skillset
 
   def skill_groups
     sum = {}
-    top_skill_names.each do |skill_name|
-      group = group_for skill_name
-      if !group[skill_name].empty?
-        type = @skill_type.type_of(skill_name.downcase)
-        sum[type]  = {} unless sum.has_key? type
-        sum[type].merge!(group)
+    unordered_skill_names.map{ |skill_name|
+      group = group_for_name skill_name
+      skill_type = @skill_type.type_of(skill_name.downcase)
+      SkillTypeGrouping.new(skill_type, group, skill_name)
+    }.reject{|skill| skill.empty?}
+    .reduce({}) {|groupings, skill|
+      if not groupings[skill.skill_type]
+        groupings[skill.skill_type] = {}
       end
-    end
-    sum
+      groupings[skill.skill_type][skill.skill_name]=skill.group
+      groupings
+    }
   end
 
   def top_skill_names
     top_skills.sort_by {|k, v| v}.reverse.map(&:first)
+  end
+
+  def unordered_skill_names
+    Set.new consultants.map{|consultant| consultant.skills.keys}.reduce(:+)
   end
 
   def top_skills
@@ -33,6 +40,10 @@ class Skillset
 
   def skills_for(consultant, aggregate={})
     consultant.skills.inject(aggregate) {|sum, (k, v)| sum.merge(k => sum[k].to_i + v.to_i) }
+  end
+
+  def group_for_name skill_name
+    consultants.select { |consultant| consultant.expert_in?(skill_name) }
   end
 
   def group_for skill_name
