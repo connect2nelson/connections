@@ -8,11 +8,11 @@ class SkillType
                     'javaScript application development' , 'ui development' , 'ruby application development' ,
                     'c# application development' , 'groovy application development' ]
 
-    @testing_skills = ['c# test automation' , 'groovy test automation' , 'java test automation' , 'load testing' ,
+    @testing_skills = Set.new ['c# test automation' , 'groovy test automation' , 'java test automation' , 'load testing' ,
                       'manual/exploratory testing' , 'mobile test automation - ios' , 'performance testing' ,
                       'selenium-webdriver' , 'test parallelization (seleniumgrid, etc)' ]
 
-    @consulting_skills = ['problem solving' , 'communication' , 'teaching' , 'presenting' , 'questioning' ,
+    @consulting_skills = Set.new ['problem solving' , 'communication' , 'teaching' , 'presenting' , 'questioning' ,
                           'facilitation' , 'influence' , 'planning' , 'negotiation' , 'innovating' ,
                           'system thinking' , 'relationship building' , 'establish & Cultivate Relationships' ,
                           'requirements analysis' , 'feedback & coaching' , 'project planning & resourcing' ,
