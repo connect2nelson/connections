@@ -21,5 +21,8 @@ class Office
     GithubRepos.new(consultants).repo_groups
   end
 
+  def sponsorship_network
+    SponsorshipService.get_network_json_for @consultants
+  end
 end
 

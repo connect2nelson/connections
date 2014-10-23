@@ -2,7 +2,7 @@
 <script>
 
     var width = 960,
-            height = 500;
+        height = 960;
 
     var color = d3.scale.category20();
 
@@ -16,8 +16,6 @@
             .attr("height", height);
 
     d3.json("/offices/SanFrancisco/network", function(error, graph) {
-        graph = JSON.parse(graph);
-
         force
                 .nodes(graph.nodes)
                 .links(graph.links)
