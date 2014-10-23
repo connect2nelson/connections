@@ -49,16 +49,18 @@ class SponsorshipService
       sponsors.each do |sponsorship|
         sponsor_index = index_of_node_with(nodes, sponsorship.sponsor_id)
 
+        #If your sponsor was in the office in the first place, a link between you two will be added
+        # when we hit the iteration where they are the consultant in question
         if(sponsor_index.nil?)
           node_for_out_of_office_consultant(nodes, sponsorship.sponsor_id)
           sponsor_index = nodes.length - 1
-        end
 
         link = {
             "source" => sponsor_index,
             "target" => consultant_index
         }
         network[:links].push(link)
+        end
       end
     end
 

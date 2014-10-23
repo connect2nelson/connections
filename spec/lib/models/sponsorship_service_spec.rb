@@ -31,28 +31,47 @@ describe SponsorshipService do
 
     let!(:sponsor) {Consultant.create(full_name: 'Derek', employee_id: "1") }
     let!(:sponsee) {Consultant.create(full_name: 'Sophie', employee_id: "3") }
-    let!(:another_sponsee) {Consultant.create(full_name: 'Ian', employee_id: "2") }
-    let!(:sponsorships) {[Sponsorship.create(sponsor_id: sponsor.employee_id, sponsee_id: sponsee.employee_id),
-                          Sponsorship.create(sponsor_id: sponsor.employee_id, sponsee_id: another_sponsee.employee_id)
-                          ]}
-    let!(:consultants) {[sponsor]}
 
-    it 'should create nodes for each consultant involved in the sponsorship network' do
-      network = SponsorshipService.get_network_for consultants
+    it 'should create a node for a sponsee not in the office consultant list' do
+      office_consultants = [sponsor]
+      sponsorships = [Sponsorship.create(sponsor_id: sponsor.employee_id, sponsee_id: sponsee.employee_id)]
+
+      network = SponsorshipService.get_network_for office_consultants
 
       expect(network.nil?).to eq(false)
-      expect(network[:nodes].length).to eq(3)
-      expect(network[:nodes][0]["employee_id"]).to eq("1")
+      expect(network[:nodes].length).to eq(2)
+      expect(network[:nodes][0]["full_name"]).to eq(sponsor.full_name)
+      expect(network[:nodes][1]["full_name"]).to eq(sponsee.full_name)
     end
 
-    it 'should create links between sponsors and sponsees' do
-      network = SponsorshipService.get_network_for consultants
+    it 'should create a node for a consultant without any sponsorships' do
+      no_sponsorships = Consultant.create(full_name: 'Shane', employee_id: "4")
+      office_consultants = [sponsor, no_sponsorships]
+      sponsorships = [Sponsorship.create(sponsor_id: sponsor.employee_id, sponsee_id: sponsee.employee_id)]
 
-      pp network[:links]
-      expect(network.nil?).to eq(false)
+      network = SponsorshipService.get_network_for office_consultants
+
+      expect(network[:nodes].length).to eq(3)
+      expect(network[:nodes][1]["full_name"]).to eq(no_sponsorships.full_name)
+    end
+
+    it 'should create links between all sponsors and sponsees' do
+      office_consultants = [sponsor]
+      another_sponsee = Consultant.create(full_name: 'Ian', employee_id: "2")
+      sponsorships = [Sponsorship.create(sponsor_id: sponsor.employee_id, sponsee_id: sponsee.employee_id),
+                      Sponsorship.create(sponsor_id: sponsor.employee_id, sponsee_id: another_sponsee.employee_id)]
+
+      network = SponsorshipService.get_network_for office_consultants
+
       expect(network[:links].length).to eq(2)
-      expect(network[:links][0]["source"]).to eq(0)
-      expect(network[:links][0]["target"]).to eq(1)
+    end
+
+    it 'should only create one link if sponsor and sponsee are both in the office consultants list' do
+      office_consultants = [sponsor, sponsee]
+      sponsorships = [Sponsorship.create(sponsor_id: sponsor.employee_id, sponsee_id: sponsee.employee_id)]
+      network = SponsorshipService.get_network_for office_consultants
+
+      expect(network[:links].length).to eq(1)
     end
 
   end
