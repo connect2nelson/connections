@@ -10,7 +10,7 @@ RSpec.describe "offices/show.html.haml", :type => :view do
 
     stub_template "offices/_office.html.haml" => ""
     stub_template "offices/_skill_groups.html.haml" => "Example skill"
-    stub_template "offices/_sponsorships.html" => ""
+    stub_template "offices/_sponsorships.html.haml" => ""
     render
   end
 

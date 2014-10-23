@@ -73,7 +73,7 @@ class SponsorshipService
     {
         "employee_id" => consultant.employee_id,
         "full_name" => consultant.full_name,
-        "office" => consultant.working_office
+        "office" => consultant.home_office
     }
   end
 

@@ -1,5 +1,6 @@
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script>
+%script{:type => "text/javascript",
+:src  => "http://d3js.org/d3.v3.min.js"}
+:javascript
 
     var width = 960,
         height = 960;
@@ -15,13 +16,15 @@
             .attr("width", width)
             .attr("height", height);
 
-    d3.json("/offices/SanFrancisco/network", function(error, graph) {
+    d3.json("/offices/#{office_name}/network", function(error, graph) {
         force
                 .nodes(graph.nodes)
                 .links(graph.links)
                 .start();
 
-        var color = d3.scale.category20().domain([1, "Chicago", 3, 4, 5, "Dallas", 7, "Porto Allegre", 9, "San Francisco"]);
+        var color = d3.scale.category20().domain(["Atlanta", "Chicago", 3, 4, 5, "Dallas", 7, "Porto Alegre", "Recife", "San Francisco",
+                                                  11, 12, 13, "New York", 15, 16, 17, 18, "Hamburg", "ETG US"
+                                                ]);
         console.log(color.range());
 
         var link = svg.selectAll(".link")
@@ -53,5 +56,3 @@
                     .attr("cy", function(d) { return d.y; });
         });
     });
-
-</script>
