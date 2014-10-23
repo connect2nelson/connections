@@ -1,12 +1,12 @@
--repo_groups.each do |repo_array|
+-repo_groups.each do |github_contrib_viewmodel|
   .row
     .small-12.columns
       .github_group
         .github_detail
           .repo_name
             = image_tag 'github.png'
-            = link_to repo_array[0], "https://github.com/"+repo_array[0]
+            = link_to github_contrib_viewmodel.repo_name, "https://github.com/"+github_contrib_viewmodel.repo_name
           %ul.consultants
-            - repo_array[1].take(5).each do |consultant|
+            - github_contrib_viewmodel.consultants.take(5).each do |consultant|
               %li.label
                 %h4= link_to consultant.full_name, "/consultants/#{consultant.employee_id}"

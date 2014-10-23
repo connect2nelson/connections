@@ -11,11 +11,15 @@ class GithubRepos
 
     repo_groups = repo_groups_unordered
 
-    repo_groups.each do |repo, consultant_contributions|
-      repo_groups[repo] = sort_contributors_by_commits consultant_contributions
-    end
+    # repo_groups.each do |repo, consultant_contributions|
+    #   repo_groups[repo] = sort_contributors_by_commits consultant_contributions
+    # end
+    repo_groups = repo_groups.map {|(repo, consultant_contributions)|
+      sorted_contributions = sort_contributors_by_commits consultant_contributions
+      GithubContributersViewModel.new(sorted_contributions, repo)
+    }
+    repo_groups.sort_by{|repoViewModel| repoViewModel.consultants.length}.reverse
 
-    repo_groups.sort_by{|repo_name, consultants| consultants.length}.reverse
   end
 
   def sort_contributors_by_commits contributions

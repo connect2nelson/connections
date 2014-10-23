@@ -34,27 +34,27 @@ describe GithubRepos do
     it 'should sort the hash of office repos by number of contributors' do
       repo_groups = GithubRepos.new(@consultants).repo_groups
 
-      expect(repo_groups[0][0]).to eq(@second_repo.repo_name)
-      expect(repo_groups[1][0]).to eq(@first_repo.repo_name)
+      expect(repo_groups[0].repo_name).to eq(@second_repo.repo_name)
+      expect(repo_groups[1].repo_name).to eq(@first_repo.repo_name)
     end
 
     it "should sort the github repos in order of how many people have contributed from" do 
       repo_groups = GithubRepos.new([@consultant, @another_consultant, @third_consultant]).repo_groups
-      expect(repo_groups[0][0]).to eq(@second_repo.repo_name)
-      expect(repo_groups[1][0]).to eq(@first_repo.repo_name)
-      expect(repo_groups[2][0]).to eq(@third_repo.repo_name)
+      expect(repo_groups[0].repo_name).to eq(@second_repo.repo_name)
+      expect(repo_groups[1].repo_name).to eq(@first_repo.repo_name)
+      expect(repo_groups[2].repo_name).to eq(@third_repo.repo_name)
     end
 
     it 'should return a hash of the office repos with lists of consultants who committed to them' do
       repo_groups = GithubRepos.new(@consultants).repo_groups
 
-      expect(repo_groups[0][1]).to eq([@another_consultant, @consultant])
-      expect(repo_groups[1][1]).to eq([@consultant])
+      expect(repo_groups[0].consultants).to eq([@another_consultant, @consultant])
+      expect(repo_groups[1].consultants).to eq([@consultant])
     end
 
     it "should rank consultants in order when multiple commits" do
       repo_groups = GithubRepos.new([@consultant, @another_consultant, @third_consultant]).repo_groups
-      expect(repo_groups[0][1]).to eq([@third_consultant, @another_consultant, @consultant])  
+      expect(repo_groups[0].consultants).to eq([@third_consultant, @another_consultant, @consultant])  
     end
 
   end
