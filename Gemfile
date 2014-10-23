@@ -34,9 +34,11 @@ gem 'local_time'
 group :test, :development do
    gem 'rspec-rails', '>=2.0.1'
    gem 'capybara'
+   gem 'cucumber-rails', :require => false
    gem 'mongoid-rspec'
    gem 'letter_opener_web'
    gem 'pry'
+   gem 'selenium-webdriver'
 end
 
 group :doc do
