@@ -22,7 +22,7 @@ class Office
   end
 
   def sponsorship_network
-    SponsorshipService.get_network_json_for @consultants
+    SponsorshipService.get_network_for @consultants
   end
 end
 

@@ -27,4 +27,26 @@ describe SponsorshipService do
 
   end
 
+  context '.get_network_json_for' do
+
+    let!(:sponsor) {Consultant.create(full_name: 'Derek', employee_id: "1") }
+    let!(:sponsee) {Consultant.create(full_name: 'Sophie', employee_id: "3") }
+    let!(:another_sponsee) {Consultant.create(full_name: 'Ian', employee_id: "2") }
+    let!(:sponsorships) {[Sponsorship.create(sponsor_id: sponsor.employee_id, sponsee_id: sponsee.employee_id),
+                          Sponsorship.create(sponsor_id: sponsor.employee_id, sponsee_id: another_sponsee.employee_id)
+                          ]}
+    before do
+      @consultants = [sponsor]
+    end
+
+    it 'should create nodes for each consultant involved in the sponsorship network' do
+
+
+      network = SponsorshipService.get_network_for @consultants
+      expect(network.nil?).to eq(false)
+      expect(network[:nodes].length).to eq(3)
+    end
+
+  end
+
 end

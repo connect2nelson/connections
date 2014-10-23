@@ -17,9 +17,9 @@ class SponsorshipService
     Connection.new(Consultant.find_by(employee_id: sponsorship.sponsor_id), Consultant.find_by(employee_id: sponsorship.sponsee_id))
   end
 
-  def self.get_network_json_for consultants
-    json_object = {:nodes => [], :links => []}
-    nodes = json_object[:nodes]
+  def self.get_network_for consultants
+    network = {:nodes => [], :links => []}
+    nodes = network[:nodes]
 
     consultants.each do |consultant|
       node = create_node_from(consultant)
@@ -47,11 +47,11 @@ class SponsorshipService
             "source" => sponsor_index,
             "target" => sponsee_index
         }
-        json_object[:links].push(link)
+        network[:links].push(link)
       end
     end
 
-    json_object.to_json
+    network
   end
 
   def self.index_of_node_with(nodes, employee_id)
