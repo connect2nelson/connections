@@ -35,16 +35,24 @@ describe SponsorshipService do
     let!(:sponsorships) {[Sponsorship.create(sponsor_id: sponsor.employee_id, sponsee_id: sponsee.employee_id),
                           Sponsorship.create(sponsor_id: sponsor.employee_id, sponsee_id: another_sponsee.employee_id)
                           ]}
-    before do
-      @consultants = [sponsor]
-    end
+    let!(:consultants) {[sponsor]}
 
     it 'should create nodes for each consultant involved in the sponsorship network' do
+      network = SponsorshipService.get_network_for consultants
 
-
-      network = SponsorshipService.get_network_for @consultants
       expect(network.nil?).to eq(false)
       expect(network[:nodes].length).to eq(3)
+      expect(network[:nodes][0]["employee_id"]).to eq("1")
+    end
+
+    it 'should create links between sponsors and sponsees' do
+      network = SponsorshipService.get_network_for consultants
+
+      pp network[:links]
+      expect(network.nil?).to eq(false)
+      expect(network[:links].length).to eq(2)
+      expect(network[:links][0]["source"]).to eq(0)
+      expect(network[:links][0]["target"]).to eq(1)
     end
 
   end

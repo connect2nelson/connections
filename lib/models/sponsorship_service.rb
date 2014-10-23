@@ -26,17 +26,12 @@ class SponsorshipService
       nodes.push(node)
     end
 
-    nodes.each do |node|
-      sponsorships = Sponsorship.or({sponsor_id: node["employee_id"]}, {sponsee_id: node["employee_id"]})
+    consultants.each do |consultant|
+      consultant_index = index_of_node_with(nodes, consultant.employee_id)
 
-      sponsorships.each do |sponsorship|
-        sponsor_index = index_of_node_with(nodes, sponsorship.sponsor_id)
+      sponsees = Sponsorship.all({sponsor_id: consultant["employee_id"]})
+      sponsees.each do |sponsorship|
         sponsee_index = index_of_node_with(nodes, sponsorship.sponsee_id)
-
-        if(sponsor_index.nil?)
-          node_for_out_of_office_consultant(nodes, sponsorship.sponsor_id)
-          sponsor_index = nodes.length - 1
-        end
 
         if(sponsee_index.nil?)
           node_for_out_of_office_consultant(nodes, sponsorship.sponsee_id)
@@ -44,8 +39,24 @@ class SponsorshipService
         end
 
         link = {
-            "source" => sponsor_index,
+            "source" => consultant_index,
             "target" => sponsee_index
+        }
+        network[:links].push(link)
+      end
+
+      sponsors = Sponsorship.all({sponsee_id: consultant["employee_id"]})
+      sponsors.each do |sponsorship|
+        sponsor_index = index_of_node_with(nodes, sponsorship.sponsor_id)
+
+        if(sponsor_index.nil?)
+          node_for_out_of_office_consultant(nodes, sponsorship.sponsor_id)
+          sponsor_index = nodes.length - 1
+        end
+
+        link = {
+            "source" => sponsor_index,
+            "target" => consultant_index
         }
         network[:links].push(link)
       end
