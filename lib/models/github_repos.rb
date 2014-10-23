@@ -5,25 +5,35 @@ class GithubRepos
     @consultants = consultants
   end
 
-  def repo_groups
-    repo_groups = {}
+  def repo_groups_unordered
+    repo_groups_by_consultant_and_repo = {}
+    repo_groups_by_consultant_and_repo.default = 0
 
-    consultants.each do |consultant|
-
-      GithubEvent.where(employee_id: consultant.employee_id).each do |event|
-        repo_name = event.github_repository.repo_name
-
-        if repo_groups.has_key? repo_name
-          if repo_groups[repo_name].has_key? consultant
-            repo_groups[repo_name][consultant] += 1
-          else
-            repo_groups[repo_name][consultant] = 1
-          end
+    repo_groups = @consultants.map { |consultant| 
+      GithubEvent.where(:employee_id => consultant.employee_id).map { |event|
+        GithubActivity.new(event.github_repository.repo_name, consultant)
+        }
+      }.reduce(:+).reduce(repo_groups_by_consultant_and_repo) {|total, github_activity| 
+        total[github_activity] = total[github_activity] + 1
+        total
+      }
+      .reduce({}) {|total, (github_activity, occurrences)|
+        repo_name = github_activity.repo_name
+        consultant = github_activity.consultant
+        if total[repo_name]
+          total[repo_name][consultant]= occurrences
         else
-          repo_groups[repo_name] = {consultant => 1}
+          total[repo_name]= {consultant => occurrences}
         end
-      end
-    end
+        total
+      }
+  end
+
+  def repo_groups
+    repo_groups_by_consultant_and_repo = {}
+    repo_groups_by_consultant_and_repo.default = 0
+
+    repo_groups = repo_groups_unordered
 
     repo_groups.each do |repo, consultant_contributions|
       repo_groups[repo] = sort_contributors_by_commits consultant_contributions
