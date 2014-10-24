@@ -52,5 +52,23 @@ describe Office do
 
   end
 
+  describe '#sponsorship_network' do
+
+    let!(:sponsor) {Consultant.create(full_name: 'Derek', employee_id: "1")}
+    let!(:sponsee) {Consultant.create(full_name: 'Sophie', employee_id: "3")}
+    let!(:office_consultants) {[sponsor, sponsee]}
+
+    it 'should create a network of sponsorships from the office consultant list' do
+      Sponsorship.create(sponsor_id: sponsor.employee_id, sponsee_id: sponsee.employee_id)
+
+      network = Office.new(office_consultants).sponsorship_network
+
+      expect(network.nil?).to eq(false)
+      expect(network[:nodes].length).to eq(2)
+      expect(network[:nodes][0]["full_name"]).to eq(sponsor.full_name)
+      expect(network[:nodes][1]["full_name"]).to eq(sponsee.full_name)
+    end
+  end
+
 end
 
