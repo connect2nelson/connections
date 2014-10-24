@@ -3,7 +3,7 @@
     %h1= @office.name
 .row
   .small-12.columns
-    %ul.tabs{"data-tab"=>""}
+    %ul.tabs{"data-tab"=>"", "data-options"=> "deep_linking:true"}
       %li.tab-title.active
         %a{:href => "#panel-skill_tab"} Skills
       %li.tab-title
@@ -21,5 +21,5 @@
       = render 'github_groups', repo_groups: @office.git_repo_groups
 
   #panel-sponsorship-network.content
-    .small-12.columns
+    .network_graph
       = render 'sponsorships', office_name: @office.name

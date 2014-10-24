@@ -2,8 +2,8 @@
 :src  => "http://d3js.org/d3.v3.min.js"}
 :javascript
 
-    var width = 960,
-        height = 960;
+    var width = 1000,
+        height = 800;
 
     var color = d3.scale.category20();
 
@@ -14,7 +14,8 @@
 
     var svg = d3.select("#panel-sponsorship-network > div").append("svg")
             .attr("width", width)
-            .attr("height", height);
+            .attr("height", height)
+            .attr("viewBox", "0 -200 1000 1200");
 
     d3.json("/offices/#{office_name}/network", function(error, graph) {
         force
@@ -22,8 +23,8 @@
                 .links(graph.links)
                 .start();
 
-        var color = d3.scale.category20().domain(["Atlanta", "Chicago", 3, 4, 5, "Dallas", 7, "Porto Alegre", "Recife", "San Francisco",
-                                                  11, 12, 13, "New York", 15, 16, 17, 18, "Hamburg", "ETG US"
+        var color = d3.scale.category20().domain(["Atlanta", "Chicago", 3, 4, 5, "Dallas", 7, "Porto Alegre", "Recife",
+                                                 "San Francisco", 11, 12, 13, "New York", 15, 16, 17, 18, "Hamburg", "ETG US"
                                                 ]);
 
         var link = svg.selectAll(".link")
