@@ -56,7 +56,11 @@ And(/^I remove the first sponsee on their list of sponsees$/) do
 end
 
 Then(/^I should not see "([^"]*)" in the list of sponsees$/) do |sponseeName|
-  sponsorshipPanel = driver.find_element(:id, "panel-sponsorship")
-  sleep(10.seconds) 
+  wait = Selenium::WebDriver::Wait.new(:timeout => 10) # seconds
+  begin
+    element = wait.until { !driver.find_element(:id, "panel-sponsorship").text.include?(sponseeName) }
+  ensure
+    sponsorshipPanel = driver.find_element(:id, "panel-sponsorship")
+  end
   expect(sponsorshipPanel.text).to_not include(sponseeName)
 end
