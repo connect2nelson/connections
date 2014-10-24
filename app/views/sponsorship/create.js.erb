@@ -1,2 +1,8 @@
-$("#panel-sponsorship .matches").append("<%= j render "consultants/connection", connection: @connection, sponsorship: true %>");
-$(".sponsee_search").val("")
+<% if !@connection.nil? %>
+    $("#panel-sponsorship .matches").append("<%=j render "consultants/connection", connection: @connection, sponsorship: true %>");
+    $(".sponsee_search").val("")
+<% end %>
+
+<% if flash[:alert]%>
+    $(".sponsee-search li:last").append("<%= j render "consultants/alert" %>")
+<% end %>

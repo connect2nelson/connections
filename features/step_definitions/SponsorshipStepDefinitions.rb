@@ -29,6 +29,7 @@ When(/^I click on the sponsorship tab$/) do
 end
 
 And(/^I add "([^"]*)" as a new sponsee$/) do |sponsee_name|
+  sponsee_name = "" if sponsee_name.blank?
   nameInput = driver.find_element(:id, "sponsee_full_name")
   nameInput.send_keys sponsee_name
   nameInput.click
@@ -37,7 +38,7 @@ And(/^I add "([^"]*)" as a new sponsee$/) do |sponsee_name|
 end
 
 Then(/^I should see "([^"]*)" show up as a sponsee on the page$/) do |sponsee|
-#   TODO: implement once the autocomplete bug is fixed
+  expect(driver.find_element(:class, "name").text).to eq(sponsee)
 end
 
 Given(/^there is a sponsorship between employee IDs "([^"]*)" and "([^"]*)"$/) do |sponsor_id, sponsee_id|
@@ -63,4 +64,11 @@ Then(/^I should not see "([^"]*)" in the list of sponsees$/) do |sponseeName|
     sponsorshipPanel = driver.find_element(:id, "panel-sponsorship")
   end
   expect(sponsorshipPanel.text).to_not include(sponseeName)
+end
+
+Then(/^I should see an error on the page$/) do
+  wait = Selenium::WebDriver::Wait.new(:timeout => 1) # seconds
+  begin
+    wait.until { driver.find_element(:class, "alert") }
+  end
 end
