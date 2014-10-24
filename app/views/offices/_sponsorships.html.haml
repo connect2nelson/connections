@@ -12,7 +12,7 @@
             .linkDistance(30)
             .size([width, height]);
 
-    var svg = d3.select("body").append("svg")
+    var svg = d3.select("#panel-sponsorship-network > div").append("svg")
             .attr("width", width)
             .attr("height", height);
 
@@ -25,7 +25,6 @@
         var color = d3.scale.category20().domain(["Atlanta", "Chicago", 3, 4, 5, "Dallas", 7, "Porto Alegre", "Recife", "San Francisco",
                                                   11, 12, 13, "New York", 15, 16, 17, 18, "Hamburg", "ETG US"
                                                 ]);
-        console.log(color.range());
 
         var link = svg.selectAll(".link")
                 .data(graph.links)
