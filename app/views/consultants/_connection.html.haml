@@ -1,4 +1,5 @@
-%li
+- sponsorship = false || sponsorship
+%li{:id => "consultant_" + connection.mentee.employee_id}
   .mentor
     = image_tag 'profile.png'
     .name= link_to connection.mentee.full_name, "/consultants/#{connection.mentee.employee_id}"
@@ -8,3 +9,5 @@
     %ul
       - connection.teachable_skills.each do |teachable_skill|
         %li.label= teachable_skill
+  - if sponsorship
+    = render 'delete_sponsorship', connection: connection

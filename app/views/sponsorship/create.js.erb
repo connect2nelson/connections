@@ -1,2 +1,2 @@
-$("#panel-sponsorship .matches").append("<%= j render "consultants/connection", connection: @connection %>");
+$("#panel-sponsorship .matches").append("<%= j render "consultants/connection", connection: @connection, locals: {sponsorship: true} %>");
 $(".sponsee_search").val("")

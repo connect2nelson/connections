@@ -12,5 +12,14 @@ RSpec.describe SponsorshipController, :type => :controller do
     end
 
   end
+
+  describe "delete sponsee" do
+    it "should delete the sponsor relationship with a given sponsee" do
+      Sponsorship.create(sponsor_id: 2, sponsee_id: 3)
+      expect(Sponsorship.count).to be(1)
+      post :delete, Hash[sponsor_id: 2, sponsee_id: 3]
+      expect(Sponsorship.count).to be(0)
+    end
+  end
 end
 

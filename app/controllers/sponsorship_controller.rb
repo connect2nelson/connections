@@ -18,11 +18,25 @@ class SponsorshipController < ApplicationController
       end
     end
 
+  def delete
+    sponsorRelationship = Sponsorship.where(sponsorship_params).first
+    @deleted_sponsee_id = sponsorship_params[:sponsee_id]
+    if sponsorRelationship.delete
+      respond_to do |format|
+        format.html { redirect_to consultant_path(params[:sponsor_id], anchor: "panel-sponsorship") }
+        format.js {}
+      end
+    else
+      flash[:alert] = "Issue found trying to delete record."
+    end
+
+  end
+
 
 
   private
   def sponsorship_params
-    params.require(:sponsor_id, :sponsee_id)
+    params.permit(:sponsor_id, :sponsee_id)
   end
 
 end

@@ -14,6 +14,7 @@ Connections::Application.routes.draw do
 
     put 'sponsorship', to: "sponsorship#create"
     get 'sponsorship/autocomplete_consultant_full_name'
+    post 'sponsorship/delete/:sponsor_id/and/:sponsee_id', to: "sponsorship#delete", as: 'delete_sponsee'
     root 'consultants#index'
 
     if Rails.env.development?
