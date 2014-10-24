@@ -5,6 +5,8 @@ driver = nil
 
 Before do
   driver = Selenium::WebDriver.for :firefox
+  Consultant.destroy_all
+  Sponsorship.destroy_all
 end
 
 After do
