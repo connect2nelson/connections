@@ -37,3 +37,23 @@ end
 Then(/^I should see "([^"]*)" show up as a sponsee on the page$/) do |sponsee|
 #   TODO: implement once the autocomplete bug is fixed
 end
+
+Given(/^there is a sponsorship between employee IDs "([^"]*)" and "([^"]*)"$/) do |sponsor_id, sponsee_id|
+  Sponsorship.create(:sponsee_id => sponsee_id, :sponsor_id => sponsor_id)
+end
+
+Then(/^I should see "([^"]*)" in the list of sponsees$/) do |sponseeName|
+  sponsorPerson = Consultant.where(:full_name => sponseeName).first
+  sponsor = driver.find_element(:id, "consultant_" + sponsorPerson.employee_id)
+  expect(sponsor.text).to include(sponseeName)
+end
+
+And(/^I remove the first sponsee on their list of sponsees$/) do
+  deleteButton = driver.find_element(:id, "delete_sponsee")
+  deleteButton.click
+end
+
+Then(/^I should not see "([^"]*)" in the list of sponsees$/) do |sponseeName|
+  sponsorshipPanel = driver.find_element(:id, "panel-sponsorship")
+  expect(sponsorshipPanel.text).to_not include(sponseeName)
+end
