@@ -57,5 +57,6 @@ end
 
 Then(/^I should not see "([^"]*)" in the list of sponsees$/) do |sponseeName|
   sponsorshipPanel = driver.find_element(:id, "panel-sponsorship")
+  sleep(10.seconds) 
   expect(sponsorshipPanel.text).to_not include(sponseeName)
 end
