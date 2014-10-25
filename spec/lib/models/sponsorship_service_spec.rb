@@ -1,8 +1,49 @@
 require 'rails_helper'
 
 describe SponsorshipService do
+  JC_GRADE = "Con - Grad"
+
+  context 'sponsorless individuals' do
+    let!(:sponsor) {Consultant.create(full_name: 'Charlotte', employee_id: "1", home_office: "San Francisco") }
+    let!(:sf_sponsee1) {Consultant.create(full_name: 'Sophie', employee_id: "2",grade: JC_GRADE, home_office: "San Francisco") }
+    let!(:sf_sponsee2) {Consultant.create(full_name: 'Tatiana', employee_id: "3",grade: JC_GRADE, home_office: "San Francisco") }
+    let!(:chicago_sponsor1) {Consultant.create(full_name: 'Billy Quizboy', employee_id: "4", home_office: "Chicago") }
+    let!(:chicago_sponsor2) {Consultant.create(full_name: 'Thaddeus S. Venture', employee_id: "5", home_office: "Chicago") }
+    let!(:chicago_sponsee1) {Consultant.create(full_name: 'Triana Orpheus', employee_id: "6", grade: JC_GRADE, home_office: "Chicago")}
+    let!(:sf_sponsorship1) {[Sponsorship.create(sponsor_id: sponsor.employee_id, sponsee_id: sf_sponsee1.employee_id)]}
+    let!(:sf_sponsorship2) {[Sponsorship.create(sponsor_id: sponsor.employee_id, sponsee_id: sf_sponsee2.employee_id)]}
+    let!(:chicago_sponsorship1) {[Sponsorship.create(sponsor_id: chicago_sponsor1.employee_id, sponsee_id: chicago_sponsor2.employee_id)]}
+
+    it "should return no sponsees if no ACs without sponsors exist for a given office" do
+      sponsorless = SponsorshipService.get_sponsorless_ACs_for "San Francisco"
+      expect(sponsorless.size).to eq(0)
+    end
+
+    it "should return a sponsee for the chicago office if there is one in that office" do
+      sponsorless = SponsorshipService.get_sponsorless_ACs_for "Chicago"
+      expect(sponsorless.size).to eq(1)
+      expect(sponsorless).to include(chicago_sponsee1)
+    end
+
+    it "should return non-AC sponsorless individuals from SF" do
+      sponsorless = SponsorshipService.get_sponsorless_individuals_for "San Francisco"
+      expect(sponsorless.size).to eq(1)
+      expect(sponsorless).to include(sponsor)
+    end
+
+    it "should return non-AC sponsorless individuals from Chicago" do
+      sponsorless = SponsorshipService.get_sponsorless_individuals_for "Chicago"
+      expect(sponsorless.size).to eq(1)
+      expect(sponsorless).to include(chicago_sponsor1)
+    end
+  end
+
+
+
+
 
   context '.get_sponsees_for' do
+
 
     let!(:consultant) {Consultant.create(full_name: 'Charlotte', employee_id: "1") }
     let!(:no_sponsees) {Consultant.create(full_name: 'Sophie', employee_id: "3") }

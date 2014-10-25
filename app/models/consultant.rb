@@ -12,6 +12,8 @@ class Consultant
   field :home_office, type: String
   field :primary_role, type: String
   field :skills, type: Hash
+  field :grade, type: String
+  field :tw_experience, type: Float
 
   def email
       self.email = "#{self.employee_id}@thoughtworks.com"

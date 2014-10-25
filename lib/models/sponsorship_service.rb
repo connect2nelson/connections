@@ -13,6 +13,25 @@ class SponsorshipService
     sponsees
   end
 
+  JC_GRADE = "Con - Grad"
+
+  def self.get_sponsorless_ACs_for office
+    acs = Consultant.where(:grade => JC_GRADE).where(:home_office => office)
+    return get_sponsorless_for(acs)
+  end
+
+  def self.get_sponsorless_individuals_for office
+    office_consultants = Consultant.not.where(:grade => JC_GRADE).where(:home_office => office).to_a
+    return get_sponsorless_for(office_consultants)
+  end
+
+  def self.get_sponsorless_for(consultants)
+    office_consultant_ids = consultants.map(&:employee_id)
+    office_consultants_without_sponsors = Sponsorship.where(:sponsee_id.in => office_consultant_ids).map(&:sponsee_id)
+    ac_ids_without_sponsors = office_consultant_ids - office_consultants_without_sponsors
+    return Consultant.where(:employee_id.in => ac_ids_without_sponsors)
+  end
+
   def self.get_connection_for sponsorship
     Connection.new(Consultant.find_by(employee_id: sponsorship.sponsor_id), Consultant.find_by(employee_id: sponsorship.sponsee_id))
   end
