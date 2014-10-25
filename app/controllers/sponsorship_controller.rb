@@ -38,6 +38,11 @@ class SponsorshipController < ApplicationController
 
   end
 
+  def sponsorless
+    @sponsorless = SponsorshipService.get_sponsorless_individuals_for(params[:office])
+    @coachless = SponsorshipService.get_sponsorless_ACs_for(params[:office])
+  end
+
 
 
   private
