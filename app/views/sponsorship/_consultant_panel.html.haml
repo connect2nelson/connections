@@ -1,0 +1,13 @@
+.small-6.columns
+  .row.header
+    .small-4.columns
+      = image_tag 'profile.png'
+    .small-8.columns
+      %h2 #{consultant.full_name}
+      %dl
+        %dt Role
+        %dd= consultant.primary_role
+        %dt Home Office
+        %dd= consultant.home_office
+        %dt Working Office
+        %dd= consultant.working_office

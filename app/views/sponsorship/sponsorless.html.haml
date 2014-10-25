@@ -1,0 +1,21 @@
+.row
+  .small-12.columns
+    %h1= @office_name
+.row
+  .small-12.columns
+    %ul.tabs{"data-tab"=>"", "data-options"=> "deep_linking:true"}
+      %li.tab-title.active
+        %a{:href => "#sponsorless"} Sponsorless people
+      %li.tab-title
+        %a{:href => "#coachless"} ACs without sponsors
+
+.row.tabs-content
+  #sponsorless.content.active
+    .small-12.columns
+      - @sponsorless.each do |consultant|
+        = render 'sponsorless_panel', :consultant => consultant
+
+  #coachless.content
+    - @coachless.each do |consultant|
+      = render 'sponsorless_panel', :consultant => consultant
+

@@ -1,0 +1,8 @@
+.small-3.columns
+  %h3.skills-header
+    = full_name.split.first
+    = skill_text
+  %ul.skills
+    - skills.sort.first(10).each do |skill, text|
+      %li
+        .label= skill
