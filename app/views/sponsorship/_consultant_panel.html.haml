@@ -3,7 +3,8 @@
     .small-4.columns
       = image_tag 'profile.png'
     .small-8.columns
-      %h2 #{consultant.full_name}
+      %h2
+        = link_to consultant.full_name, consultant_url(consultant)
       %dl
         %dt Role
         %dd= consultant.primary_role
