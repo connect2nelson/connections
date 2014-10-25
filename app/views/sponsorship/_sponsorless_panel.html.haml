@@ -1,4 +1,4 @@
 .row
-  = render 'skills_panel', :skills => consultant.skills, :full_name => consultant.full_name, :skill_text => "can teach"
+  = render 'skills_panel', :skills => consultant.skills_to_teach, :full_name => consultant.full_name, :skill_text => "can teach"
   = render "consultant_panel", :consultant => consultant
-  = render 'skills_panel', :skills => consultant.skills, :full_name => consultant.full_name, :skill_text => "wants to learn"
+  = render 'skills_panel', :skills => consultant.skills_to_learn, :full_name => consultant.full_name, :skill_text => "wants to learn"
