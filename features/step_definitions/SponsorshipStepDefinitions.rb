@@ -38,7 +38,12 @@ And(/^I add "([^"]*)" as a new sponsee$/) do |sponsee_name|
 end
 
 Then(/^I should see "([^"]*)" show up as a sponsee on the page$/) do |sponsee|
+  wait = Selenium::WebDriver::Wait.new(:timeout => 1) # seconds
+  begin
+    wait.until {driver.find_element(:class, "name")}
+  end
   expect(driver.find_element(:class, "name").text).to eq(sponsee)
+
 end
 
 Given(/^there is a sponsorship between employee IDs "([^"]*)" and "([^"]*)"$/) do |sponsor_id, sponsee_id|
