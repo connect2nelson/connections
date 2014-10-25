@@ -9,5 +9,5 @@
     %ul
       - connection.teachable_skills.each do |teachable_skill|
         %li.label= teachable_skill
-  - if sponsorship
-    = render 'consultants/delete_sponsorship', connection: connection
+    - if sponsorship
+      = render 'consultants/delete_sponsorship', connection: connection
