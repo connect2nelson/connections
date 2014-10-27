@@ -11,3 +11,6 @@
         %li.label= teachable_skill
     - if sponsorship
       = render 'consultants/delete_sponsorship', connection: connection
+    - else
+      = render 'consultants/add_sponsorship', connection: connection
+

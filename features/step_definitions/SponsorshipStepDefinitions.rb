@@ -15,8 +15,11 @@ After do
 end
 
 Given(/^there is a consultant named "([^"]*)" with employee ID "([^"]*)"$/) do |full_name, employee_id|
-  Consultant.create!(employee_id: employee_id, full_name: full_name, primary_role: 'Dev', home_office: 'San Francisco', working_office: 'San Francisco', skills: Hash['Ruby'=>'1', 'Cat'=>'5'])
+  Consultant.create!(employee_id: employee_id, full_name: full_name, primary_role: 'Dev', home_office: 'San Francisco', working_office: 'San Francisco', skills: Hash['Ruby'=>'1'])
+end
 
+Given(/^there is a Ruby expert named "([^"]*)" with employee ID "([^"]*)"$/) do |full_name, employee_id|
+  Consultant.create!(employee_id: employee_id, full_name: full_name, primary_role: 'Dev', home_office: 'San Francisco', working_office: 'San Francisco', skills: Hash['Ruby'=>'5'])
 end
 
 Given(/^I am on the consultant page for employee ID "([^"]*)"$/) do |employee_id|
@@ -28,21 +31,31 @@ When(/^I click on the sponsorship tab$/) do
   sponsorship_tab.click
 end
 
+When(/^I click on the mentees tab$/) do
+  mentee_tab = driver.find_element(:id, "mentees-tab")
+  mentee_tab.click
+end
+
+And(/^I click on the add sponsee button for "([^"]*)"$/) do |sponsee_name|
+  add_sponsee_button = driver.find_element(:id, sponsee_name)
+  add_sponsee_button.click
+end
+
 And(/^I add "([^"]*)" as a new sponsee$/) do |sponsee_name|
   sponsee_name = "" if sponsee_name.blank?
   nameInput = driver.find_element(:id, "sponsee_full_name")
   nameInput.send_keys sponsee_name
   nameInput.click
-  addButton = driver.find_element(:id, "add_sponsee")
+  addButton = driver.find_element(:class, "submit_sponsee")
   addButton.click
 end
 
 Then(/^I should see "([^"]*)" show up as a sponsee on the page$/) do |sponsee|
-  wait = Selenium::WebDriver::Wait.new(:timeout => 1) # seconds
+  wait = Selenium::WebDriver::Wait.new(:timeout => 3) # seconds
   begin
-    wait.until {driver.find_element(:class, "name")}
+    wait.until {driver.find_element(:css, "#panel-sponsorship .name > a")}
   end
-  expect(driver.find_element(:class, "name").text).to eq(sponsee)
+  expect(driver.find_element(:css, "#panel-sponsorship .name > a").attribute("innerHTML")).to eq(sponsee)
 
 end
 

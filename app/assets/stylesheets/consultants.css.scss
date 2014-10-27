@@ -75,6 +75,16 @@
   display: inline-block;
 
   .submit_sponsee{
+    margin-left: 4em;
+    float: right;
+  }
+}
+
+.add_sponsee_form{
+  display: inline-block;
+
+  .submit_sponsee{
+    margin-left: 1em;
     float: right;
   }
 }
@@ -88,6 +98,7 @@
         width: 16px;
       }
     }
+
     .name {
       margin-left: 0.5em;
       font-size: 1.3rem;
@@ -120,7 +131,7 @@
   ul {
     list-style: none;
     margin: 0.2em 0 0 0;
-    width: 85%;
+    width: 75%;
     display: inline-block;
   }
 
