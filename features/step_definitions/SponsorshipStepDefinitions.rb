@@ -36,8 +36,18 @@ When(/^I click on the mentees tab$/) do
   mentee_tab.click
 end
 
+When(/^I click on the mentors tab$/) do
+  mentor_tab = driver.find_element(:id, "mentors-tab")
+  mentor_tab.click
+end
+
 And(/^I click on the add sponsee button for "([^"]*)"$/) do |sponsee_name|
   add_sponsee_button = driver.find_element(:id, sponsee_name)
+  add_sponsee_button.click
+end
+
+And(/^I click on the add sponsor button for "([^"]*)"$/) do |sponsor_name|
+  add_sponsee_button = driver.find_element(:id, sponsor_name)
   add_sponsee_button.click
 end
 
@@ -89,4 +99,9 @@ Then(/^I should see an error on the page$/) do
   begin
     wait.until { driver.find_element(:class, "alert") }
   end
+end
+
+When(/^I click on "([^"]*)"'s name$/) do |sponsor|
+  sponsor = driver.find_element(:link, sponsor)
+  sponsor.click
 end

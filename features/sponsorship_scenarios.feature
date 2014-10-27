@@ -33,9 +33,17 @@ Feature: Sponsors
     And I remove the first sponsee on their list of sponsees
     Then I should not see "Sophie" in the list of sponsees
 
-    Scenario: add a sponsee from the mentee tab
-      Given I am on the consultant page for employee ID "99993"
-      When I click on the mentees tab
-      And I click on the add sponsee button for "Sophie"
-      When I click on the sponsorship tab
-      Then I should see "Sophie" show up as a sponsee on the page
+  Scenario: add a sponsee from the mentee tab
+    Given I am on the consultant page for employee ID "99993"
+    When I click on the mentees tab
+    And I click on the add sponsee button for "Sophie"
+    When I click on the sponsorship tab
+    Then I should see "Sophie" show up as a sponsee on the page
+
+  Scenario: add a sponsor from the mentor tab
+    Given I am on the consultant page for employee ID "99991"
+    When I click on the mentors tab
+    And I click on the add sponsor button for "Derek"
+    When I click on "Derek"'s name
+    And I click on the sponsorship tab
+    Then I should see "Sophie" show up as a sponsee on the page

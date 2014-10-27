@@ -62,7 +62,7 @@
   text-align: right;
 }
 
-.submit_sponsee{
+.submit_sponsee, .submit_sponsor{
   background-color: $blue;
   border: #ccc solid thin;
   margin: 0;
@@ -80,10 +80,10 @@
   }
 }
 
-.add_sponsee_form{
+.add_sponsee_form, .add_sponsor_form{
   display: inline-block;
 
-  .submit_sponsee{
+  .submit_sponsee, .submit_sponsor{
     margin-left: 1em;
     float: right;
   }
