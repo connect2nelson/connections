@@ -5,7 +5,10 @@
       %h4 "Couldn't find any matches"
     -else
       - sponsees.take(5).each do |connection|
-        = render 'connection', connection: connection, sponsorship: true
+        %li{:id => "consultant_" + connection.mentee.employee_id}
+          .mentor
+            = render 'connection', connection: connection, name: connection.mentee.full_name, employee_id: connection.mentee.employee_id
+            = render 'consultants/delete_sponsorship', connection: connection
 .small-8.columns
   %ul.sponsee-search
     %li

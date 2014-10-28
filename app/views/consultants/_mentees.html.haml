@@ -5,5 +5,7 @@
       %h4 "Couldn't find any matches"
     -else
       - mentees.take(5).each do |connection|
-        = render 'connection', connection: connection, sponsorship: false
-
+        %li{:id => "consultant_" + connection.mentee.employee_id}
+          .mentor
+            = render 'connection', connection: connection, name: connection.mentee.full_name, employee_id: connection.mentee.employee_id
+            = render 'consultants/add_sponsorship', connection: connection

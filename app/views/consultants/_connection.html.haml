@@ -1,16 +1,8 @@
-- sponsorship = false || sponsorship
-%li{:id => "consultant_" + connection.mentee.employee_id}
-  .mentor
-    = image_tag 'profile.png'
-    .name= link_to connection.mentee.full_name, "/consultants/#{connection.mentee.employee_id}"
-    .score
-      = image_tag 'connections-32.png'
-      = link_to number_with_precision(connection.score, precision: 2), "/connections/#{connection.mentor.employee_id}/and/#{connection.mentee.employee_id}"
-    %ul
-      - connection.teachable_skills.each do |teachable_skill|
-        %li.label= teachable_skill
-    - if sponsorship
-      = render 'consultants/delete_sponsorship', connection: connection
-    - else
-      = render 'consultants/add_sponsorship', connection: connection
-
+= image_tag 'profile.png'
+.name= link_to name, "/consultants/#{employee_id}"
+.score
+  = image_tag 'connections-32.png'
+  = link_to number_with_precision(connection.score, precision: 2), "/connections/#{connection.mentor.employee_id}/and/#{connection.mentee.employee_id}"
+%ul
+  - connection.teachable_skills.each do |teachable_skill|
+    %li.label= teachable_skill

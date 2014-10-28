@@ -3,16 +3,9 @@
   .small-8.columns
     %ul.matches
       - mentors.take(5).each do |connection|
-        %li
+        %li{:id => "consultant_" + connection.mentor.employee_id}
           .mentor
-            = image_tag 'profile.png'
-            .name= link_to connection.mentor.full_name, "/consultants/#{connection.mentor.employee_id}"
-            .score
-              = image_tag 'connections-32.png'
-              = link_to number_with_precision(connection.score, precision: 2), "/connections/#{connection.mentor.employee_id}/and/#{connection.mentee.employee_id}"
-            %ul
-              - connection.teachable_skills.each do |teachable_skill|
-                %li.label= teachable_skill
+            = render 'connection', connection: connection, name: connection.mentor.full_name, employee_id: connection.mentor.employee_id
             = render 'consultants/add_sponsor', connection: connection
 - else
   .small-4.columns &nbsp;
