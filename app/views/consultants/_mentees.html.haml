@@ -8,4 +8,4 @@
         %li{:id => "consultant_" + connection.mentee.employee_id}
           .mentor
             = render 'connection', connection: connection, name: connection.mentee.full_name, employee_id: connection.mentee.employee_id
-            = render 'consultants/add_sponsorship', connection: connection
+            = render 'consultants/add_sponsee', connection: connection

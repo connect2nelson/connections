@@ -1,4 +1,2 @@
-= form_tag '/sponsorship', class: "add_sponsor_form", remote: true, method: :put do
-  = hidden_field_tag 'sponsee_full_name', connection.mentee.full_name
-  = hidden_field_tag 'sponsor_id', connection.mentor.employee_id
+= form_tag add_sponsee_url(:sponsor_id => connection.mentor.employee_id, :sponsee_full_name => connection.mentee.full_name), class: "add_sponsor_form", remote: true, method: :put do
   = submit_tag "Add Sponsor", class: "submit_sponsor", :id => "#{connection.mentor.full_name}"

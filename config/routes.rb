@@ -13,9 +13,10 @@ Connections::Application.routes.draw do
 
     get 'about', to: 'welcome#about'
 
-    put 'sponsorship', to: "sponsorship#create"
     get 'sponsorship/autocomplete_consultant_full_name'
     post 'sponsorship/delete/:sponsor_id/and/:sponsee_id', to: "sponsorship#delete", as: 'delete_sponsee'
+    put 'sponsorship/create/:sponsor_id/and/:sponsee_full_name', to: "sponsorship#create", as: 'add_sponsee'
+    put 'sponsorship', to: "sponsorship#create"
     root 'consultants#index'
 
     if Rails.env.development?
