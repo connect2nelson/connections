@@ -1,0 +1,8 @@
+.small-4.columns
+  %h3.skills-header
+    = consultant.full_name.split.first
+    can teach
+  %ul.skills
+    - consultant.skills_to_teach.sort.each do |skill|
+      %li
+        .label= skill

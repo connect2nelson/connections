@@ -1,17 +1,9 @@
-- sponsorship = sponsorship || false
-.small-4.columns
-  %h3.skills-header
-    = consultant.full_name.split.first
-    can teach
-  %ul.skills
-    - consultant.skills_to_teach.sort.each do |skill|
-      %li
-        .label= skill
+= render 'consultant_skills', consultant: consultant
 .small-8.columns
   %ul.matches
     - if mentees.empty?
       %h4 "Couldn't find any matches"
     -else
       - mentees.take(5).each do |connection|
-        = render 'connection', connection: connection, sponsorship: sponsorship
+        = render 'connection', connection: connection, sponsorship: false
 

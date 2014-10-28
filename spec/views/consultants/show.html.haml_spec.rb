@@ -24,6 +24,7 @@ describe 'consultants/show.html.haml' do
     allow(connection_two).to receive(:score).and_return(1.9900001)
 
     stub_template "consultants/_mentees.html.haml" => ""
+    stub_template "consultants/_sponsorship.html.haml" => ""
     render
   end
 
