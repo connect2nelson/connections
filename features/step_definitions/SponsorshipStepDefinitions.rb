@@ -27,8 +27,11 @@ Given(/^I am on the consultant page for employee ID "([^"]*)"$/) do |employee_id
 end
 
 When(/^I click on the sponsorship tab$/) do
-  sponsorship_tab = driver.find_element(:id, "sponsorship-tab")
-  sponsorship_tab.click
+  wait = Selenium::WebDriver::Wait.new(:timeout => 3) # seconds
+  begin
+    wait.until {driver.find_element(:id, "sponsorship-tab")}
+  end
+  driver.find_element(:id, "sponsorship-tab").click
 end
 
 When(/^I click on the mentees tab$/) do
@@ -53,7 +56,7 @@ end
 
 And(/^I add "([^"]*)" as a new sponsee$/) do |sponsee_name|
   sponsee_name = "" if sponsee_name.blank?
-  nameInput = driver.find_element(:id, "sponsee_full_name")
+  nameInput = driver.find_element(:css, "#sponsee_full_name.sponsee_search")
   nameInput.send_keys sponsee_name
   nameInput.click
   addButton = driver.find_element(:class, "submit_sponsee")
