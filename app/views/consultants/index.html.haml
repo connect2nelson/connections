@@ -26,13 +26,7 @@
       Explore
 .row
   %ul.offices
-    %li
-      .label= link_to "San Francisco", "offices/San Francisco"
-    %li
-      .label= link_to "Chicago", "offices/Chicago"
-    %li
-      .label= link_to "Dallas", "offices/Dallas"
-    %li
-      .label= link_to "Atlanta", "offices/Atlanta"
-    %li
-      .label= link_to "New York", "offices/New York"
+    -@offices.sort.each do |office|
+      -unless office.blank?
+        %li
+          .label= link_to office, "offices/#{office}"

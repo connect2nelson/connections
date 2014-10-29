@@ -13,6 +13,7 @@ class ConsultantsController < ApplicationController
   end
 
   def index
+    @offices = OfficeService.find_all_offices
     @search_results = Consultant.where(full_name: /#{params[:full_name]}/i) if params[:full_name]
   end
 
