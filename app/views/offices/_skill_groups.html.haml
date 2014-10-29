@@ -1,9 +1,10 @@
--skill_group.sort.each do |skill_name, consultants|
-  .row
-    .small-12.columns
-      .skills_group
-        %h3= skill_name
-        %ul.consultants
-          - consultants.take(5).each do |consultant|
-            %li.label
-              %h4= link_to consultant.full_name, "/consultants/#{consultant.employee_id}"
+-unless skill_group.nil?
+  -skill_group.sort.each do |skill_name, consultants|
+    .row
+      .small-12.columns
+        .skills_group
+          %h3= skill_name
+          %ul.consultants
+            - consultants.take(5).each do |consultant|
+              %li.label
+                %h4= link_to consultant.full_name, "/consultants/#{consultant.employee_id}"
