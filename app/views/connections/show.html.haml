@@ -1,10 +1,15 @@
 .row
   .small-4.columns
     .first-consultant-profile
-      %h2= @consultant_one.full_name
+      = image_tag 'profile.png'
+      %h3= @consultant_one.full_name
       %dl
         %dt Role
         %dd= @consultant_one.primary_role
+        %dt Home Office
+        %dd= @consultant_one.home_office
+        %dt Working Office
+        %dd= @consultant_one.working_office
   .small-4.columns
     .summary
       .score
@@ -16,10 +21,15 @@
       .summary-text You two should grab some coffee!
   .small-4.columns
     .second-consultant-profile
-      %h2= @consultant_two.full_name
+      = image_tag 'profile.png'
+      %h3= @consultant_two.full_name
       %dl
         %dt Role
         %dd= @consultant_two.primary_role
+        %dt Home Office
+        %dd= @consultant_two.home_office
+        %dt Working Office
+        %dd= @consultant_two.working_office
 
 .row.skill-diffs
   .small-1.columns &nbsp;

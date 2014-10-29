@@ -2,8 +2,14 @@
 @import 'modules/profile-attributes';
 
 .second-consultant-profile, .first-consultant-profile {
-  h2 {
+  h3 {
     color: $dark-brown;
+    width: 80%;
+    display: inline-block;
+  }
+  img {
+    width: 15%;
+    margin: 3.2px 3px 8px 0px;
   }
 }
 

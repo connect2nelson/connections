@@ -1,11 +1,11 @@
 @mixin profile-attributes($selector, $align: left) {
-  $dd-width: 75%;
-  $dt-width: 20%;
+  $dd-width: 50%;
+  $dt-width: 40%;
   $text-align: left;
 
   @if($align == right) {
-    $dt-width: 75%;
-    $dd-width: 20%;
+    $dt-width: 50%;
+    $dd-width: 40%;
     $text-align: right;
   }
 

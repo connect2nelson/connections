@@ -4,7 +4,7 @@ RSpec.describe "connections/show.html.haml" do
 
   before do
     consultant_one = Consultant.new(full_name: 'Bob', primary_role: 'Dev', skills: {})
-    consultant_two = Consultant.new(full_name: 'Master', primary_role: 'QA', skills: {})
+    consultant_two = Consultant.new(full_name: 'Master', primary_role: 'QA', skills: {}, home_office: 'Chicago', working_office: 'San Francisco')
     connection = Connection.new(consultant_one, consultant_two)
     allow(connection).to receive(:score).and_return(1.5)
 
@@ -26,6 +26,11 @@ RSpec.describe "connections/show.html.haml" do
     expect(rendered).to have_text('Dev')
     expect(rendered).to have_text('Master')
     expect(rendered).to have_text('QA')
+  end
+
+  it 'should show offices' do
+    expect(rendered).to have_text('San Francisco')
+    expect(rendered).to have_text('Chicago')
   end
 
   it 'should show score' do
