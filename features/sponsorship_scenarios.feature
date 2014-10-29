@@ -7,22 +7,22 @@ Feature: Sponsors
     Given there is a consultant named "Mridula" with employee ID "99992"
     Given there is a Ruby expert named "Derek" with employee ID "99993"
 
-  Scenario: add a sponsee from the sponsorship tab
+  Scenario: add a sponsee from the mentor tab search box
     Given I am on the consultant page for employee ID "99991"
-    When I click on the sponsorship tab
     And I add "Mridula" as a new sponsee
+    And I click on the sponsorship tab
     Then I should see "Mridula" show up as a sponsee on the page
 
   Scenario: show an error if I add a consultant that doesnt exist
     Given I am on the consultant page for employee ID "99991"
-    When I click on the sponsorship tab
     And I add "Ian" as a new sponsee
+    And I click on the sponsorship tab
     Then I should see an error on the page
 
   Scenario: show an error if I add a blank consultant name
     Given I am on the consultant page for employee ID "99991"
-    When I click on the sponsorship tab
     And I add "" as a new sponsee
+    And I click on the sponsorship tab
     Then I should see an error on the page
 
   Scenario: delete a consultant

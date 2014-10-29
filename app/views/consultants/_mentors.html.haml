@@ -11,3 +11,12 @@
   .small-4.columns &nbsp;
   .small-8.columns
     = image_tag 'jigsaw-300.jpg'
+
+.small-8.columns
+  %ul.sponsee-search
+    %li
+      .mentor
+        = form_tag '/sponsorship', remote: true, method: :put do
+          = autocomplete_field_tag 'sponsee_full_name', '', sponsorship_autocomplete_consultant_full_name_path, placeholder: 'Search for Consultants', class: "sponsee_search"
+          = hidden_field_tag 'sponsor_id', consultant.employee_id
+          = submit_tag "Add Sponsee", class: "submit_sponsee", :id => "add_sponsee"
