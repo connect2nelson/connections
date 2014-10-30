@@ -13,9 +13,7 @@ $(document).ready ->
 
   addHighlight = ->
     $(this).addClass 'highlight'
-    $(this).find('.text').show()
   removeHighlight = ->
     $(this).removeClass 'highlight'
-    $(this).find('.text').hide()
   $('.contact-entry').hover addHighlight, removeHighlight
 

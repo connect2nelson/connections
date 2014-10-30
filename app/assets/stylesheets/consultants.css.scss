@@ -72,19 +72,24 @@
 
     .contact-entry {
       opacity: 0.4;
+      float: left;
+
       img {
         max-width: 40px;
         max-height: 40px;
-        float: left;
       }
 
       &.highlight {
         opacity: 1.0;
+        .text {
+          visibility: visible;
+        }
       }
 
       .text {
-        font-size: 90%;
-        display: none;
+        font-size: 75%;
+        visibility: hidden;
+        text-align: center;
       }
     }
 
