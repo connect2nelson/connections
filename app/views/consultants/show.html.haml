@@ -2,7 +2,7 @@
   .row.header
     .small-4.columns
       = image_tag 'profile.png'
-    .small-8.columns
+    .small-5.columns
       %h2 #{@consultant.full_name}
       %dl
         %dt Role
@@ -11,6 +11,9 @@
         %dd= @consultant.home_office
         %dt Working Office
         %dd= @consultant.working_office
+    .small-3.columns.links
+      - github = @contact.nil? ? "" : @contact.github_account
+      = link_to image_tag('github.png', alt: 'github'), "//www.github.com/#{github}", :target => "_blank"
   .row
     .small-4.columns &nbsp;
     .small-8.columns
