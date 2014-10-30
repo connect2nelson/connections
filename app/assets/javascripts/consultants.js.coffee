@@ -11,3 +11,11 @@ $(document).ready ->
     $('.label').removeClass 'highlight'
   $('.matches li').hover onHoverIn, onHoverOut
 
+  addHighlight = ->
+    $(this).addClass 'highlight'
+    $(this).find('.text').show()
+  removeHighlight = ->
+    $(this).removeClass 'highlight'
+    $(this).find('.text').hide()
+  $('.contact-entry').hover addHighlight, removeHighlight
+

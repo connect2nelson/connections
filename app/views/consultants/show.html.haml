@@ -11,9 +11,11 @@
         %dd= @consultant.home_office
         %dt Working Office
         %dd= @consultant.working_office
-    .small-3.columns.links
-      - github = @contact.nil? ? "" : @contact.github_account
-      = link_to image_tag('github.png', alt: 'github'), "//www.github.com/#{github}", :target => "_blank"
+    .small-3.columns.contact
+      - if !@contact.nil?
+        .contact-entry
+          = link_to image_tag('github.png'), "//www.github.com/#{@contact.github_account}", :target => "_blank"
+          .text github
   .row
     .small-4.columns &nbsp;
     .small-8.columns

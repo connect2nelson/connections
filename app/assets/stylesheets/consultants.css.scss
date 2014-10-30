@@ -68,12 +68,26 @@
     margin-bottom: 0;
   }
 
-  .links {
-    img {
-      max-width: 40px;
-      max-height: 40px;
-      float: left;
+  .contact {
+
+    .contact-entry {
+      opacity: 0.4;
+      img {
+        max-width: 40px;
+        max-height: 40px;
+        float: left;
+      }
+
+      &.highlight {
+        opacity: 1.0;
+      }
+
+      .text {
+        font-size: 90%;
+        display: none;
+      }
     }
+
   }
 }
 
