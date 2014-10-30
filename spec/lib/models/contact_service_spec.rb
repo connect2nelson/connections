@@ -16,17 +16,17 @@ describe ContactService do
   context '.github_name_for' do
 
     before do
-      Contact.create({employee_id: '111', github_account: 'yo'})
+      contact = Contact.create({employee_id: '111', github_account: 'yo'})
     end
 
-    it 'should return empty string for an employee without github info' do
+    it 'should return nil for a non-existent employee' do
       consultant = Consultant.new(employee_id: '000')
-      expect(ContactService.github_name_for consultant).to eq ""
+      expect(ContactService.contacts_for consultant).to eq nil
     end
 
-    it 'should return github account name for an employee with github info' do
+    it 'should return contact of an existing employee' do
       consultant = Consultant.new(employee_id: '111')
-      expect(ContactService.github_name_for consultant).to eq 'yo'
+      expect(ContactService.contacts_for consultant).to eq Contact.first
     end
   end
 
