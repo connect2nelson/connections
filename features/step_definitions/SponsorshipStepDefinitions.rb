@@ -11,7 +11,6 @@ end
 
 After do
   driver.quit
-  # Consultant.where("employee_id > 99990").delete
 end
 
 Given(/^there is a consultant named "([^"]*)" with employee ID "([^"]*)" who wants to learn "([^"]*)"$/) do |full_name, employee_id, wants_to_learn|
@@ -22,11 +21,6 @@ end
 Given(/^there is a "([^"]*)" expert named "([^"]*)" with employee ID "([^"]*)"$/) do |can_teach, full_name, employee_id|
   Consultant.create!(employee_id: employee_id, full_name: full_name, primary_role: 'Dev', home_office: 'San Francisco',
       working_office: 'San Francisco', skills: {can_teach=>'5'})
-end
-
-Given(/^there is a Java expert named "([^"]*)" with employee ID "([^"]*)"$/) do |full_name, employee_id|
-  Consultant.create!(employee_id: employee_id, full_name: full_name, primary_role: 'Dev', home_office: 'San Francisco',
-      working_office: 'San Francisco', skills: Hash['Java'=>'5'])
 end
 
 Given(/^I am on the consultant page for employee ID "([^"]*)"$/) do |employee_id|

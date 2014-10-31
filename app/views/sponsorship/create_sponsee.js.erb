@@ -6,6 +6,7 @@
 
     var to_append = opening_tags+render_consultant+delete_button+closing_tags;
     $("#panel-sponsorship .matches").prepend(to_append);
+    $("#panel-sponsorship h4").remove()
 
     $("#panel-mentees .matches").prepend("<li id='alert' >Added sponsee!")
 <% end %>
