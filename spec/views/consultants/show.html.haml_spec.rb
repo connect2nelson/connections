@@ -35,7 +35,7 @@ describe 'consultants/show.html.haml' do
       expect(rendered).to have_text('Chicago')
     end
 
-    xit 'should show skills to learn' do
+    it 'should show skills to learn' do
       expect(rendered).to have_text('Ruby')
     end
 
