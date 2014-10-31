@@ -8,7 +8,6 @@ class ConsultantsController < ApplicationController
     @mentors = ConnectionService.best_mentors_for(@consultant)
     @mentees = ConnectionService.best_mentees_for(@consultant)
     @sponsees = SponsorshipService.get_sponsees_for(@consultant)
-    @activities = ActivityService.github_events(params[:id])
     @contact = ContactService.contacts_for(@consultant)
     @connected =  ENV["SECURITY_ENABLED"]
   end

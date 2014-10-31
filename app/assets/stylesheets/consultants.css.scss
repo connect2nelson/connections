@@ -198,50 +198,6 @@
   }
 }
 
-.activities{
-  list-style: none;
-  clear: both;
-
-  .date{
-      list-style: none;
-      padding: 1em 0.7em 5em;
-      text-align: right;
-      border-right: 3px solid #333;
-  }
-  .dot {
-    font-size: 95px;
-    position: absolute;
-    line-height: 0.2;
-  }
-  .activity-details-container {
-    list-style: none;
-    height: 100%;
-    background-image: image-url('github-bg.png');
-    background-size: cover;
-    margin: 0.5em 0;
-  }
-
-  .activity-details {
-    border: #ccc solid thin;
-    padding: 2em 1em;
-    background-color: rgba(255, 255, 255, 0.8);
-
-    img {
-      width: 32px;
-      margin-right: 0.5em;
-    }
-
-    .name {
-      color: #F4A460;
-      margin-left: 0.5em;
-      font-size: 1.3rem;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      white-space: nowrap;
-    }
-  }
-}
-
 .matches, .skills, .activity_details {
   .label {
     font-size: 1.1rem;
