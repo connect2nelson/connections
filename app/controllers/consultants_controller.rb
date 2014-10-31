@@ -7,6 +7,7 @@ class ConsultantsController < ApplicationController
     @consultant = Consultant.find_by(employee_id: params[:id])
     @mentors = ConnectionService.best_mentors_for(@consultant)
     @mentees = ConnectionService.best_mentees_for(@consultant)
+    @peers = ConnectionService.best_peers_for(@consultant)
     @sponsees = SponsorshipService.get_sponsees_for(@consultant)
     @contact = ContactService.contacts_for(@consultant)
     @connected =  ENV["SECURITY_ENABLED"]

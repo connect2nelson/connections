@@ -107,4 +107,22 @@ describe ConnectionService do
 
   end
 
+  context '.best_peers_for' do
+
+    let!(:clojure_fanboy) {Consultant.create(full_name: 'Clojure Fanatics', skills: {'clojure' => '4', 'ruby' => '1'}, working_office: 'San Francisco')}
+    let!(:ruby_fanboy) {Consultant.create(full_name: 'Male Rubyist', skills: {'clojure' => '1', 'ruby' => '4'}, working_office: 'San Francisco')}
+    let!(:ruby_fangirl) {Consultant.create(full_name: 'Female Rubyist', skills: {'ruby' => '3', 'clojure' => '1'}, working_office: 'San Francisco')}
+    let!(:neither_ruby_or_clojure) {Consultant.create(full_name: 'Neither', skills: {'java' => '5'}, working_office: 'San Francisco')}
+    let!(:random_folk_in_chicago) {Consultant.create(full_name: 'Chicago Proud', skills: {'ruby' => '2', 'clojure' => '5'}, working_office: 'Chicago')}
+
+    it 'should return a list of peer matches for the consultant in descending order' do
+      connections = ConnectionService.best_peers_for ruby_fangirl
+      expect(connections.size).to eq 3
+      expect(connections[0].mentee.full_name).to eq 'Male Rubyist'
+      expect(connections[1].mentee.full_name).to eq 'Clojure Fanatics'
+      expect(connections[2].mentee.full_name).to eq 'Neither'
+    end
+
+  end
+
 end

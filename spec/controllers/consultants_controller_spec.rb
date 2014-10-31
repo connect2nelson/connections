@@ -13,6 +13,7 @@ RSpec.describe ConsultantsController, :type => :controller do
     sponsee = Connection.new(consultant, Consultant.new(employee_id: '2'))
     let(:sponsees) {[sponsee]}
     let(:contact) {Contact.new(employee_id: '1', github_account: 'yo')}
+    let(:peers) {[Connection.new(consultant, Consultant.new)]}
 
     it 'should show user' do
       expect(Consultant).to receive(:find_by).with({:employee_id=>consultant.employee_id}).and_return consultant
@@ -44,6 +45,14 @@ RSpec.describe ConsultantsController, :type => :controller do
       expect(SponsorshipService).to receive(:get_sponsees_for).with(consultant).and_return sponsees
       get :show, Hash[id: consultant.employee_id]
       expect(assigns(:sponsees)).to eq sponsees
+    end
+
+    it 'should assign peers' do
+      expect(Consultant).to receive(:find_by).with({:employee_id=>consultant.employee_id}).and_return consultant
+      expect(ConnectionService).to receive(:best_peers_for).with(consultant).and_return peers
+
+      get :show, Hash[id: consultant.employee_id]
+      expect(assigns(:peers)).to eq peers
     end
 
     it 'should assign contact' do

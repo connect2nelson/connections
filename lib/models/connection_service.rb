@@ -38,4 +38,11 @@ class ConnectionService
       Connection.new(mentor, other)
     end.flatten.select(&:match?).sort_by(&:skill_gap).reverse
   end
+
+  def self.best_peers_for consultant
+    for_office(consultant.working_office).not.where('_id' => consultant.id).map do |other|
+      Connection.new(consultant, other)
+    end.flatten.sort_by(&:score).reverse
+  end
+
 end
