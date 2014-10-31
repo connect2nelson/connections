@@ -40,7 +40,7 @@ class Connection
       if mentee.skills.has_key?(skill)
         diff = level.to_i - mentee.skills[skill].to_i
         @relevant_skills[skill] = diff
-        sum = sum + diff
+        sum = sum + diff.abs
       end
     end
     return sum
