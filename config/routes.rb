@@ -15,7 +15,9 @@ Connections::Application.routes.draw do
 
     get 'sponsorship/autocomplete_consultant_full_name'
     post 'sponsorship/delete/:sponsor_id/and/:sponsee_id', to: "sponsorship#delete", as: 'delete_sponsee'
-    put 'sponsorship/create/:sponsor_id/and/:sponsee_full_name', to: "sponsorship#create", as: 'add_sponsee'
+    put 'sponsorship/create/:sponsee_id/and/:sponsor_full_name', to: "sponsorship#create", as: 'add_sponsee'
+
+    put 'sponsorship/create_sponsee/:sponsor_id/and/:sponsee_id', to: "sponsorship#create_sponsee", as: 'create_sponsee'
     put 'sponsorship', to: "sponsorship#create"
     root 'consultants#index'
 

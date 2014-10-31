@@ -1,0 +1,11 @@
+<% if !@connection.nil? %>
+    var opening_tags =  "<li id='consultant_<%= @connection.mentee.employee_id%>'><div class='mentor'>";
+    var render_consultant = "<%= j render "consultants/connection", connection: @connection, name: @connection.mentee.full_name, employee_id: @connection.mentee.employee_id%>";
+    var delete_button = "<%=j render 'consultants/delete_sponsorship', connection: @connection%>";
+    var closing_tags = "</div></li>";
+
+    var to_append = opening_tags+render_consultant+delete_button+closing_tags;
+    $("#panel-sponsorship .matches").prepend(to_append);
+
+    $("#panel-mentees .matches").prepend("<li id='alert' >Added sponsee!")
+<% end %>

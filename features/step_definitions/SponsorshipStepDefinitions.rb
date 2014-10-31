@@ -14,12 +14,19 @@ After do
   # Consultant.where("employee_id > 99990").delete
 end
 
-Given(/^there is a consultant named "([^"]*)" with employee ID "([^"]*)"$/) do |full_name, employee_id|
-  Consultant.create!(employee_id: employee_id, full_name: full_name, primary_role: 'Dev', home_office: 'San Francisco', working_office: 'San Francisco', skills: Hash['Ruby'=>'1'])
+Given(/^there is a consultant named "([^"]*)" with employee ID "([^"]*)" who wants to learn "([^"]*)"$/) do |full_name, employee_id, wants_to_learn|
+  Consultant.create!(employee_id: employee_id, full_name: full_name, primary_role: 'Dev', home_office: 'San Francisco',
+      working_office: 'San Francisco', skills: {wants_to_learn=>'1'})
 end
 
-Given(/^there is a Ruby expert named "([^"]*)" with employee ID "([^"]*)"$/) do |full_name, employee_id|
-  Consultant.create!(employee_id: employee_id, full_name: full_name, primary_role: 'Dev', home_office: 'San Francisco', working_office: 'San Francisco', skills: Hash['Ruby'=>'5'])
+Given(/^there is a "([^"]*)" expert named "([^"]*)" with employee ID "([^"]*)"$/) do |can_teach, full_name, employee_id|
+  Consultant.create!(employee_id: employee_id, full_name: full_name, primary_role: 'Dev', home_office: 'San Francisco',
+      working_office: 'San Francisco', skills: {can_teach=>'5'})
+end
+
+Given(/^there is a Java expert named "([^"]*)" with employee ID "([^"]*)"$/) do |full_name, employee_id|
+  Consultant.create!(employee_id: employee_id, full_name: full_name, primary_role: 'Dev', home_office: 'San Francisco',
+      working_office: 'San Francisco', skills: Hash['Java'=>'5'])
 end
 
 Given(/^I am on the consultant page for employee ID "([^"]*)"$/) do |employee_id|
@@ -63,12 +70,30 @@ And(/^I add "([^"]*)" as a new sponsee$/) do |sponsee_name|
   addButton.click
 end
 
+And(/^I add "([^"]*)" as a new sponsor$/) do |sponsor_name|
+  sponsor_name = "" if sponsor_name.blank?
+  nameInput = driver.find_element(:css, "#sponsor_full_name.sponsor_search")
+  nameInput.send_keys sponsor_name
+  nameInput.click
+  addButton = driver.find_element(:id, "add_sponsor")
+  addButton.click
+end
+
 Then(/^I should see "([^"]*)" show up as a sponsee on the page$/) do |sponsee|
   wait = Selenium::WebDriver::Wait.new(:timeout => 3) # seconds
   begin
     wait.until {driver.find_element(:css, "#panel-sponsorship .name > a")}
   end
   expect(driver.find_element(:css, "#panel-sponsorship .name > a").attribute("innerHTML")).to eq(sponsee)
+
+end
+
+Then(/^I should see "([^"]*)" show up as a mentor on the page$/) do |mentor|
+  wait = Selenium::WebDriver::Wait.new(:timeout => 5) # seconds
+  begin
+    wait.until {driver.find_element(:css, "#panel-mentors .name > a")}
+  end
+  expect(driver.find_element(:css, "#panel-mentors .name > a").attribute("innerHTML")).to eq(mentor)
 
 end
 

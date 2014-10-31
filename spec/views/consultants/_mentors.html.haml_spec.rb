@@ -31,7 +31,7 @@ RSpec.describe "consultants/_mentees.html.haml", :type => :view do
 
     describe 'show text box and button to add a sponsee' do
       specify { expect(rendered).to have_css "form[action='/sponsorship'][method='post']" }
-      specify { expect(rendered).to have_css "input[value='Add Sponsee']" }
+      specify { expect(rendered).to have_css "input[value='Add Sponsor']" }
     end
   end
 

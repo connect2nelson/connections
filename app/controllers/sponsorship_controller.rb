@@ -4,24 +4,37 @@ class SponsorshipController < ApplicationController
   autocomplete :consultant, :full_name, :full => true, :extra_data => [:employee_id]
 
   def create
-    if params[:sponsee_full_name].blank?
-      flash[:alert] = "I can't save a sponsee without a name!"
+    if params[:sponsor_full_name].blank?
+      flash[:alert] = "I can't save a sponsor without a name!"
     else
-      if sponsee = Consultant.find_by(full_name: params[:sponsee_full_name])
-        params_sponsee_id = sponsee.employee_id
-        sponsorship = Sponsorship.create(sponsor_id: params[:sponsor_id], sponsee_id: params_sponsee_id)
-        @connection = SponsorshipService.get_connection_for(sponsorship)
+      if sponsor = Consultant.find_by(full_name: params[:sponsor_full_name])
+        params_sponsor_id = sponsor.employee_id
+        @connection = create_sponsorship(params_sponsor_id)
       else
-        flash[:alert] = "That is not a valid sponsee!"
+        flash[:alert] = "That is not a valid sponsor!"
       end
-
     end
 
       respond_to do |format|
-        format.html { redirect_to consultant_path(params[:sponsor_id], anchor: "panel-sponsorship") }
+        format.html { redirect_to consultant_path(params[:sponsor_id], anchor: "panel-mentors") }
         format.js {}
       end
 
+  end
+
+  def create_sponsee
+    @connection = create_sponsorship(params[:sponsor_id])
+
+    respond_to do |format|
+      format.html { redirect_to consultant_path(params[:sponsor_id], anchor: "panel-mentees") }
+      format.js {}
+    end
+
+  end
+
+  def create_sponsorship(sponsor_id)
+    sponsorship = Sponsorship.create(sponsor_id: sponsor_id, sponsee_id: params[:sponsee_id])
+    SponsorshipService.get_connection_for(sponsorship)
   end
 
   def delete
