@@ -16,6 +16,9 @@
         .contact-entry
           = link_to image_tag('github.png'), "//www.github.com/#{@contact.github_account}", :target => "_blank"
           .text github
+      .contact-entry
+        = link_to image_tag('github.png'), "//jigsaw.thoughtworks.com/consultants/#{@consultant.employee_id}", :target => "_blank"
+        .text jigsaw
   .row
     .small-4.columns &nbsp;
     .small-8.columns
