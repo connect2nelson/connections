@@ -1,4 +1,4 @@
-= render 'skills_to_teach', consultant: consultant
+= render 'skills', consultant: consultant, text: :teach, skills: consultant.skills_to_teach
 .small-8.columns
   %ul.matches
     - if mentees.empty?

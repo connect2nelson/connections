@@ -1,5 +1,5 @@
 - if consultant.has_skills_from_jigsaw?
-  = render 'skills_to_learn', consultant: consultant
+  = render 'skills', consultant: consultant, text: :learn, skills: consultant.skills_to_learn
   .small-8.columns
     %ul.matches
       - mentors.take(5).each do |connection|
