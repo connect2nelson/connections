@@ -42,7 +42,7 @@ class SponsorshipController < ApplicationController
     @deleted_sponsee_id = sponsorship_params[:sponsee_id]
     if sponsorRelationship.delete
       respond_to do |format|
-        format.html { redirect_to consultant_path(params[:sponsor_id], anchor: "panel-sponsorship") }
+        format.html { redirect_to consultant_path(params[:sponsor_id], anchor: "panel-mentees") }
         format.js {}
       end
     else

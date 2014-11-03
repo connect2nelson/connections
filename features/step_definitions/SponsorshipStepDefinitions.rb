@@ -101,22 +101,18 @@ Then(/^I should see "([^"]*)" in the list of sponsees$/) do |sponseeName|
   expect(sponsee_element.attribute("innerHTML")).to include(sponseeName)
 end
 
-And(/^I remove the first sponsee on their list of sponsees$/) do
-  wait = Selenium::WebDriver::Wait.new(:timeout => 5) # seconds
-  begin
-    wait.until {driver.find_element(:id, "delete_sponsee").displayed?}
-  end
-
-  deleteButton = driver.find_element(:id, "delete_sponsee")
+And(/^I delete "([^"]*)"$/) do |sponseeName|
+  sponsee = Consultant.where(:full_name => sponseeName).first
+  deleteButton = driver.find_element(:id, "delete_sponsee_#{sponsee.employee_id}")
   deleteButton.click
 end
 
 Then(/^I should not see "([^"]*)" in the list of sponsees$/) do |sponseeName|
   wait = Selenium::WebDriver::Wait.new(:timeout => 10) # seconds
   begin
-    element = wait.until { !driver.find_element(:id, "panel-sponsorship").text.include?(sponseeName) }
+    element = wait.until { !driver.find_element(:id, "panel-mentees").text.include?(sponseeName) }
   ensure
-    sponsorshipPanel = driver.find_element(:id, "panel-sponsorship")
+    sponsorshipPanel = driver.find_element(:id, "panel-mentees")
   end
   expect(sponsorshipPanel.text).to_not include(sponseeName)
 end
