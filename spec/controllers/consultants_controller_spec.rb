@@ -43,6 +43,7 @@ RSpec.describe ConsultantsController, :type => :controller do
     it 'should assign sponsees' do
       expect(Consultant).to receive(:find_by).with({:employee_id=>consultant.employee_id}).and_return consultant
       expect(SponsorshipService).to receive(:get_sponsees_for).with(consultant).and_return sponsees
+      expect(ConnectionService).to receive(:best_mentees_for).with(consultant).and_return mentees
       get :show, Hash[id: consultant.employee_id]
       expect(assigns(:sponsees)).to eq sponsees
     end

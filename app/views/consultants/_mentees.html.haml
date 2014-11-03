@@ -1,11 +1,17 @@
 = render 'skills', consultant: consultant, text: :teach, skills: consultant.skills_to_teach
 .small-8.columns
   %ul.matches
-    - if mentees.empty?
+    - if mentees.empty? && sponsees.empty?
       %h4 "Couldn't find any matches"
     -else
+      - sponsees.take(5).each do |connection|
+        %li{:id => "consultant_" + connection.mentee.employee_id}
+          .mentor
+            = render 'connection', connection: connection, name: connection.mentee.full_name, employee_id: connection.mentee.employee_id
+            = render 'consultants/delete_sponsorship', connection: connection
       - mentees.take(5).each do |connection|
         %li{:id => "consultant_" + connection.mentee.employee_id}
           .mentor
             = render 'connection', connection: connection, name: connection.mentee.full_name, employee_id: connection.mentee.employee_id
             = render 'consultants/add_sponsee', connection: connection
+

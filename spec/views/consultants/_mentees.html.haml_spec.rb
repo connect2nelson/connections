@@ -6,9 +6,11 @@ RSpec.describe "consultants/_mentees.html.haml", :type => :view do
     a_consultant = Consultant.new(employee_id: '3', full_name: 'Ian Norris', primary_role: 'Dev', home_office: 'Chicago', working_office: 'San Francisco', skills: Hash['Ruby'=>'1', 'Cat'=>'5'])
     mentee_one = Consultant.new(full_name: 'Charlie', employee_id: '4', skills: {})
     mentee_two = Consultant.new(full_name: 'Dee', employee_id: '5', skills: {})
+    sponsee = Consultant.new(full_name: 'Sophie', employee_id: '6', skills: {})
 
     mentee_connection_one = Connection.new(a_consultant, mentee_one)
     mentee_connection_two = Connection.new(a_consultant, mentee_two)
+    sponsee_connection = Connection.new(a_consultant, sponsee)
     some_mentees = [mentee_connection_one, mentee_connection_two]
 
     @create_time = '2014-06-20 -0700'
@@ -20,7 +22,7 @@ RSpec.describe "consultants/_mentees.html.haml", :type => :view do
     allow(mentee_connection_two).to receive(:score).and_return(0.1333)
 
     stub_template "consultants/_sponsorship.html.haml" => ""
-    render 'consultants/mentees', consultant: a_consultant, mentees: some_mentees
+    render 'consultants/mentees', consultant: a_consultant, mentees: some_mentees, sponsees: [sponsee_connection]
   end
 
   describe 'show mentees' do
