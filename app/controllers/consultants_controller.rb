@@ -19,7 +19,7 @@ class ConsultantsController < ApplicationController
       existing_sponsorship_index = mentees.index { |mentee_connection|
         mentee_connection.mentee.full_name == sponsee_connection.mentee.full_name && mentee_connection.mentor.full_name == sponsee_connection.mentor.full_name
       }
-      mentees.delete_at(existing_sponsorship_index)
+      mentees.delete_at(existing_sponsorship_index) unless existing_sponsorship_index.nil?
     end
     mentees
   end

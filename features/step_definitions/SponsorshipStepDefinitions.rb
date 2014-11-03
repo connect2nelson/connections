@@ -96,12 +96,17 @@ Given(/^there is a sponsorship between employee IDs "([^"]*)" and "([^"]*)"$/) d
 end
 
 Then(/^I should see "([^"]*)" in the list of sponsees$/) do |sponseeName|
-  sponsorPerson = Consultant.where(:full_name => sponseeName).first
-  sponsor = driver.find_element(:id, "consultant_" + sponsorPerson.employee_id)
-  expect(sponsor.text).to include(sponseeName)
+  sponsee = Consultant.where(:full_name => sponseeName).first
+  sponsee_element = driver.find_element(:css, "#consultant_#{sponsee.employee_id} .name > a")
+  expect(sponsee_element.attribute("innerHTML")).to include(sponseeName)
 end
 
 And(/^I remove the first sponsee on their list of sponsees$/) do
+  wait = Selenium::WebDriver::Wait.new(:timeout => 5) # seconds
+  begin
+    wait.until {driver.find_element(:id, "delete_sponsee").displayed?}
+  end
+
   deleteButton = driver.find_element(:id, "delete_sponsee")
   deleteButton.click
 end
