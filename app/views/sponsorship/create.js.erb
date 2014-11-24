@@ -1,4 +1,6 @@
 <% if !@connection.nil? %>
+    $("#consultant_<%= @connection.mentor.employee_id%>").remove()
+
     var opening_tags =  "<li id='consultant_<%= @connection.mentor.employee_id%>'><div class='mentor'>";
     var render_consultant = "<%= j render "consultants/connection", connection: @connection, name: @connection.mentor.full_name, employee_id: @connection.mentor.employee_id%>";
     var delete_button = "<%=j render 'consultants/delete_sponsorship', connection: @connection%>";
