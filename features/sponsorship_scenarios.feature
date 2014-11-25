@@ -9,7 +9,7 @@ Feature: Sponsors
     Given there is a "Java" expert named "Vanessa" with employee ID "99994"
 
   Scenario: add a sponsor that is not on my recommended list of mentors
-    Given I am on the consultant page for employee ID "99992"
+    Given I am on the consultant page for "Mridula"
     And I add "Vanessa" as a new sponsor
     Then I should see "Vanessa" show up as a sponsor on the page
     When I click on "Vanessa"'s name
@@ -17,39 +17,39 @@ Feature: Sponsors
     Then I should see "Mridula" in the list of sponsees
 
   Scenario: add a sponsor from the list of recommended mentors
-    Given I am on the consultant page for employee ID "99991"
+    Given I am on the consultant page for "Sophie"
     When I click on the mentors tab
     And I click on the add sponsor button for "Derek"
     Then I should see "Derek" show up as a sponsor on the page
 
   Scenario: show an error if I add a sponsor that doesnt exist
-    Given I am on the consultant page for employee ID "99991"
+    Given I am on the consultant page for "Sophie"
     And I add "Ian" as a new sponsor
     Then I should see an error on the page
 
   Scenario: show an error if I add a blank sponsor name
-    Given I am on the consultant page for employee ID "99991"
+    Given I am on the consultant page for "Sophie"
     And I add "" as a new sponsor
     Then I should see an error on the page
 
   Scenario: delete a sponsor
-    Given there is a sponsorship between employee IDs "99991" and "99992"
-    Given I am on the consultant page for employee ID "99992"
+    Given "Sophie" is sponsoring "Mridula"
+    Given I am on the consultant page for "Mridula"
     When I click on the mentors tab
     Then I should see "Sophie" show up as a sponsor on the page
     And I delete the sponsorship between "Mridula" and "Sophie"
     Then I should not see "Sophie" in the list of sponsors
 
   Scenario: delete a sponsee
-    Given there is a sponsorship between employee IDs "99992" and "99991"
-    Given I am on the consultant page for employee ID "99992"
+    Given "Mridula" is sponsoring "Sophie"
+    Given I am on the consultant page for "Mridula"
     When I click on the mentees tab
     Then I should see "Sophie" in the list of sponsees
     And I delete the sponsorship between "Sophie" and "Mridula"
     Then I should not see "Sophie" in the list of sponsees
 
   Scenario: add a sponsee
-    Given I am on the consultant page for employee ID "99993"
+    Given I am on the consultant page for "Derek"
     When I click on the mentees tab
     And I click on the add sponsee button for "Sophie"
     Then I should see "Sophie" in the list of sponsees

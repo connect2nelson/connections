@@ -23,8 +23,9 @@ Given(/^there is a "([^"]*)" expert named "([^"]*)" with employee ID "([^"]*)"$/
       working_office: 'San Francisco', skills: {can_teach=>'5'})
 end
 
-Given(/^I am on the consultant page for employee ID "([^"]*)"$/) do |employee_id|
-  driver.navigate.to CONSULTANT_URL + "/" + employee_id
+Given(/^I am on the consultant page for "([^"]*)"$/) do |employee_name|
+  employee = Consultant.where(:full_name => employee_name).first
+  driver.navigate.to CONSULTANT_URL + "/" + employee.employee_id
 end
 
 When(/^I click on the sponsorship tab$/) do
@@ -92,8 +93,10 @@ Then(/^I should see "([^"]*)" show up as a sponsor on the page$/) do |mentor|
 
 end
 
-Given(/^there is a sponsorship between employee IDs "([^"]*)" and "([^"]*)"$/) do |sponsor_id, sponsee_id|
-  Sponsorship.create(:sponsee_id => sponsee_id, :sponsor_id => sponsor_id)
+Given(/^"([^"]*)" is sponsoring "([^"]*)"$/) do |sponsor_name, sponsee_name|
+  sponsee = Consultant.where(:full_name => sponsee_name).first
+  sponsor = Consultant.where(:full_name => sponsor_name).first
+  Sponsorship.create(:sponsee_id => sponsee.employee_id, :sponsor_id => sponsor.employee_id)
 end
 
 Then(/^I should see "([^"]*)" in the list of sponsees$/) do |sponseeName|
