@@ -7,7 +7,7 @@
       - else
         - sponsors.take(5).each do |connection|
           %li{:id => "consultant_" + connection.mentor.employee_id}
-            .mentor
+            .sponsor
               = render 'connection', connection: connection, name: connection.mentor.full_name, employee_id: connection.mentor.employee_id
               = render 'consultants/delete_sponsorship', connection: connection
         - mentors.take(5).each do |connection|
