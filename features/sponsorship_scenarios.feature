@@ -11,17 +11,16 @@ Feature: Sponsors
   Scenario: add a sponsor that is not on my recommended list of mentors
     Given I am on the consultant page for employee ID "99992"
     And I add "Vanessa" as a new sponsor
-    Then I should see "Vanessa" show up as a mentor on the page
+    Then I should see "Vanessa" show up as a sponsor on the page
     When I click on "Vanessa"'s name
-    And I click on the sponsorship tab
-    Then I should see "Mridula" show up as a sponsee on the page
+    And I click on the mentees tab
+    Then I should see "Mridula" in the list of sponsees
 
   Scenario: add a sponsor from the list of recommended mentors
     Given I am on the consultant page for employee ID "99991"
     When I click on the mentors tab
     And I click on the add sponsor button for "Derek"
-    Then I should see "Derek" show up as a mentor on the page
-    When I click on "Derek"'s name
+    Then I should see "Derek" show up as a sponsor on the page
 
   Scenario: show an error if I add a sponsor that doesnt exist
     Given I am on the consultant page for employee ID "99991"
@@ -33,17 +32,24 @@ Feature: Sponsors
     And I add "" as a new sponsor
     Then I should see an error on the page
 
-  Scenario: delete a consultant
+  Scenario: delete a sponsor
+    Given there is a sponsorship between employee IDs "99991" and "99992"
+    Given I am on the consultant page for employee ID "99992"
+    When I click on the mentors tab
+    Then I should see "Sophie" show up as a sponsor on the page
+    And I delete the sponsorship between "Mridula" and "Sophie"
+    Then I should not see "Sophie" in the list of sponsors
+
+  Scenario: delete a sponsee
     Given there is a sponsorship between employee IDs "99992" and "99991"
     Given I am on the consultant page for employee ID "99992"
     When I click on the mentees tab
     Then I should see "Sophie" in the list of sponsees
-    And I delete "Sophie"
+    And I delete the sponsorship between "Sophie" and "Mridula"
     Then I should not see "Sophie" in the list of sponsees
 
-  Scenario: add a sponsee from the mentee tab
+  Scenario: add a sponsee
     Given I am on the consultant page for employee ID "99993"
     When I click on the mentees tab
     And I click on the add sponsee button for "Sophie"
-    When I click on the sponsorship tab
-    Then I should see "Sophie" show up as a sponsee on the page
+    Then I should see "Sophie" in the list of sponsees

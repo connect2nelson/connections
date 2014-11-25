@@ -40,6 +40,7 @@ class SponsorshipController < ApplicationController
   def delete
     sponsorRelationship = Sponsorship.where(sponsorship_params).first
     @deleted_sponsee_id = sponsorship_params[:sponsee_id]
+    @deleted_sponsor_id = sponsorship_params[:sponsor_id]
     if sponsorRelationship.delete
       respond_to do |format|
         format.html { redirect_to consultant_path(params[:sponsor_id], anchor: "panel-mentees") }

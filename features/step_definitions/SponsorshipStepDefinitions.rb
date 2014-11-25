@@ -82,12 +82,13 @@ Then(/^I should see "([^"]*)" show up as a sponsee on the page$/) do |sponsee|
 
 end
 
-Then(/^I should see "([^"]*)" show up as a mentor on the page$/) do |mentor|
+Then(/^I should see "([^"]*)" show up as a sponsor on the page$/) do |mentor|
   wait = Selenium::WebDriver::Wait.new(:timeout => 5) # seconds
   begin
     wait.until {driver.find_element(:css, "#panel-mentors .name > a")}
   end
   expect(driver.find_element(:css, "#panel-mentors .name > a").attribute("innerHTML")).to eq(mentor)
+  expect(driver.find_element(:css, "#panel-mentors .delete_sponsee_form"))
 
 end
 
@@ -99,11 +100,13 @@ Then(/^I should see "([^"]*)" in the list of sponsees$/) do |sponseeName|
   sponsee = Consultant.where(:full_name => sponseeName).first
   sponsee_element = driver.find_element(:css, "#consultant_#{sponsee.employee_id} .name > a")
   expect(sponsee_element.attribute("innerHTML")).to include(sponseeName)
+  expect(driver.find_element(:css, "#panel-mentees .delete_sponsee_form"))
 end
 
-And(/^I delete "([^"]*)"$/) do |sponseeName|
+And(/^I delete the sponsorship between "([^"]*)" and "([^"]*)"$/) do |sponseeName, sponsorName|
   sponsee = Consultant.where(:full_name => sponseeName).first
-  deleteButton = driver.find_element(:id, "delete_sponsee_#{sponsee.employee_id}")
+  sponsor = Consultant.where(:full_name => sponsorName).first
+  deleteButton = driver.find_element(:id, "delete_#{sponsee.employee_id}_#{sponsor.employee_id}")
   deleteButton.click
 end
 
@@ -115,6 +118,16 @@ Then(/^I should not see "([^"]*)" in the list of sponsees$/) do |sponseeName|
     sponsorshipPanel = driver.find_element(:id, "panel-mentees")
   end
   expect(sponsorshipPanel.text).to_not include(sponseeName)
+end
+
+Then(/^I should not see "([^"]*)" in the list of sponsors$/) do |sponsorName|
+  wait = Selenium::WebDriver::Wait.new(:timeout => 10) # seconds
+  begin
+    element = wait.until { !driver.find_element(:id, "panel-mentors").text.include?(sponsorName) }
+  ensure
+    sponsorshipPanel = driver.find_element(:id, "panel-mentors")
+  end
+  expect(sponsorshipPanel.text).to_not include(sponsorName)
 end
 
 Then(/^I should see an error on the page$/) do

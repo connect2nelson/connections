@@ -1,2 +1,2 @@
 = form_tag delete_sponsee_url(:sponsor_id => connection.mentor.employee_id, :sponsee_id => connection.mentee.employee_id), class: "delete_sponsee_form", remote: true, method: :post do
-  = submit_tag "Delete", class: "submit_sponsee", :id => "delete_sponsee_#{connection.mentee.employee_id}"
+  = submit_tag "Delete", class: "submit_sponsee", :id => "delete_#{connection.mentee.employee_id}_#{connection.mentor.employee_id}"
