@@ -2,11 +2,19 @@
   = render 'skills', consultant: consultant, text: :learn, skills: consultant.skills_to_learn
   .small-8.columns
     %ul.matches
-      - mentors.take(5).each do |connection|
-        %li{:id => "consultant_" + connection.mentor.employee_id}
-          .mentor
-            = render 'connection', connection: connection, name: connection.mentor.full_name, employee_id: connection.mentor.employee_id
-            = render 'consultants/add_sponsor', connection: connection
+      - if mentors.empty? && sponsors.empty?
+        %h4 "Couldn't find any matches"
+      - else
+        - sponsors.take(5).each do |connection|
+          %li{:id => "consultant_" + connection.mentor.employee_id}
+            .mentor
+              = render 'connection', connection: connection, name: connection.mentor.full_name, employee_id: connection.mentor.employee_id
+              = render 'consultants/delete_sponsorship', connection: connection
+        - mentors.take(5).each do |connection|
+          %li{:id => "consultant_" + connection.mentor.employee_id}
+            .mentor
+              = render 'connection', connection: connection, name: connection.mentor.full_name, employee_id: connection.mentor.employee_id
+              = render 'consultants/add_sponsor', connection: connection
 - else
   .small-4.columns &nbsp;
   .small-8.columns

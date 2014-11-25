@@ -1,6 +1,16 @@
 require 'json'
 
 class SponsorshipService
+  def self.get_sponsors_for sponsee
+    sponsors = []
+    sponsorships = Sponsorship.all(sponsee_id: sponsee.employee_id)
+    sponsorships.each do |sponsorship|
+      sponsors.push(
+          Connection.new(Consultant.find_by(employee_id: sponsorship.sponsor_id), sponsee)
+      )
+    end
+    sponsors
+  end
 
   def self.get_sponsees_for sponsor
     sponsees = []
@@ -103,5 +113,6 @@ class SponsorshipService
     node = create_node_from(sponsor)
     nodes.push(node)
   end
+
 
 end

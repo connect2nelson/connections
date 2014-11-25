@@ -5,23 +5,36 @@ class ConsultantsController < ApplicationController
 
   def show
     @consultant = Consultant.find_by(employee_id: params[:id])
-    @mentors = ConnectionService.best_mentors_for(@consultant)
     @peers = ConnectionService.best_peers_for(@consultant)
+    @contact = ContactService.contacts_for(@consultant)
+
     @sponsees = SponsorshipService.get_sponsees_for(@consultant)
     @mentees = remove_sponsees_from(ConnectionService.best_mentees_for(@consultant))
-    @contact = ContactService.contacts_for(@consultant)
+
+    @sponsors = SponsorshipService.get_sponsors_for(@consultant)
+    @mentors = remove_sponsors_from(ConnectionService.best_mentors_for(@consultant))
+
     @connected =  ENV["SECURITY_ENABLED"]
   end
 
   def remove_sponsees_from(mentees)
-
     @sponsees.each do |sponsee_connection|
       existing_sponsorship_index = mentees.index { |mentee_connection|
-        mentee_connection.mentee.full_name == sponsee_connection.mentee.full_name && mentee_connection.mentor.full_name == sponsee_connection.mentor.full_name
+        mentee_connection.mentee.employee_id == sponsee_connection.mentee.employee_id && mentee_connection.mentor.employee_id == sponsee_connection.mentor.employee_id
       }
       mentees.delete_at(existing_sponsorship_index) unless existing_sponsorship_index.nil?
     end
     mentees
+  end
+
+  def remove_sponsors_from(mentors)
+    @sponsors.each do |sponsor_connection|
+      existing_sponsorship_index = mentors.index { |mentor_connection|
+        mentor_connection.mentee.employee_id == sponsor_connection.mentee.employee_id && mentor_connection.mentor.employee_id == sponsor_connection.mentor.employee_id
+      }
+      mentors.delete_at(existing_sponsorship_index) unless existing_sponsorship_index.nil?
+    end
+    mentors
   end
 
   def index

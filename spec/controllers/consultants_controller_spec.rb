@@ -10,8 +10,6 @@ RSpec.describe ConsultantsController, :type => :controller do
     let(:consultant) {consultant}
     let(:mentors) {[Connection.new(Consultant.new, consultant)]}
     let(:mentees) {[Connection.new(consultant, Consultant.new)]}
-    sponsee = Connection.new(consultant, Consultant.new(employee_id: '2'))
-    let(:sponsees) {[sponsee]}
     let(:contact) {Contact.new(employee_id: '1', github_account: 'yo')}
     let(:peers) {[Connection.new(consultant, Consultant.new)]}
 
@@ -41,11 +39,21 @@ RSpec.describe ConsultantsController, :type => :controller do
     end
 
     it 'should assign sponsees' do
+      sponsees = [Connection.new(consultant, Consultant.new(employee_id: '2'))]
       expect(Consultant).to receive(:find_by).with({:employee_id=>consultant.employee_id}).and_return consultant
       expect(SponsorshipService).to receive(:get_sponsees_for).with(consultant).and_return sponsees
-      expect(ConnectionService).to receive(:best_mentees_for).with(consultant).and_return mentees
+
       get :show, Hash[id: consultant.employee_id]
       expect(assigns(:sponsees)).to eq sponsees
+    end
+
+    it 'should assign sponsors' do
+      sponsors = [Connection.new(consultant, Consultant.new(employee_id: '2'))]
+      expect(Consultant).to receive(:find_by).with({:employee_id=>consultant.employee_id}).and_return consultant
+      expect(SponsorshipService).to receive(:get_sponsors_for).with(consultant).and_return sponsors
+
+      get :show, Hash[id: consultant.employee_id]
+      expect(assigns(:sponsors)).to eq sponsors
     end
 
     it 'should assign peers' do
@@ -62,6 +70,32 @@ RSpec.describe ConsultantsController, :type => :controller do
 
       get :show, Hash[id: consultant.employee_id]
       expect(assigns(:contact)).to eq contact
+    end
+
+    it 'should remove sponsees from the recommended mentees list' do
+      sponsee_in_mentees = Connection.new(consultant, Consultant.new(employee_id: 2))
+      mentees = [Connection.new(consultant, Consultant.new(employee_id: 4)), sponsee_in_mentees]
+      sponsees = [sponsee_in_mentees]
+      expect(Consultant).to receive(:find_by).with({:employee_id=>consultant.employee_id}).and_return consultant
+      expect(SponsorshipService).to receive(:get_sponsees_for).with(consultant).and_return sponsees
+      expect(ConnectionService).to receive(:best_mentees_for).with(consultant).and_return mentees
+
+      get :show, Hash[id: consultant.employee_id]
+      expect(assigns(:mentees).size).to eq 1
+      expect(assigns(:mentees)[0].mentee.employee_id).to eq "4"
+    end
+
+    it 'should remove sponsors from the recommended mentors list' do
+      sponsor_in_mentors = Connection.new(Consultant.new(employee_id: 2), consultant)
+      mentors = [Connection.new(Consultant.new(employee_id: 4), consultant), sponsor_in_mentors]
+      sponsors = [sponsor_in_mentors]
+      expect(Consultant).to receive(:find_by).with({:employee_id=>consultant.employee_id}).and_return consultant
+      expect(SponsorshipService).to receive(:get_sponsors_for).with(consultant).and_return sponsors
+      expect(ConnectionService).to receive(:best_mentors_for).with(consultant).and_return mentors
+
+      get :show, Hash[id: consultant.employee_id]
+      expect(assigns(:mentors).size).to eq 1
+      expect(assigns(:mentors)[0].mentor.employee_id).to eq "4"
     end
 
   end

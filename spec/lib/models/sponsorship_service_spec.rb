@@ -38,12 +38,7 @@ describe SponsorshipService do
     end
   end
 
-
-
-
-
   context '.get_sponsees_for' do
-
 
     let!(:consultant) {Consultant.create(full_name: 'Charlotte', employee_id: "1") }
     let!(:no_sponsees) {Consultant.create(full_name: 'Sophie', employee_id: "3") }
@@ -64,6 +59,32 @@ describe SponsorshipService do
 
       expect(sponsees.size).to eq 1
       expect(sponsees[0].mentee.full_name).to eq sponsee.full_name
+    end
+
+  end
+
+  context '.get_sponsors_for' do
+
+    let!(:consultant) {Consultant.create(full_name: 'Charlotte', employee_id: "1") }
+    let!(:no_sponsors) {Consultant.create(full_name: 'Sophie', employee_id: "3") }
+    let!(:sponsor) {Consultant.create(full_name: 'Billy', employee_id: "2") }
+    let!(:sponsorships) {[Sponsorship.create(sponsor_id: sponsor.employee_id, sponsee_id: consultant.employee_id)]}
+
+    it 'should return an empty list if the consultant doesnt have any sponsors' do
+      expect(Sponsorship).to receive(:all).with({:sponsee_id=>consultant.employee_id}).and_return []
+      sponsors = SponsorshipService.get_sponsors_for consultant
+
+      expect(sponsors.size).to eq 0
+    end
+
+    it 'should return a list of current sponsees for the consultant' do
+      puts sponsorships[0].sponsor_id
+      expect(Sponsorship).to receive(:all).with({:sponsee_id=>consultant.employee_id}).and_return sponsorships
+      expect(Consultant).to receive(:find_by).with({:employee_id=>sponsor.employee_id}).and_return sponsor
+      sponsors = SponsorshipService.get_sponsors_for consultant
+
+      expect(sponsors.size).to eq 1
+      expect(sponsors[0].mentor.full_name).to eq sponsor.full_name
     end
 
   end
