@@ -86,7 +86,7 @@ end
 Then(/^I should see "([^"]*)" show up as a sponsor on the page$/) do |mentor|
   wait = Selenium::WebDriver::Wait.new(:timeout => 5) # seconds
   begin
-    wait.until {driver.find_element(:css, "#panel-mentors .name > a")}
+    wait.until {driver.find_element(:css, "#panel-mentors .name > a") && driver.find_element(:css, "#panel-mentors .delete_sponsee_form")}
   end
   expect(driver.find_element(:css, "#panel-mentors .name > a").attribute("innerHTML")).to eq(mentor)
   expect(driver.find_element(:css, "#panel-mentors .delete_sponsee_form"))
