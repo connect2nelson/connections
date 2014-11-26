@@ -36,10 +36,10 @@ class SponsorshipService
   end
 
   def self.get_sponsorless_for(consultants)
-    office_consultant_ids = consultants.map(&:employee_id)
-    office_consultants_without_sponsors = Sponsorship.where(:sponsee_id.in => office_consultant_ids).map(&:sponsee_id)
-    ac_ids_without_sponsors = office_consultant_ids - office_consultants_without_sponsors
-    return Consultant.where(:employee_id.in => ac_ids_without_sponsors)
+    consultant_ids = consultants.map(&:employee_id)
+    consultant_ids_with_sponsors = Sponsorship.where(:sponsee_id.in => consultant_ids).map(&:sponsee_id)
+    consultant_ids_without_sponsors = consultant_ids - consultant_ids_with_sponsors
+    return Consultant.where(:employee_id.in => consultant_ids_without_sponsors)
   end
 
   def self.get_connection_for sponsorship
