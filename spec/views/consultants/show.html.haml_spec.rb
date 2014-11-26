@@ -13,7 +13,6 @@ describe 'consultants/show.html.haml' do
 
     stub_template "consultants/_mentees.html.haml" => ""
     stub_template "consultants/_mentors.html.haml" => ""
-    stub_template "consultants/_sponsorship.html.haml" => ""
     render
   end
 
@@ -30,6 +29,5 @@ describe 'consultants/show.html.haml' do
   describe 'show Mentor, Mentees, and Sponsorship tabs' do
     specify{expect(rendered).to have_text('Mentor')}
     specify{expect(rendered).to have_text('Mentees')}
-    specify{expect(rendered).to have_text('Sponsorship')}
   end
 end
