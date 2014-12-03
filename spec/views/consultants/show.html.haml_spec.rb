@@ -13,6 +13,7 @@ describe 'consultants/show.html.haml' do
 
     stub_template "consultants/_mentees.html.haml" => ""
     stub_template "consultants/_mentors.html.haml" => ""
+    stub_template "consultants/_peers.html.haml" => ""
     render
   end
 
