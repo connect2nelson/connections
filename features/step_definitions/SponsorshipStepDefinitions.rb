@@ -37,8 +37,11 @@ When(/^I click on the sponsorship tab$/) do
 end
 
 When(/^I click on the mentees tab$/) do
-  mentee_tab = driver.find_element(:id, "mentees-tab")
-  mentee_tab.click
+  wait = Selenium::WebDriver::Wait.new(:timeout => 3) # seconds
+  begin
+    wait.until {driver.find_element(:id, "mentees-tab")}
+  end
+  driver.find_element(:id, "mentees-tab").click
 end
 
 When(/^I click on the mentors tab$/) do
@@ -101,6 +104,12 @@ end
 
 Then(/^I should see "([^"]*)" in the list of sponsees$/) do |sponseeName|
   sponsee = Consultant.where(:full_name => sponseeName).first
+
+  wait = Selenium::WebDriver::Wait.new(:timeout => 5) # seconds
+  begin
+    wait.until {driver.find_element(:css, "#consultant_#{sponsee.employee_id} .name > a") && driver.find_element(:css, "#panel-mentees .delete_sponsee_form")}
+  end
+
   sponsee_element = driver.find_element(:css, "#consultant_#{sponsee.employee_id} .name > a")
   expect(sponsee_element.attribute("innerHTML")).to include(sponseeName)
   expect(driver.find_element(:css, "#panel-mentees .delete_sponsee_form"))
