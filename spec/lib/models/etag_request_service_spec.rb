@@ -1,6 +1,5 @@
 require 'spec_helper'
 require './app/services/api_call_service'
-require 'rest_client'
 
 describe EtagRequestService do
 
@@ -39,7 +38,7 @@ describe EtagRequestService do
   context 'returns exception code' do
     it 'should return null etag response' do
       allow(mocked_request).to receive(:response)
-        .and_raise(RestClient::Exception)
+        .and_raise(HTTParty::Error)
       expect(EtagRequestService.create url).to be_kind_of EtagNullResponse
     end
   end

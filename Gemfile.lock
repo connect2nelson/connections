@@ -33,13 +33,9 @@ GEM
       tzinfo (~> 0.3.37)
     addressable (2.3.6)
     arel (4.0.2)
-    arrayfields (4.9.2)
-    awesome_print (1.2.0)
     bson (2.3.0)
     bson_ext (1.5.1)
     builder (3.1.4)
-    cane (2.6.2)
-      parallel
     canonix (0.1.1)
     capybara (2.3.0)
       mime-types (>= 1.16)
@@ -49,18 +45,6 @@ GEM
       xpath (~> 2.0)
     childprocess (0.5.5)
       ffi (~> 1.0, >= 1.0.11)
-    chronic (0.10.2)
-    churn (0.0.35)
-      chronic (>= 0.2.3)
-      hirb
-      json_pure
-      main
-      rest-client (>= 1.6.0)
-      ruby_parser (~> 3.0)
-      sexp_processor (~> 4.1)
-    code_analyzer (0.4.5)
-      sexp_processor
-    code_metrics (0.1.3)
     coderay (1.1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -69,7 +53,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.0)
-    colored (1.2)
     connection_pool (2.0.0)
     css_parser (1.3.5)
       addressable
@@ -95,14 +78,7 @@ GEM
     execjs (2.2.0)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
-    fattr (2.2.2)
     ffi (1.9.6)
-    flay (2.5.0)
-      ruby_parser (~> 3.0)
-      sexp_processor (~> 4.0)
-    flog (4.2.1)
-      ruby_parser (~> 3.1, > 3.1.0)
-      sexp_processor (~> 4.4)
     foreman (0.71.0)
       dotenv (~> 0.11.1)
       thor (~> 0.19.1)
@@ -120,8 +96,10 @@ GEM
       railties (>= 4.0.1)
     hashie (2.1.2)
     hike (1.2.3)
-    hirb (0.7.2)
     htmlentities (4.3.2)
+    httparty (0.13.3)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.6.9)
     jbuilder (1.5.3)
       activesupport (>= 3.0.0)
@@ -132,7 +110,6 @@ GEM
     jquery-ui-rails (4.2.1)
       railties (>= 3.2.16)
     json (1.8.1)
-    json_pure (1.8.1)
     jwt (1.0.0)
     launchy (2.4.2)
       addressable (~> 2.3)
@@ -148,28 +125,7 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    main (6.0.0)
-      arrayfields (>= 4.7.4)
-      chronic (>= 0.6.2)
-      fattr (>= 2.2.0)
-      map (>= 5.1.0)
-    map (6.5.4)
     method_source (0.8.2)
-    metric_fu (4.11.1)
-      cane (~> 2.5, >= 2.5.2)
-      churn (~> 0.0.35)
-      code_metrics (~> 0.1)
-      coderay
-      flay (~> 2.1, >= 2.0.1)
-      flog (~> 4.1, >= 4.1.1)
-      launchy (~> 2.0)
-      metric_fu-Saikuro (~> 1.1, >= 1.1.3)
-      multi_json
-      rails_best_practices (~> 1.14, >= 1.14.3)
-      redcard
-      reek (~> 1.3, >= 1.3.4)
-      roodi (~> 3.1)
-    metric_fu-Saikuro (1.1.3)
     mime-types (1.25.1)
     mini_portile (0.6.0)
     minitest (4.7.5)
@@ -190,7 +146,6 @@ GEM
     multi_test (0.1.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
-    netrc (0.7.7)
     nokogiri (1.6.2.1)
       mini_portile (= 0.6.0)
     oauth2 (0.9.4)
@@ -215,7 +170,6 @@ GEM
       ruby-saml (~> 0.7.2)
     optionable (0.2.0)
     origin (2.1.1)
-    parallel (1.0.0)
     polyglot (0.3.5)
     premailer (1.8.2)
       css_parser (>= 1.3.5)
@@ -244,16 +198,6 @@ GEM
     rails_12factor (0.0.2)
       rails_serve_static_assets
       rails_stdout_logging
-    rails_best_practices (1.15.4)
-      activesupport
-      awesome_print
-      code_analyzer (>= 0.4.3)
-      colored
-      erubis
-      i18n
-      json
-      require_all
-      ruby-progressbar
     rails_serve_static_assets (0.0.2)
     rails_stdout_logging (0.0.3)
     railties (4.0.4)
@@ -261,23 +205,9 @@ GEM
       activesupport (= 4.0.4)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rainbow (2.0.0)
     rake (10.3.2)
     rdoc (4.1.1)
       json (~> 1.4)
-    redcard (1.1.0)
-    reek (1.3.7)
-      rainbow
-      ruby2ruby (~> 2.0.8)
-      ruby_parser (~> 3.3)
-      sexp_processor
-    require_all (1.3.2)
-    rest-client (1.6.7)
-      mime-types (>= 1.16)
-    rest_client (1.7.3)
-      netrc (~> 0.7.7)
-    roodi (3.3.1)
-      ruby_parser (~> 3.2, >= 3.2.2)
     rspec (3.0.0)
       rspec-core (~> 3.0.0)
       rspec-expectations (~> 3.0.0)
@@ -298,16 +228,10 @@ GEM
       rspec-mocks (~> 3.0.0)
       rspec-support (~> 3.0.0)
     rspec-support (3.0.0)
-    ruby-progressbar (1.5.1)
     ruby-saml (0.7.2)
       canonix (= 0.1.1)
       nokogiri
       uuid (~> 2.3)
-    ruby2ruby (2.0.8)
-      ruby_parser (~> 3.1)
-      sexp_processor (~> 4.0)
-    ruby_parser (3.6.1)
-      sexp_processor (~> 4.1)
     rubyzip (1.1.6)
     sass (3.2.19)
     sass-rails (4.0.3)
@@ -323,7 +247,6 @@ GEM
       multi_json (~> 1.0)
       rubyzip (~> 1.0)
       websocket (~> 1.0)
-    sexp_processor (4.4.3)
     slop (3.5.0)
     sprockets (2.11.0)
       hike (~> 1.2)
@@ -367,12 +290,12 @@ DEPENDENCIES
   foundation-rails
   haml (>= 3.0.0)
   haml-rails
+  httparty
   jbuilder (~> 1.2)
   jquery-rails
   jquery-ui-rails
   letter_opener_web
   local_time
-  metric_fu
   mongoid
   mongoid-rspec
   nokogiri
@@ -384,7 +307,6 @@ DEPENDENCIES
   rails (= 4.0.4)
   rails3-jquery-autocomplete
   rails_12factor
-  rest_client
   rspec-rails (>= 2.0.1)
   sass-rails (~> 4.0.2)
   sdoc

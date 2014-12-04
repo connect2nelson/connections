@@ -19,14 +19,13 @@ gem 'bson_ext'
 gem 'mongoid'
 gem 'foreman'
 gem 'rails_12factor'
-gem 'metric_fu'
 
 gem 'd3-rails'
 
 gem 'omniauth-saml'
 gem 'omniauth-github'
 
-gem 'rest_client'
+gem 'httparty'
 
 gem 'rMeetup'
 gem 'local_time'

@@ -7,12 +7,7 @@ class EtagRequest
   end
 
   def response
-    request(@url).get(:if_none_match => @etag)
+    HTTParty.get(@url + @credentials)
   end
 
-  private
-
-  def request path
-    RestClient::Resource.new path + @credentials
-  end
 end
