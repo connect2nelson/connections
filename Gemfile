@@ -30,6 +30,8 @@ gem 'httparty'
 gem 'rMeetup'
 gem 'local_time'
 
+gem 'whenever'
+
 group :test, :development do
    gem 'rspec-rails', '>=2.0.1'
    gem 'capybara'
