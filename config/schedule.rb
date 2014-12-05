@@ -7,8 +7,8 @@
 #
 # set :output, "/path/to/my/cron_log.log"
 #
-# set :environment, 'development'
-# set :output, '~/ThoughtWorks_Projects/connections/whenever.log'
+set :environment, 'development'
+set :output, '~/ThoughtWorks_Projects/connections/whenever.log'
 every 1.hours do
   rake "github:update"
 end
