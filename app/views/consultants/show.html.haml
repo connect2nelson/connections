@@ -17,6 +17,15 @@
           = link_to "//www.github.com/#{@contact.github_account}", :target => "_blank" do
             = image_tag('github.png')
             .text github
+      - else
+        .contact-entry
+          .add-github-username
+            .github-image
+              = image_tag('github.png')
+              .text link github
+            .add-symbol
+              .fa.fa-plus-circle
+
       .contact-entry
         = link_to "//jigsaw.thoughtworks.com/consultants/#{@consultant.employee_id}", :target => "_blank" do
           = image_tag('jigsaw.png')

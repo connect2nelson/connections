@@ -21,6 +21,7 @@ gem 'foreman'
 gem 'rails_12factor'
 
 gem 'd3-rails'
+gem 'font-awesome-sass', '~> 4.0.3.1'
 
 gem 'omniauth-saml'
 gem 'omniauth-github'

@@ -93,6 +93,19 @@
         visibility: hidden;
         text-align: center;
       }
+
+      .add-github-username {
+        position: relative;
+      }
+      .github-image img{
+        margin-left: 5px;
+        margin-right: 5px;
+      }
+      .add-symbol {
+        position: absolute;
+        bottom: 52.5%;
+        right: 42.5%;
+      }
     }
 
   }
