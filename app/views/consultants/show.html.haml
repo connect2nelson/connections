@@ -12,31 +12,33 @@
         %dt Working Office
         %dd= @consultant.working_office
     .small-3.columns.contact
-      - if !@contact.nil?
-        .contact-entry
-          = render 'github_contact', contact: @contact
-      - else
-        .contact-entry.github
-          .add-github-username
-            .github-image
-              = image_tag('github.png')
-              .text.github-text link github
-              .add-username-form
-                = form_tag '/contact', remote: true, method: :put do
-                  = hidden_field_tag :employee_id, @consultant.employee_id
-                  = text_field_tag :github_account, 'username'
-                  = submit_tag "Add", class: "submit_contact"
-            .add-symbol
-              .fa.fa-plus-circle
+      .row
+        - if !@contact.nil?
+          .contact-entry
+            = render 'github_contact', contact: @contact
+        - else
+          .contact-entry.github
+            .add-github-username
+              .github-image
+                = image_tag('github.png')
+                .text.github-text link github
+              .add-symbol
+                .fa.fa-plus-circle
 
-      .contact-entry
-        = link_to "//jigsaw.thoughtworks.com/consultants/#{@consultant.employee_id}", :target => "_blank" do
-          = image_tag('jigsaw.png')
-          .text jigsaw
-  .row.errors
-    .small-4.columns
-    .small-8.columns
-      .alert
+        .contact-entry
+          = link_to "//jigsaw.thoughtworks.com/consultants/#{@consultant.employee_id}", :target => "_blank" do
+            = image_tag('jigsaw.png')
+            .text jigsaw
+
+      .row.add-username-form
+        = form_tag '/contact', remote: true, method: :put do
+          = hidden_field_tag :employee_id, @consultant.employee_id
+          = text_field_tag :github_account, "", placeholder: 'github username'
+          = submit_tag "Add", class: "submit_contact"
+
+      .row.errors
+        .alert
+
   .row
     .small-4.columns &nbsp;
     .small-8.columns

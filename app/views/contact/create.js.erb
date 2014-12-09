@@ -1,5 +1,7 @@
 <% if !@contact.nil?%>
-    $('.add-github-username').remove();
+    $('.alert').remove();
+    $('.add-github-username').hide();
+    $('.add-username-form').hide();
     $("<%= j render 'consultants/github_contact', contact: @contact %>").appendTo('.contact-entry.github');
 <% end %>
 

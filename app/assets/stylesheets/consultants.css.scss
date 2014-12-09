@@ -107,21 +107,28 @@
         right: 42.5%;
       }
 
-      .add-username-form{
-        display: none;
-      }
-
     }
 
   }
 }
 
-.github_account{
-  width: 50%;
+.add-username-form {
+  visibility: hidden;
+
+  #github_account {
+    width: 70%;
+    display: inline-block;
+  }
+
+  .submit_contact {
+    margin-left: 0.5em;
+    float: right;
+    width: 25%;
+  }
 }
 
-.submit_contact{
-  width: 30%;
+.alert {
+  color: $alert-color;
 }
 
 .skills {
@@ -144,7 +151,7 @@
   text-align: right;
 }
 
-.submit_sponsee, .submit_sponsor{
+.submit_sponsee, .submit_sponsor, .submit_contact {
   background-color: $blue;
   border: #ccc solid thin;
   margin: 0;

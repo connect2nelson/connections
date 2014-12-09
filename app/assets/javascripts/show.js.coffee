@@ -1,5 +1,5 @@
 $(document).ready ->
   $('.add-github-username').click ->
-    $('.github-text').remove()
-    $('.add-username-form').show()
+    $('.github-text').css('visibility', 'hidden')
+    $('.add-username-form').css('visibility', 'visible')
 
