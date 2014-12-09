@@ -20,6 +20,7 @@ describe 'consultants/show.html.haml' do
   describe 'show consultant' do
     specify {expect(rendered).to have_text('Ian Norris')}
     specify {expect(rendered).to have_text('Dev')}
+    specify {expect(rendered).to have_text('Home')}
 
     it 'should show offices' do
       expect(rendered).to have_text('San Francisco')

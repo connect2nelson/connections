@@ -1,6 +1,8 @@
 .consultant-show
   .row.header
-    .small-4.columns
+    .small-1.columns.home
+      .home-button= link_to "Home", "/", {:style => 'color: #ffffff'}
+    .small-3.columns
       = image_tag 'profile.png'
     .small-5.columns
       %h2 #{@consultant.full_name}

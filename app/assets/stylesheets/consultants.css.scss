@@ -151,7 +151,7 @@
   text-align: right;
 }
 
-.submit_sponsee, .submit_sponsor, .submit_contact {
+.submit_sponsee, .submit_sponsor, .submit_contact, .home-button {
   background-color: $blue;
   border: #ccc solid thin;
   margin: 0;
@@ -239,4 +239,8 @@
     margin-right: 0.2em;
     margin-bottom: 0.2em;
   }
+}
+
+.small-1.columns.home {
+  padding-right: 0;
 }
