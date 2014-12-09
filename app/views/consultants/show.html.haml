@@ -8,9 +8,9 @@
         %dt Role
         %dd= @consultant.primary_role
         %dt Home Office
-        %dd= @consultant.home_office
+        %dd= link_to @consultant.home_office, "/offices/#{@consultant.home_office}"
         %dt Working Office
-        %dd= @consultant.working_office
+        %dd= link_to @consultant.working_office, "/offices/#{@consultant.working_office}"
     .small-3.columns.contact
       .row
         - if !@contact.nil?
