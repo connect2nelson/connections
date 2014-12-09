@@ -14,15 +14,18 @@
     .small-3.columns.contact
       - if !@contact.nil?
         .contact-entry
-          = link_to "//www.github.com/#{@contact.github_account}", :target => "_blank" do
-            = image_tag('github.png')
-            .text github
+          = render 'github_contact', contact: @contact
       - else
-        .contact-entry
+        .contact-entry.github
           .add-github-username
             .github-image
               = image_tag('github.png')
-              .text link github
+              .text.github-text link github
+              .add-username-form
+                = form_tag '/contact', remote: true, method: :put do
+                  = hidden_field_tag :employee_id, @consultant.employee_id
+                  = text_field_tag :github_account, 'username'
+                  = submit_tag "Add", class: "submit_contact"
             .add-symbol
               .fa.fa-plus-circle
 
@@ -30,6 +33,10 @@
         = link_to "//jigsaw.thoughtworks.com/consultants/#{@consultant.employee_id}", :target => "_blank" do
           = image_tag('jigsaw.png')
           .text jigsaw
+  .row.errors
+    .small-4.columns
+    .small-8.columns
+      .alert
   .row
     .small-4.columns &nbsp;
     .small-8.columns

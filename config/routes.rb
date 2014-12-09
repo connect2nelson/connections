@@ -19,6 +19,8 @@ Connections::Application.routes.draw do
 
     put 'sponsorship/create_sponsee/:sponsor_id/and/:sponsee_id', to: "sponsorship#create_sponsee", as: 'create_sponsee'
     put 'sponsorship', to: "sponsorship#create"
+
+    put 'contact', to: "contact#create"
     root 'consultants#index'
 
     if Rails.env.development?

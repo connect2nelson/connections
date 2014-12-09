@@ -1,0 +1,8 @@
+<% if !@contact.nil?%>
+    $('.add-github-username').remove();
+    $("<%= j render 'consultants/github_contact', contact: @contact %>").appendTo('.contact-entry.github');
+<% end %>
+
+<% if flash[:alert]%>
+    $(".alert").append("<%= flash[:alert] %>")
+<% end %>
