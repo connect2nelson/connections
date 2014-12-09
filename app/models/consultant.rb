@@ -15,6 +15,8 @@ class Consultant
   field :grade, type: String
   field :tw_experience, type: Float
 
+  index({ employee_id: 1 }, { unique: true })
+
   def email
       self.email = "#{self.employee_id}@thoughtworks.com"
   end
