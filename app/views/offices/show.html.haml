@@ -1,6 +1,8 @@
 .row
-  .small-12.columns
-    %h1= @office.name
+  .small-10.columns
+    %h1.office-name= @office.name
+  .small-1.columns.home
+    .home-button= link_to "Home", "/", {:style => 'color: #ffffff'}
 .row
   .small-12.columns
     %ul.tabs{"data-tab"=>"", "data-options"=> "deep_linking:true"}

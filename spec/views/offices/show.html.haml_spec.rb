@@ -18,5 +18,6 @@ RSpec.describe "offices/show.html.haml", :type => :view do
     specify{expect(rendered).to have_text('Skills')}
     specify{expect(rendered).to have_text('Github Repos')}
     specify{expect(rendered).to have_text('Sponsorship Network')}
+    specify{expect(rendered).to have_text('Home')}
   end
 end

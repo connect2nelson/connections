@@ -121,7 +121,6 @@
   }
 
   .submit_contact {
-    margin-left: 0.5em;
     float: right;
     width: 25%;
   }
@@ -241,6 +240,12 @@
   }
 }
 
-.small-1.columns.home {
-  padding-right: 0;
+.home-button {
+  width: 27.5%;
+  float: right;
+  margin-top: 25px;
+}
+
+.small-3.columns.contact {
+  margin-right: 10px;
 }
